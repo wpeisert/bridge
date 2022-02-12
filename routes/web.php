@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DealController;
+use App\Http\Controllers\DealsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/deals', function () {
-    return view('deals');
-})->middleware(['auth', 'verified'])->name('deals');
+Route::get('/deals', DealsController::class)->middleware(['auth', 'verified'])->name('deals');
+
+Route::get('/deal/{id}', DealController::class)->middleware(['auth', 'verified'])->name('deal');
 
 require __DIR__.'/auth.php';

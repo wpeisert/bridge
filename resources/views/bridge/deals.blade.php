@@ -9,25 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="font-bold p-6 bg-white border-b border-gray-200">
-                    <b>{{ __('Licytacje bieżące') }}</b> <br />
-                    @foreach($currentDeals as $deals)
-                        {{ $deals['partner_name'] }}:
-                        @foreach($deals['deals'] as $deal)
-                            &nbsp;
-                            <a href="{{ route('deal', ['id' => $deal['id']]) }}">@if($deal['status'] === 'my_bid')<b>[@endif{{ $loop->iteration }}@if($deal['status'] === 'my_bid')]</b>@endif</a>
-                        @endforeach
-                        <br />
-                    @endforeach
+                    @include('bridge.elements.deals', ['title' => 'Licytacje bieżące', 'deals' => $currentDeals])
                     <br />
-                    <b>{{ __('Zakończone') }}</b> <br />
-                    @foreach($finishedDeals as $deals)
-                        {{ $deals['partner_name'] }}:
-                        @foreach($deals['deals'] as $deal)
-                            &nbsp;
-                            <a href="{{ route('deal', ['id' => $deal['id']]) }}">@if($deal['status'] === 'my_bid')<b>[@endif{{ $loop->iteration }}@if($deal['status'] === 'my_bid')]</b>@endif</a>
-                        @endforeach
-                        <br />
-                    @endforeach
+                    @include('bridge.elements.deals', ['title' => 'Zakończone', 'deals' => $finishedDeals])
                 </div>
             </div>
         </div>

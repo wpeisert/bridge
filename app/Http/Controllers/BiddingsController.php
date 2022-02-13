@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DealsController extends Controller
+class BiddingsController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,10 +15,10 @@ class DealsController extends Controller
     public function __invoke(Request $request)
     {
         return view(
-            'bridge.deals',
+            'bridge.biddings',
             [
-                'currentDeals' => $this->getFakeDeals(),
-                'finishedDeals' => $this->getFakeDeals(),
+                'currentBiddings' => $this->getFakeBiddings(),
+                'finishedBiddings' => $this->getFakeBiddings(),
             ]
         );
     }
@@ -26,13 +26,13 @@ class DealsController extends Controller
     /**
      * @return array[]
      */
-    private function getFakeDeals(): array
+    private function getFakeBiddings(): array
     {
         return
             [
                 [
                     'partner_name' => 'Daro',
-                    'deals' => [
+                    'biddings' => [
                         [
                             'status' => 'my_bid',
                             'id' => 123,
@@ -53,7 +53,7 @@ class DealsController extends Controller
                 ],
                 [
                     'partner_name' => 'Zenon',
-                    'deals' => [
+                    'biddings' => [
                         [
                             'status' => 'partner_bid',
                             'id' => 123,

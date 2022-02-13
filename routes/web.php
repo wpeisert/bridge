@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\DealController;
-use App\Http\Controllers\DealsController;
+use App\Http\Controllers\BiddingController;
+use App\Http\Controllers\BiddingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/deals', DealsController::class)->middleware(['auth', 'verified'])->name('deals');
+Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verified'])->name('biddings');
 
-Route::get('/deal/{id}', DealController::class)->middleware(['auth', 'verified'])->name('deal');
+Route::get('/bidding/{id}', BiddingController::class)->middleware(['auth', 'verified'])->name('bidding');
 
 require __DIR__.'/auth.php';

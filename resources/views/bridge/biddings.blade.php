@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="font-bold p-6 bg-white border-b border-gray-200">
-                    @include('bridge.elements.deals', ['title' => 'Licytacje bieżące', 'deals' => $currentDeals])
+                    @include('bridge.elements.biddings', ['title' => 'Licytacje bieżące', 'biddings' => $currentBiddings])
                     <br />
-                    @include('bridge.elements.deals', ['title' => 'Zakończone', 'deals' => $finishedDeals])
+                    @include('bridge.elements.biddings', ['title' => 'Zakończone', 'biddings' => $finishedBiddings])
                 </div>
             </div>
         </div>

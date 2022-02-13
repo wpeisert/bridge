@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DealController extends Controller
+class BiddingController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,7 +15,7 @@ class DealController extends Controller
     public function __invoke(int $id)
     {
         return view(
-            'bridge.deal',
+            'bridge.bidding',
             ['id' => $id]
         );
     }

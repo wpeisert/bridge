@@ -25,6 +25,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verified'])->name('biddings');
 
-Route::get('/bidding/{id}', BiddingController::class)->middleware(['auth', 'verified'])->name('bidding');
+Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
 
 require __DIR__.'/auth.php';

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('bidding_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->smallInteger('user_no');
+            $table->boolean('should_bid');
             $table->timestamps();
 
             $table->foreign('bidding_id')->references('id')->on('bidding')->onDelete('cascade');

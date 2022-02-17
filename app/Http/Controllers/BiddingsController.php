@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\BiddingRepositoryInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BiddingsController extends Controller
 {
+    public function __construct(protected BiddingRepositoryInterface $biddingRepository)
+    {
+    }
+
     /**
      * Handle the incoming request.
      *
@@ -14,65 +21,27 @@ class BiddingsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view(
-            'bridge.biddings',
+        $preparing = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'preparing');
+        $pending = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'pending');
+        $finished = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'finished');
+
+        return view('bridge.biddings',
             [
-                'currentBiddings' => $this->getFakeBiddings(),
-                'finishedBiddings' => $this->getFakeBiddings(),
+                'allBiddings' => [
+                    [
+                        'title' => 'Licytacje bieżące',
+                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $pending]]
+                    ],
+                    [
+                        'title' => 'Licytacje oczekujące',
+                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $preparing]]
+                    ],
+                    [
+                        'title' => 'Licytacje zakończone',
+                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $finished]]
+                    ],
+                ],
             ]
         );
-    }
-
-    /**
-     * @return array[]
-     */
-    private function getFakeBiddings(): array
-    {
-        return
-            [
-                [
-                    'partner_name' => 'Daro',
-                    'biddings' => [
-                        [
-                            'status' => 'my_bid',
-                            'id' => 123,
-                        ],
-                        [
-                            'status' => 'partner_bid',
-                            'id' => 456,
-                        ],
-                        [
-                            'status' => 'my_bid',
-                            'id' => 789,
-                        ],
-                        [
-                            'status' => 'partner_bid',
-                            'id' => 234,
-                        ],
-                    ],
-                ],
-                [
-                    'partner_name' => 'Zenon',
-                    'biddings' => [
-                        [
-                            'status' => 'partner_bid',
-                            'id' => 123,
-                        ],
-                        [
-                            'status' => 'partner_bid',
-                            'id' => 456,
-                        ],
-                        [
-                            'status' => 'my_bid',
-                            'id' => 789,
-                        ],
-                        [
-                            'status' => 'partner_bid',
-                            'id' => 234,
-                        ],
-                    ],
-                ],
-            ]
-        ;
     }
 }

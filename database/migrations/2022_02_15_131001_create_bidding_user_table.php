@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('should_bid');
             $table->timestamps();
 
-            $table->foreign('bidding_id')->references('id')->on('bidding')->onDelete('cascade');
+            $table->foreign('bidding_id')->references('id')->on('biddings')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

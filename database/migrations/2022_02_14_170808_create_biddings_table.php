@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bidding', function (Blueprint $table) {
+        Schema::create('biddings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('deal_id')->unsigned();
             $table->smallInteger('current_user_no')->comment("0, 1, 2, 3");
             $table->string('status')->comment('preparing, pending, finished');
             $table->text('comments');
             $table->timestamps();
-            $table->foreign('deal_id')->references('id')->on('deal');
+            $table->foreign('deal_id')->references('id')->on('deals');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bidding');
+        Schema::dropIfExists('biddings');
     }
 };

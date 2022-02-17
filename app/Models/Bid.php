@@ -9,8 +9,6 @@ class Bid extends Model
 {
     use HasFactory;
 
-    protected $table = 'bid';
-
     public function bidding()
     {
         return $this->belongsTo(Bidding::class);

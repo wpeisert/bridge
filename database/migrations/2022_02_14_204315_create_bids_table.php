@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bid', function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bidding_id')->unsigned();
             $table->bigInteger('user_id')->unsigned()->comment('User that placed the bid');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('bidding_id')->references('id')->on('bidding')->onDelete('cascade');
+            $table->foreign('bidding_id')->references('id')->on('biddings')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bid');
+        Schema::dropIfExists('bids');
     }
 };

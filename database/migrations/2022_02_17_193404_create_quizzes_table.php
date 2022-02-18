@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('deals', function (Blueprint $table) {
+        Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->text('cards');
-            $table->boolean('vulnerable_02')->default(false);
-            $table->boolean('vulnerable_13')->default(false);
-            $table->smallInteger('start_user_no');
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deals');
+        Schema::dropIfExists('quizzes');
     }
 };

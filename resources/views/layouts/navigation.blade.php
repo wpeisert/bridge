@@ -17,8 +17,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('deals.index')" :active="request()->routeIs('deals.index')">
+                        {{ __('Rozdania') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('biddings')" :active="request()->routeIs('biddings')">
-                        {{ __('Moje licytacje') }}
+                        {{ __('Licytacje') }}
                     </x-nav-link>
                 </div>
             </div>

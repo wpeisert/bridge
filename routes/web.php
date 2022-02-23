@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\BiddingsController;
+use App\Http\Controllers\DealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verified'])->name('biddings');
-
 Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
+
+Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

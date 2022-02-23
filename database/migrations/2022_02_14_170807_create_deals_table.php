@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
-            $table->text('cards');
-            $table->boolean('vulnerable_02')->default(false);
-            $table->boolean('vulnerable_13')->default(false);
-            $table->smallInteger('start_user_no');
+            $table->string('cards_0')->default('');
+            $table->string('cards_1')->default('');
+            $table->string('cards_2')->default('');
+            $table->string('cards_3')->default('');
+            $table->integer('vulnerable_02')->default(0);
+            $table->integer('vulnerable_13')->default(0);
+            $table->smallInteger('start_user_no')->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
         });

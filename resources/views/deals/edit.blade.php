@@ -42,12 +42,14 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>NS vulnerable:</strong>
+                    <input type="hidden" name="vulnerable_02" value="0" />
                     <input type="checkbox" class="form-control" name="vulnerable_02" @checked($deal->vulnerable_02) value="1" style="width: 15px"/>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>WE vulnerable:</strong>
+                    <input type="hidden" name="vulnerable_13" value="0" />
                     <input type="checkbox" class="form-control" name="vulnerable_13" @checked($deal->vulnerable_13) value="1" style="width: 15px"/>
                 </div>
             </div>

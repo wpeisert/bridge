@@ -66,7 +66,7 @@ class DealController extends Controller
      */
     public function edit(Deal $deal)
     {
-        return view('deals.edit', compact('product'));
+        return view('deals.edit', compact('deal'));
     }
 
     /**
@@ -79,8 +79,7 @@ class DealController extends Controller
     public function update(Request $request, Deal $deal)
     {
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'description' => 'required'
         ]);
 
         $deal->update($request->all());

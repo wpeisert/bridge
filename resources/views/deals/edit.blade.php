@@ -33,12 +33,20 @@
                     {{ $deal->id }}
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Description:</strong>
-                    <textarea name="description" class="form-control" style="height:100px" placeholder="Description">{{ $deal->description }}</textarea>
+                    <strong>Start player:</strong>
+                    <select class="form-control" name="start_player_no">
+                        @foreach ($deal->getPlayersNames() as $no => $player)
+                            <option value="{{ $no }}" @selected($no == $deal->start_player_no)>
+                            {{ $player }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>NS vulnerable:</strong>
@@ -53,6 +61,41 @@
                     <input type="checkbox" class="form-control" name="vulnerable_13" @checked($deal->vulnerable_13) value="1" style="width: 15px"/>
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Description:</strong>
+                    <textarea name="description" class="form-control" style="height:100px" placeholder="Description">{{ $deal->description }}</textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>N cards:</strong>
+                    <input class="form-control" name="cards_0" value="{{ $deal->cards_0 }}" />
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>E cards:</strong>
+                    <input class="form-control" name="cards_1" value="{{ $deal->cards_1 }}" />
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>S cards:</strong>
+                    <input class="form-control" name="cards_2" value="{{ $deal->cards_2 }}" />
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>W cards:</strong>
+                    <input class="form-control" name="cards_3" value="{{ $deal->cards_3 }}" />
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

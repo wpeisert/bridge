@@ -15,12 +15,14 @@
                 {{ $deal->id }}
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Description:</strong>
-                {{ $deal->description }}
+                <strong>Start player: </strong>
+                {{ $deal->getPlayersNames()[intval($deal->start_player_no)] }}
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>NS vulnerable:</strong>
@@ -33,5 +35,41 @@
                 {{ $deal->vulnerable_13 }}
             </div>
         </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Description:</strong>
+                {{ $deal->description }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>N cards:</strong>
+                {!! $deal->getOneLineCards(0) !!}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>E cards:</strong>
+                {!! $deal->getOneLineCards(1) !!}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>S cards:</strong>
+                {!! $deal->getOneLineCards(2) !!}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>W cards:</strong>
+                {!! $deal->getOneLineCards(3) !!}
+            </div>
+        </div>
+
     </div>
 </x-deals-layout>

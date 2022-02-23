@@ -68,33 +68,18 @@
                     <textarea name="description" class="form-control" style="height:100px" placeholder="Description">{{ $deal->description }}</textarea>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>N cards:</strong>
-                    <input class="form-control" name="cards_0" value="{{ $deal->cards_0 }}" />
-                </div>
-            </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>E cards:</strong>
-                    <input class="form-control" name="cards_1" value="{{ $deal->cards_1 }}" />
+            @for ($iter = 0; $iter < $deal->getPlayersCount(); ++$iter)
+                @php
+                    $getter = 'cards_' . $iter;
+                @endphp
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>{{ $deal->getPlayersNames()[$iter] }} cards:</strong>
+                        <input class="form-control" name="cards_{{ $iter }}" value="{{ $deal->$getter }}" />
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>S cards:</strong>
-                    <input class="form-control" name="cards_2" value="{{ $deal->cards_2 }}" />
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>W cards:</strong>
-                    <input class="form-control" name="cards_3" value="{{ $deal->cards_3 }}" />
-                </div>
-            </div>
+            @endfor
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

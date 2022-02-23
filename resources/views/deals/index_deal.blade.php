@@ -15,10 +15,11 @@
         <br />
     </td>
     <td>
-        <b>N:</b> {!! $deal->getOneLineCards(0) !!}<br />
-        <b>E:</b> {!! $deal->getOneLineCards(1) !!}<br />
-        <b>S:</b> {!! $deal->getOneLineCards(2) !!}<br />
-        <b>W:</b> {!! $deal->getOneLineCards(3) !!}<br />
+        @for ($iter = 0; $iter < $deal->getPlayersCount(); ++$iter)
+            <strong>{{ $deal->getPlayersNames()[$iter] }}:</strong>
+            {!! $deal->getOneLineCards($iter) !!}
+            <br />
+        @endfor
     </td>
     <td>
         <form action="{{ route('deals.destroy',$deal->id) }}" method="POST">

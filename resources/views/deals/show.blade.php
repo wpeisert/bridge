@@ -43,33 +43,14 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>N cards:</strong>
-                {!! $deal->getOneLineCards(0) !!}
+        @for ($iter = 0; $iter < $deal->getPlayersCount(); ++$iter)
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>{{ $deal->getPlayersNames()[$iter] }} cards:</strong>
+                    {!! $deal->getOneLineCards($iter) !!}
+                </div>
             </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>E cards:</strong>
-                {!! $deal->getOneLineCards(1) !!}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>S cards:</strong>
-                {!! $deal->getOneLineCards(2) !!}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>W cards:</strong>
-                {!! $deal->getOneLineCards(3) !!}
-            </div>
-        </div>
+        @endfor
 
     </div>
 </x-deals-layout>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\BiddingsController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,6 @@ Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verifie
 Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
 
 Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
+Route::resource('quizes', QuizController::class)->middleware(['auth', 'verified'])->parameters(['quizes' => 'quiz']);
 
 require __DIR__.'/auth.php';

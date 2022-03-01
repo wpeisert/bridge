@@ -1,9 +1,9 @@
-<x-deals-layout>
+<x-quizes-layout>
 
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <a class="btn btn-success" href="{{ route('deals.create') }}"> Create New Deal</a>
+                                <a class="btn btn-success" href="{{ route('quizes.create') }}"> Create New Quiz</a>
                             </div>
                         </div>
                     </div>
@@ -16,14 +16,15 @@
 
                     <table class="table table-bordered">
                         <tr>
-                            <th>Data</th>
-                            <th>Cards</th>
-                            <th>Action</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th style="width: 300px">Actions</th>
                         </tr>
-                        @each('deals.index_item', $deals, 'deal')
+                        @each('quizes.index_item', $quizes, 'quiz')
 
                     </table>
 
-                    {!! $deals->links() !!}
+                    {!! $quizes->links() !!}
 
-</x-deals-layout>
+</x-quizes-layout>

@@ -2,85 +2,106 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuizRequest;
-use App\Http\Requests\UpdateQuizRequest;
 use App\Models\Quiz;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class QuizController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        //
+        $quizes = Quiz::latest()->paginate(5);
+        return view('quizes.index',compact('quizes'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('quizes.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreQuizRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
-    public function store(StoreQuizRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        Quiz::create($request->all());
+
+        return redirect()->route('quizes.index')
+            ->with('success','Quiz created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
+     * @param Quiz $quiz
+     * @return Response
      */
     public function show(Quiz $quiz)
     {
-        //
+        return view('quizes.show', compact('quiz'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
+     * @param Quiz $quiz
+     * @return Response
      */
     public function edit(Quiz $quiz)
     {
-        //
+        return view('quizes.edit', compact('quiz'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateQuizRequest  $request
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Quiz $quiz
+     * @return Response
      */
-    public function update(UpdateQuizRequest $request, Quiz $quiz)
+    public function update(Request $request, Quiz $quiz)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $quiz->update($request->all());
+
+        return redirect()->route('quizes.index')
+            ->with('success','Quiz updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
+     * @param Quiz $quiz
+     * @return Response
      */
     public function destroy(Quiz $quiz)
     {
-        //
+        $quiz->delete();
+
+        return redirect()->route('quizes.index')
+            ->with('success','Quiz deleted successfully');
     }
 }

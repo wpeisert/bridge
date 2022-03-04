@@ -20,25 +20,8 @@ return new class extends Migration
             $table->smallInteger('vulnerable');
             $table->smallInteger('dealer');
 
-            for ($iter = 0; $iter < \App\Dictionaries\BridgeConstants::PLAYERS_COUNT; ++$iter) {
-                $table->integer('PC_' . ($iter) . '_from');
-                $table->integer('PC_' . ($iter) . '_to');
-            }
-            $table->integer('PC_any_player_from');
-            $table->integer('PC_any_player_to');
-
-            $table->integer('PC_02_from');
-            $table->integer('PC_02_to');
-            $table->integer('PC_13_from');
-            $table->integer('PC_13_to');
-            $table->integer('PC_any_pair_from');
-            $table->integer('PC_any_pair_to');
-
-            foreach (\App\Dictionaries\BridgeConstants::DEAL_CONSTRAINTS_COLORS as $color) {
-                for ($iter = 0; $iter < \App\Dictionaries\BridgeConstants::PLAYERS_COUNT; ++$iter) {
-                    $table->integer($color . '_' . ($iter) . '_from');
-                    $table->integer($color . '_' . ($iter) . '_to');
-                }
+            foreach (\App\Models\DealConstraint::getFieldsNames() as $fieldName) {
+                $table->integer($fieldName);
             }
 
             $table->timestamps();

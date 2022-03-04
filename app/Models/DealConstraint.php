@@ -19,30 +19,38 @@ class DealConstraint extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->fillable = array_merge($this->fillable, self::getFieldsNames());
+        $fieldNames = array_reduce(
+            self::getFields(),
+            function($carry, $item) {
+                $carry[] = $item['name'];
+                return $carry;
+            },
+            []
+        );
+        $this->fillable = array_merge($this->fillable, $fieldNames);
 
         parent::__construct($attributes);
     }
 
-    public static function getFieldsNames()
+    public static function getFields()
     {
-        $fieldNames = [];
+        $fields = [];
 
         for ($iter = 0; $iter < BridgeConstants::PLAYERS_COUNT; ++$iter) {
-            $fieldNames[] = 'PC_' . ($iter) . '_from';
-            $fieldNames[] = 'PC_' . ($iter) . '_to';
+            $fields[] = ['name' => 'PC_' . ($iter) . '_from', 'defaultValue' => 0];
+            $fields[] = ['name' => 'PC_' . ($iter) . '_to', 'defaultValue' => 40];
         }
 
-        $fieldNames[] = 'PC_02_from';
-        $fieldNames[] = 'PC_02_to';
+        $fields[] = ['name' => 'PC_02_from', 'defaultValue' => 0];
+        $fields[] = ['name' => 'PC_02_to', 'defaultValue' => 40];
 
         foreach (BridgeConstants::DEAL_CONSTRAINTS_COLORS as $color) {
             for ($iter = 0; $iter < BridgeConstants::PLAYERS_COUNT; ++$iter) {
-                $fieldNames[] = $color . '_' . ($iter) . '_from';
-                $fieldNames[] = $color . '_' . ($iter) . '_to';
+                $fields[] = ['name' => $color . '_' . ($iter) . '_from', 'defaultValue' => 0];
+                $fields[] = ['name' => $color . '_' . ($iter) . '_to', 'defaultValue' => 13];
             }
         }
 
-        return $fieldNames;
+        return $fields;
     }
 }

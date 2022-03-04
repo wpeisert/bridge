@@ -20,8 +20,8 @@ return new class extends Migration
             $table->smallInteger('vulnerable');
             $table->smallInteger('dealer');
 
-            foreach (\App\Models\DealConstraint::getFieldsNames() as $fieldName) {
-                $table->integer($fieldName);
+            foreach (\App\Models\DealConstraint::getFields() as $fields) {
+                $table->integer($fields['name'])->default($fields['defaultValue']);
             }
 
             $table->timestamps();

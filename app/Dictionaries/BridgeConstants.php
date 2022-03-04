@@ -9,6 +9,7 @@ class BridgeConstants
     public const COLORS_SYMBOLS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
     public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'NS', 'WE', ' both ', ' none '];
     public const DEAL_CONSTRAINTS_DEALER = ['N', 'E', 'S', 'W', '- any -'];
+    public const DEAL_CONSTRAINTS_COLORS = ['S', 'H', 'D', 'C'];
 
     public static function get(): array
     {
@@ -18,6 +19,7 @@ class BridgeConstants
             'COLORS_SYMBOLS' => self::COLORS_SYMBOLS,
             'DEAL_CONSTRAINTS_VULNERABLE' => self::DEAL_CONSTRAINTS_VULNERABLE,
             'DEAL_CONSTRAINTS_DEALER' => self::DEAL_CONSTRAINTS_DEALER,
+            'DEAL_CONSTRAINTS_COLORS' => self::DEAL_CONSTRAINTS_COLORS,
         ];
     }
 }

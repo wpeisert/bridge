@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class QuizesLayout extends Component
+class QuizzesLayout extends Component
 {
     /**
      * Get the view / contents that represents the component.
@@ -13,6 +13,6 @@ class QuizesLayout extends Component
      */
     public function render()
     {
-        return view('quizes.layout');
+        return view('quizzes.layout');
     }
 }

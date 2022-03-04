@@ -12,4 +12,9 @@ class Quiz extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    public function deals()
+    {
+        return $this->belongsToMany(Deal::class)->withTimestamps();
+    }
 }

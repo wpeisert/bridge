@@ -29,6 +29,6 @@ Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verifie
 Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
 
 Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
-Route::resource('quizes', QuizController::class)->middleware(['auth', 'verified'])->parameters(['quizes' => 'quiz']);
+Route::resource('quizzes', QuizController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

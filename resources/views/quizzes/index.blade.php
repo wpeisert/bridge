@@ -1,9 +1,9 @@
-<x-quizes-layout>
+<x-quizzes-layout>
 
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <a class="btn btn-success" href="{{ route('quizes.create') }}"> Create New Quiz</a>
+                                <a class="btn btn-success" href="{{ route('quizzes.create') }}"> Create New Quiz</a>
                             </div>
                         </div>
                     </div>
@@ -19,12 +19,13 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Deals</th>
                             <th style="width: 300px">Actions</th>
                         </tr>
-                        @each('quizes.index_item', $quizes, 'quiz')
+                        @each('quizzes.index_item', $quizzes, 'quiz')
 
                     </table>
 
-                    {!! $quizes->links() !!}
+                    {!! $quizzes->links() !!}
 
-</x-quizes-layout>
+</x-quizzes-layout>

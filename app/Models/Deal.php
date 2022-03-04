@@ -9,6 +9,7 @@ class Deal extends Model
 {
     private const PLAYERS_COUNT = 4;
     private const PLAYERS_NAMES = ['N', 'E', 'S', 'W'];
+    private const COLORS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
 
     use HasFactory;
 
@@ -20,6 +21,11 @@ class Deal extends Model
         'vulnerable_02' => 'integer',
         'vulnerable_13' => 'integer',
     ];
+
+    public function quizzes()
+    {
+        return $this->belongsToMany(Quiz::class)->withTimestamps();
+    }
 
     public static function getPLayersCount(): int
     {
@@ -41,13 +47,11 @@ class Deal extends Model
 
     private function decorateOneLine(string $cards)
     {
-        $colors = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
-
         $result = '';
         $cardsArr = explode('.', $cards);
         for ($iter = 0; $iter < 4; ++$iter) {
             if ($cardsArr[$iter]) {
-                $result .= $colors[$iter] . ' ' . $cardsArr[$iter] . '   ';
+                $result .= self::COLORS[$iter] . ' ' . $cardsArr[$iter] . '   ';
             }
         }
 

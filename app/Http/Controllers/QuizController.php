@@ -15,8 +15,8 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizes = Quiz::latest()->paginate(5);
-        return view('quizes.index',compact('quizes'))
+        $quizzes = Quiz::latest()->paginate(5);
+        return view('quizzes.index',compact('quizzes'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quizes.create');
+        return view('quizzes.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class QuizController extends Controller
 
         Quiz::create($request->all());
 
-        return redirect()->route('quizes.index')
+        return redirect()->route('quizzes.index')
             ->with('success','Quiz created successfully.');
     }
 
@@ -57,7 +57,7 @@ class QuizController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        return view('quizes.show', compact('quiz'));
+        return view('quizzes.show', compact('quiz'));
     }
 
     /**
@@ -68,7 +68,7 @@ class QuizController extends Controller
      */
     public function edit(Quiz $quiz)
     {
-        return view('quizes.edit', compact('quiz'));
+        return view('quizzes.edit', compact('quiz'));
     }
 
     /**
@@ -87,7 +87,7 @@ class QuizController extends Controller
 
         $quiz->update($request->all());
 
-        return redirect()->route('quizes.index')
+        return redirect()->route('quizzes.index')
             ->with('success','Quiz updated successfully');
     }
 
@@ -101,7 +101,7 @@ class QuizController extends Controller
     {
         $quiz->delete();
 
-        return redirect()->route('quizes.index')
+        return redirect()->route('quizzes.index')
             ->with('success','Quiz deleted successfully');
     }
 }

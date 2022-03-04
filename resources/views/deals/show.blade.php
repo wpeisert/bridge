@@ -2,8 +2,11 @@
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <a class="btn btn-primary" href="javascript:history.back();"> Back</a>
+            </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('deals.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('deals.index') }}"> Deals list</a>
             </div>
         </div>
     </div>

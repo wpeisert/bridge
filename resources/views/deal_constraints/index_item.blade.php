@@ -15,13 +15,13 @@
         {{ $DEAL_CONSTRAINTS_DEALER[intval($dealConstraint->dealer)] }}
     </td>
     <td>
-        PC - players
+        
     </td>
     <td>
-        PC - pairs
+
     </td>
     <td>
-        Colors
+
     </td>
     <td>
         <form action="{{ route('deal_constraints.destroy',$dealConstraint->id) }}" method="POST">

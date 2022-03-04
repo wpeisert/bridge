@@ -2,19 +2,16 @@
 
 namespace App\Models;
 
+use App\Dictionaries\BridgeConstants;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Deal extends Model
 {
-    private const PLAYERS_COUNT = 4;
-    private const PLAYERS_NAMES = ['N', 'E', 'S', 'W'];
-    private const COLORS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
-
     use HasFactory;
 
     protected $fillable = [
-        'description', 'vulnerable_02', 'vulnerable_13', 'cards_0', 'cards_1', 'cards_2', 'cards_3', 'start_player_no'
+        'description', 'vulnerable_02', 'vulnerable_13', 'cards_0', 'cards_1', 'cards_2', 'cards_3', 'dealer'
     ];
 
     protected $casts = [
@@ -27,15 +24,6 @@ class Deal extends Model
         return $this->belongsToMany(Quiz::class)->withTimestamps();
     }
 
-    public static function getPLayersCount(): int
-    {
-        return self::PLAYERS_COUNT;
-    }
-
-    public static function getPLayersNames(): array
-    {
-        return self::PLAYERS_NAMES;
-    }
 
     public function getOneLineCards(int $user_no): string
     {
@@ -50,8 +38,8 @@ class Deal extends Model
         $result = '';
         $cardsArr = explode('.', $cards);
         for ($iter = 0; $iter < 4; ++$iter) {
-            if ($cardsArr[$iter]) {
-                $result .= self::COLORS[$iter] . ' ' . $cardsArr[$iter] . '   ';
+            if (isset($cardsArr[$iter])) {
+                $result .= BridgeConstants::COLORS_SYMBOLS[$iter] . ' ' . $cardsArr[$iter] . '   ';
             }
         }
 

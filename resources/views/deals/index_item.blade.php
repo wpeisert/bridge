@@ -1,8 +1,8 @@
 <tr>
     <td>
         <b>ID: </b>{{ $deal->id }}<br />
-        <b>Start player: </b>
-        {{ $deal->getPlayersNames()[intval($deal->start_player_no)] }}
+        <b>Dealer: </b>
+        {{ $PLAYERS_NAMES[intval($deal->dealer)] }}
         <br />
         <b>Vulnerable: </b>
         @if ($deal->vulnerable_02 && $deal->vulnerable_13) both
@@ -15,8 +15,8 @@
         <br />
     </td>
     <td>
-        @for ($iter = 0; $iter < $deal->getPlayersCount(); ++$iter)
-            <strong>{{ $deal->getPlayersNames()[$iter] }}:</strong>
+        @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
+            <strong>{{ $PLAYERS_NAMES[$iter] }}:</strong>
             {!! $deal->getOneLineCards($iter) !!}
             <br />
         @endfor

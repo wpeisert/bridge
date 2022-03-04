@@ -29,9 +29,9 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Start player:</strong>
-                    <select class="form-control" name="start_player_no">
-                        @foreach (\App\Models\Deal::getPLayersNames() as $no => $player)
+                    <strong>Dealer:</strong>
+                    <select class="form-control" name="dealer">
+                        @foreach ($PLAYERS_NAMES as $no => $player)
                             <option value="{{ $no }}">
                                 {{ $player }}
                             </option>

@@ -36,10 +36,10 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Start player:</strong>
-                    <select class="form-control" name="start_player_no">
-                        @foreach ($deal->getPlayersNames() as $no => $player)
-                            <option value="{{ $no }}" @selected($no == $deal->start_player_no)>
+                    <strong>Dealer:</strong>
+                    <select class="form-control" name="dealer">
+                        @foreach ($PLAYERS_NAMES as $no => $player)
+                            <option value="{{ $no }}" @selected($no == $deal->dealer)>
                             {{ $player }}
                             </option>
                         @endforeach
@@ -69,13 +69,13 @@
                 </div>
             </div>
 
-            @for ($iter = 0; $iter < $deal->getPlayersCount(); ++$iter)
+            @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
                 @php
                     $getter = 'cards_' . $iter;
                 @endphp
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>{{ $deal->getPlayersNames()[$iter] }} cards:</strong>
+                        <strong>{{ $PLAYERS_NAMES[$iter] }} cards:</strong>
                         <input class="form-control" name="cards_{{ $iter }}" value="{{ $deal->$getter }}" />
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<x-deals-layout>
+<x-deal-constraints-layout>
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <a class="btn btn-primary" href="javascript:history.back();"> Back</a>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('deals.index') }}"> Deals list</a>
+                <a class="btn btn-primary" href="{{ route('deal_constraints.index') }}"> Deals list</a>
             </div>
         </div>
     </div>
@@ -15,45 +15,36 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ID:</strong>
-                {{ $deal->id }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Dealer: </strong>
-                {{ $PLAYERS_NAMES[intval($deal->dealer)] }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>NS vulnerable:</strong>
-                {{ $deal->vulnerable_02 }}
+                {{ $dealConstraint->id }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>WE vulnerable:</strong>
-                {{ $deal->vulnerable_13 }}
+                <strong>Name:</strong>
+                {{ $dealConstraint->name }}
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $deal->description }}
+                {{ $dealConstraint->description }}
             </div>
         </div>
 
-        @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>{{ $PLAYERS_NAMES[$iter] }} cards:</strong>
-                    {!! $deal->getOneLineCards($iter) !!}
-                </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Vulnerable: </strong>
+                {{ $DEAL_CONSTRAINTS_VULNERABLE[intval($dealConstraint->vulnerable)] }}
             </div>
-        @endfor
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Dealer: </strong>
+                {{ $DEAL_CONSTRAINTS_DEALER[intval($dealConstraint->dealer)] }}
+            </div>
+        </div>
 
     </div>
-</x-deals-layout>
+</x-deal-constraints-layout>

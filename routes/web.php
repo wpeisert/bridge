@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\BiddingsController;
+use App\Http\Controllers\DealConstraintController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,7 @@ Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware
 
 Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
 Route::resource('quizzes', QuizController::class)->middleware(['auth', 'verified']);
+
+Route::resource('deal_constraints', DealConstraintController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

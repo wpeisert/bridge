@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('cards_3')->default('');
             $table->integer('vulnerable_02')->default(0);
             $table->integer('vulnerable_13')->default(0);
-            $table->smallInteger('start_player_no')->default(0);
+            $table->smallInteger('dealer')->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -18,17 +18,22 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('quizzes.index')" :active="request()->routeIs('quizzes.index')">
-                        {{ __('Quizy') }}
+                        {{ __('Quizzes') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('deals.index')" :active="request()->routeIs('deals.index')">
-                        {{ __('Rozdania') }}
+                        {{ __('Deals') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('deal_constraints.index')" :active="request()->routeIs('deal_constraints.index')">
+                        {{ __('Deal constraints') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('biddings')" :active="request()->routeIs('biddings')">
-                        {{ __('Licytacje') }}
+                        {{ __('Biddings') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -29,15 +29,15 @@ class BiddingsController extends Controller
             [
                 'allBiddings' => [
                     [
-                        'title' => 'Licytacje bieżące',
+                        'title' => 'Current biddings',
                         'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $pending]]
                     ],
                     [
-                        'title' => 'Licytacje oczekujące',
+                        'title' => 'Preparing biddings',
                         'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $preparing]]
                     ],
                     [
-                        'title' => 'Licytacje zakończone',
+                        'title' => 'Finished biddings',
                         'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $finished]]
                     ],
                 ],

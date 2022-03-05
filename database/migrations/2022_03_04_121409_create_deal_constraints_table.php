@@ -1,6 +1,6 @@
 <?php
 
-use App\Dictionaries\BridgeConstants;
+use App\Bridge\Tools;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->smallInteger('vulnerable');
             $table->smallInteger('dealer');
 
-            foreach (BridgeConstants::getDealConstraintsFields() as $name => $field) {
+            foreach (Tools::getDealConstraintsFields() as $name => $field) {
                 $table->integer($name)->default($field['defaultValue']);
             }
 

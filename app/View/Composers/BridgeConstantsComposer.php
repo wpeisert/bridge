@@ -2,7 +2,7 @@
 
 namespace App\View\Composers;
 
-use App\Dictionaries\BridgeConstants;
+use App\Bridge\Constants;
 use Illuminate\View\View;
 
 class BridgeConstantsComposer
@@ -15,7 +15,7 @@ class BridgeConstantsComposer
      */
     public function compose(View $view)
     {
-        foreach (BridgeConstants::get() as $name => $value) {
+        foreach (Constants::get() as $name => $value) {
             $view->with($name, $value);
         }
     }

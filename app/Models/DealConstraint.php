@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Dictionaries\BridgeConstants;
+use App\Bridge\Tools;
 use Illuminate\Database\Eloquent\Model;
 
 class DealConstraint extends Model
@@ -20,7 +20,7 @@ class DealConstraint extends Model
     public function __construct(array $attributes = [])
     {
         $fieldNames = array_reduce(
-            array_keys(BridgeConstants::getDealConstraintsFields()),
+            array_keys(Tools::getDealConstraintsFields()),
             function($carry, $item) {
                 $carry[] = $item;
                 return $carry;

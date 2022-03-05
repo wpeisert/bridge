@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Dictionaries\BridgeConstants;
+use App\Bridge\Constants;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,7 +39,7 @@ class Deal extends Model
         $cardsArr = explode('.', $cards);
         for ($iter = 0; $iter < 4; ++$iter) {
             if (isset($cardsArr[$iter])) {
-                $result .= BridgeConstants::COLORS_SYMBOLS[$iter] . ' ' . $cardsArr[$iter] . '   ';
+                $result .= Constants::COLORS_SYMBOLS[$iter] . ' ' . $cardsArr[$iter] . '   ';
             }
         }
 

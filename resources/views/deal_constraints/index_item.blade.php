@@ -17,14 +17,7 @@
     <td>
         @foreach ($DEAL_CONSTRAINTS_FIELDS as $name => $field)
             @if ($field['defaultValue'] !== $dealConstraint->$name)
-                @php
-                    $parsedName = str_replace(
-                        array_merge(['PC'], $COLORS_NAMES, array_keys($PLAYERS_NAMES), ['_', 'from', 'to']),
-                        array_merge(['Points'], $COLORS_SYMBOLS, $PLAYERS_NAMES, [' ', '>=', '<=']),
-                        $name
-                    );
-                @endphp
-                {!! $parsedName !!} {{ $dealConstraint->$name }}<br />
+                {!! \App\Bridge\Tools::parseDealConstraintsFieldName($name) !!} {{ $dealConstraint->$name }}<br />
             @endif
         @endforeach
     </td>

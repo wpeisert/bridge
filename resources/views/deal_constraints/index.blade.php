@@ -21,9 +21,7 @@
                             <th>Description</th>
                             <th>Vulnerable</th>
                             <th>Dealer</th>
-                            <th>PC - players</th>
-                            <th>PC - pairs</th>
-                            <th>Colors</th>
+                            <th>Constraints</th>
                             <th>Action</th>
                         </tr>
                         @each('deal_constraints.index_item', $dealConstraints, 'dealConstraint')

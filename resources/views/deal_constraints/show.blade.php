@@ -3,48 +3,29 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <a class="btn btn-primary" href="javascript:history.back();"> Back</a>
+                <h2>View Deal Constraints</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('deal_constraints.index') }}"> Deals list</a>
+                <a class="btn btn-primary" href="{{ route('deal_constraints.index') }}"> Back</a>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>ID:</strong>
-                {{ $dealConstraint->id }}
-            </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                {{ $dealConstraint->name }}
-            </div>
-        </div>
+    @endif
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Description:</strong>
-                {{ $dealConstraint->description }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Vulnerable: </strong>
-                {{ $DEAL_CONSTRAINTS_VULNERABLE[intval($dealConstraint->vulnerable)] }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Dealer: </strong>
-                {{ $DEAL_CONSTRAINTS_DEALER[intval($dealConstraint->dealer)] }}
-            </div>
-        </div>
-
-    </div>
+    @include (
+        'deal_constraints.form',
+        [
+            'dealConstraint' => $dealConstraint,
+        ]
+    )
 </x-deal-constraints-layout>

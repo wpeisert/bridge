@@ -22,58 +22,10 @@
         </div>
     @endif
 
-    <form action="{{ route('deal_constraints.store') }}" method="POST">
-        @csrf
-
-        <div class="row">
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input class="form-control" name="name" />
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Description:</strong>
-                    <textarea name="description" class="form-control" style="height:100px" placeholder="Description"></textarea>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Vulnerable:</strong>
-                    <select class="form-control" name="vulnerable">
-                        @foreach ($DEAL_CONSTRAINTS_VULNERABLE as $value => $text)
-                            <option value="{{ $value }}">
-                                {{ $text }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Dealer:</strong>
-                    <select class="form-control" name="dealer">
-                        @foreach ($DEAL_CONSTRAINTS_DEALER as $value => $text)
-                            <option value="{{ $value }}">
-                                {{ $text }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-
-    </form>
-
+    @include (
+        'deal_constraints.form',
+        [
+            'formAction' => 'store'
+        ]
+    )
 </x-deal-constraints-layout>
-
-

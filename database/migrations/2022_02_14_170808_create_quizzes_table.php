@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('deal_constraint_id')->unsigned();
             $table->string('name');
             $table->text('description');
+            $table->integer('deals_count')->default(10);
             $table->timestamps();
+
+            $table->foreign('deal_constraint_id')->references('id')->on('deal_constraints');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Bridge\Constants;
 use App\Bridge\Tools;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,5 +31,31 @@ class DealConstraint extends Model
         $this->fillable = array_merge($this->fillable, $fieldNames);
 
         parent::__construct($attributes);
+    }
+
+    public function getVulnerableHumanAttribute()
+    {
+        return Constants::DEAL_CONSTRAINTS_VULNERABLE[intval($this->vulnerable)];
+    }
+
+    public function getDealerHumanAttribute()
+    {
+        return Constants::DEAL_CONSTRAINTS_DEALER[intval($this->dealer)];
+    }
+
+    public function getConstraintsHumanAttribute()
+    {
+        $constraints = [];
+        foreach (Tools::getDealConstraintsFields() as $name => $field) {
+            if ($field['defaultValue'] !== $this->$name) {
+                $constraints[] = ['name' => Tools::parseDealConstraintsFieldName($name), 'value' => $this->$name];
+            }
+        }
+        return $constraints;
+    }
+
+    public function getSelectOptionTextAttribute()
+    {
+        return $this->name . ' ' . $this->description;
     }
 }

@@ -9,16 +9,14 @@
         {{ $dealConstraint->description }}
     </td>
     <td>
-        {{ $DEAL_CONSTRAINTS_VULNERABLE[intval($dealConstraint->vulnerable)] }}
+        {{ $dealConstraint->vulnerable_human }}
     </td>
     <td>
-        {{ $DEAL_CONSTRAINTS_DEALER[intval($dealConstraint->dealer)] }}
+        {{ $dealConstraint->dealer_human }}
     </td>
     <td>
-        @foreach ($DEAL_CONSTRAINTS_FIELDS as $name => $field)
-            @if ($field['defaultValue'] !== $dealConstraint->$name)
-                {!! \App\Bridge\Tools::parseDealConstraintsFieldName($name) !!} {{ $dealConstraint->$name }}<br />
-            @endif
+        @foreach ($dealConstraint->constraints_human as $constraint)
+            {!! $constraint['name'] !!} {{ $constraint['value'] }} <br />
         @endforeach
     </td>
     <td>

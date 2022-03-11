@@ -1,12 +1,6 @@
 <x-quizzes-layout>
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('quizzes.index') }}"> Back</a>
-            </div>
-        </div>
-    </div>
+    <x-slot name="subtitle">Show quiz</x-slot>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -27,6 +21,24 @@
             <div class="form-group">
                 <strong>Description:</strong>
                 {{ $quiz->description }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Deal constraints:</strong>
+                <ul style="list-style-type: disc; margin-left: 30px">
+                    @foreach ($quiz->deal_constraint->constraints_human as $constraint)
+                        <li>{!! $constraint['name']  !!} {{ $constraint['value'] }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Deals count:</strong>
+                {{ $quiz->deals_count }}
             </div>
         </div>
 

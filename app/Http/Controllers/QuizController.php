@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DealConstraint;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -27,7 +28,8 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quizzes.create');
+        $dealConstraints = DealConstraint::all();
+        return view('quizzes.create', compact('dealConstraints'));
     }
 
     /**
@@ -68,7 +70,8 @@ class QuizController extends Controller
      */
     public function edit(Quiz $quiz)
     {
-        return view('quizzes.edit', compact('quiz'));
+        $dealConstraints = DealConstraint::all();
+        return view('quizzes.edit', compact('quiz', 'dealConstraints'));
     }
 
     /**

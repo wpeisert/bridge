@@ -19,7 +19,7 @@ class DealCreator implements DealCreatorInterface
      */
     public function create(?DealConstraint $dealConstraint = null): Deal
     {
-        throw new \Exception('not implemented yet');
+        return new Deal();
         // TODO: Implement create() method.
     }
 }

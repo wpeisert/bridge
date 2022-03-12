@@ -10,7 +10,7 @@ class DealConstraintsVerifier implements DealConstraintsVerifierInterface
 {
     public function verify(Deal $deal, DealConstraint $dealConstraint): bool
     {
-        throw new \Exception('not implemented yet');
+        return true;
         // TODO: Implement verify() method.
     }
 }

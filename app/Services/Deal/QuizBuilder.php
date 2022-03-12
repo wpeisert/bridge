@@ -17,7 +17,9 @@ class QuizBuilder implements QuizBuilderInterface
         $createdCount = 0;
         for ($iter = 0; $iter < $limit; ++$iter) {
             try {
-                $this->dealBuilder->build($quiz->deal_constraint);
+                $deal = $this->dealBuilder->build($quiz->deal_constraint);
+                $deal->save();
+                $quiz->deals()->attach($deal);
                 ++$createdCount;
             } catch (DealBuilderLimitReachedException $e) {
                 // silent

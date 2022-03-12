@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\Deal\QuizBuilderInterface;
 use App\Models\DealConstraint;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
@@ -9,6 +10,8 @@ use Illuminate\Http\Response;
 
 class QuizController extends Controller
 {
+    public function __construct(private QuizBuilderInterface $quizBuilder) {}
+
     /**
      * Display a listing of the resource.
      *
@@ -110,7 +113,9 @@ class QuizController extends Controller
 
     public function generateDeals(Quiz $quiz)
     {
+        $createdCount = $this->quizBuilder->build($quiz);
+
         return redirect()->route('quizzes.index')
-            ->with('success','10 deals generated successfully');
+            ->with('success', $createdCount . ' deals generated successfully');
     }
 }

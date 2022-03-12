@@ -21,7 +21,7 @@ class DealBuilder implements DealBuilderInterface
      * @return Deal
      * @throws DealBuilderLimitReachedException
      */
-    public function build(?DealConstraint $dealConstraint): Deal
+    public function build(?DealConstraint $dealConstraint = null): Deal
     {
         $limit = intval(config('bridge.deal_builder_trials_limit'));
         if ($limit <= 0) {
@@ -29,7 +29,7 @@ class DealBuilder implements DealBuilderInterface
         }
 
         for ($trial = 0; $trial < $limit; ++$trial) {
-            $deal = $this->dealCreator->create();
+            $deal = $this->dealCreator->create($dealConstraint);
             if (!$dealConstraint) {
                 return $deal;
             }

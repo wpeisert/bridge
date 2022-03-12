@@ -21,6 +21,8 @@
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Deals cnt.</th>
+            <th>Deals constraints</th>
             <th>Deals</th>
             <th style="width: 300px">Actions</th>
         </tr>

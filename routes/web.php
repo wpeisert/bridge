@@ -30,6 +30,8 @@ Route::get('/biddings', BiddingsController::class)->middleware(['auth', 'verifie
 Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
 
 Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
+Route::get('quizzes/{quiz}/generate-deals', [QuizController::class, 'generateDeals'])->middleware(['auth', 'verified'])->name('quizzes.generate-deals');
+
 Route::resource('quizzes', QuizController::class)->middleware(['auth', 'verified']);
 
 Route::resource('deal_constraints', DealConstraintController::class)->middleware(['auth', 'verified']);

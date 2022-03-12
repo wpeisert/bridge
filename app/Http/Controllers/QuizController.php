@@ -107,4 +107,10 @@ class QuizController extends Controller
         return redirect()->route('quizzes.index')
             ->with('success','Quiz deleted successfully');
     }
+
+    public function generateDeals(Quiz $quiz)
+    {
+        return redirect()->route('quizzes.index')
+            ->with('success','10 deals generated successfully');
+    }
 }

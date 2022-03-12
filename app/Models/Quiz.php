@@ -12,11 +12,15 @@ class Quiz extends Model
     protected $fillable = [
         'name', 'description', 'deals_count', 'deal_constraint_id'
     ];
-    protected $appends = ['deal_constraint'];
 
     public function deals()
     {
         return $this->belongsToMany(Deal::class)->withTimestamps();
+    }
+
+    public function getExistingDealsCountAttribute()
+    {
+        return count($this->deals()->get());
     }
 
     public function dealConstraint()

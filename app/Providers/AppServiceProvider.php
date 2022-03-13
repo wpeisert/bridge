@@ -6,11 +6,13 @@ use App\Interfaces\BiddingRepositoryInterface;
 use App\Interfaces\Deal\DealBuilderInterface;
 use App\Interfaces\Deal\DealConstraintsVerifierInterface;
 use App\Interfaces\Deal\DealCreatorInterface;
+use App\Interfaces\Deal\DealModifierInterface;
 use App\Interfaces\Deal\QuizBuilderInterface;
 use App\Repositories\BiddingRepository;
 use App\Services\Deal\DealConstraintsVerifier;
 use App\Services\Deal\DealCreator;
 use App\Services\Deal\DealBuilder;
+use App\Services\Deal\DealModifier;
 use App\Services\Deal\QuizBuilder;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DealBuilderInterface::class, DealBuilder::class);
         $this->app->bind(DealConstraintsVerifierInterface::class, DealConstraintsVerifier::class);
         $this->app->bind(DealCreatorInterface::class, DealCreator::class);
+        $this->app->bind(DealModifierInterface::class, DealModifier::class);
     }
 
     /**

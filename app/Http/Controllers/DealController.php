@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 
 class DealController extends Controller
 {
+    private const MAX_PER_PAGE = 15;
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +18,9 @@ class DealController extends Controller
      */
     public function index()
     {
-        $deals = Deal::latest()->paginate(5);
+        $deals = Deal::latest()->paginate(self::MAX_PER_PAGE);
         return view('deals.index',compact('deals'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * self::MAX_PER_PAGE);
     }
 
     /**

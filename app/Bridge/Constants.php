@@ -7,7 +7,7 @@ class Constants
     public const PLAYERS_COUNT = 4;
     public const PLAYERS_NAMES = ['N', 'E', 'S', 'W'];
     public const COLORS_SYMBOLS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
-    public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'NS', 'WE', ' both ', ' none '];
+    public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'NS', 'WE', 'both', 'none'];
     public const DEAL_CONSTRAINTS_DEALER = ['N', 'E', 'S', 'W', '- any -'];
     public const COLORS_COUNT = 4;
     public const COLORS_NAMES = ['S', 'H', 'D', 'C'];

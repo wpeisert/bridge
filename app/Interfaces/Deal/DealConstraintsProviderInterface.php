@@ -2,7 +2,6 @@
 
 namespace App\Interfaces\Deal;
 
-use App\Models\Deal;
 use App\Models\DealConstraint;
 
 interface DealConstraintsProviderInterface

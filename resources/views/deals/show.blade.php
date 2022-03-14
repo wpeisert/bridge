@@ -29,13 +29,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>NS vulnerable:</strong>
-                {{ $deal->vulnerable_02 }}
+                {{ $deal->vulnerable_NS }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>WE vulnerable:</strong>
-                {{ $deal->vulnerable_13 }}
+                {{ $deal->vulnerable_WE }}
             </div>
         </div>
 
@@ -46,14 +46,14 @@
             </div>
         </div>
 
-        @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
+        @foreach ($PLAYERS_NAMES as $playerName)
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>{{ $PLAYERS_NAMES[$iter] }} cards:</strong>
-                    {!! $deal->getOneLineCards($iter) !!}
+                    <strong>{{ $playerName }} cards:</strong>
+                    {!! $deal->getOneLineCards($playerName) !!}
                 </div>
             </div>
-        @endfor
+        @endforeach
 
     </div>
 </x-deals-layout>

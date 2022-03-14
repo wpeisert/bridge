@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class DealConstraint extends Model
 {
     protected $fillable = [
-        'name', 'description', 'vulnerable', 'dealer'
+        'name', 'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer'
     ];
 
     /**
@@ -33,9 +33,14 @@ class DealConstraint extends Model
         parent::__construct($attributes);
     }
 
-    public function getVulnerableHumanAttribute()
+    public function getVulnerableNsHumanAttribute()
     {
-        return Constants::DEAL_CONSTRAINTS_VULNERABLE[intval($this->vulnerable)];
+        return Constants::DEAL_CONSTRAINTS_VULNERABLE[intval($this->vulnerable_NS)];
+    }
+
+    public function getVulnerableWeHumanAttribute()
+    {
+        return Constants::DEAL_CONSTRAINTS_VULNERABLE[intval($this->vulnerable_WE)];
     }
 
     public function getDealerHumanAttribute()

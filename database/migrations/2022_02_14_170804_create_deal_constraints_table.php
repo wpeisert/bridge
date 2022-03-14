@@ -18,7 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->smallInteger('vulnerable');
+            $table->smallInteger('vulnerable_NS');
+            $table->smallInteger('vulnerable_WE');
             $table->smallInteger('dealer');
 
             foreach (Tools::getDealConstraintsFields() as $name => $field) {

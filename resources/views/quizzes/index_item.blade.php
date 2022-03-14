@@ -13,7 +13,8 @@
     </td>
     <td>
         Dealer: {{ $quiz->deal_constraint->dealer_human }}<br />
-        Vulnerable: {{ $quiz->deal_constraint->vulnerable_human }}<br />
+        Vulnerable NS: {{ $quiz->deal_constraint->vulnerable_ns_human }}<br />
+        Vulnerable WE: {{ $quiz->deal_constraint->vulnerable_we_human }}<br />
         Constraints:
         <ul style="list-style-type: disc; margin-left: 30px">
             @foreach ($quiz->deal_constraint->constraints_human as $constraint)

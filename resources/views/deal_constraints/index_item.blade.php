@@ -9,7 +9,8 @@
         {{ $dealConstraint->description }}
     </td>
     <td>
-        {{ $dealConstraint->vulnerable_human }}
+        NS: {{ $dealConstraint->vulnerable_ns_human }}<br />
+        WE: {{ $dealConstraint->vulnerable_we_human }}<br />
     </td>
     <td>
         {{ $dealConstraint->dealer_human }}

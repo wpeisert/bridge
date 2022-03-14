@@ -43,13 +43,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>NS vulnerable:</strong>
-                    <input type="checkbox" class="form-control" name="vulnerable_02" value="1" style="width: 15px"/>
+                    <input type="checkbox" class="form-control" name="vulnerable_NS" value="1" style="width: 15px"/>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>WE vulnerable:</strong>
-                    <input type="checkbox" class="form-control" name="vulnerable_13" value="1" style="width: 15px" />
+                    <input type="checkbox" class="form-control" name="vulnerable_WE" value="1" style="width: 15px" />
                 </div>
             </div>
 
@@ -60,33 +60,17 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>N cards:</strong>
-                    <input class="form-control" name="cards_0" />
+            @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
+                @php
+                    $playerName = $PLAYERS_NAMES[$iter];
+                @endphp
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>{{ $playerName }} cards:</strong>
+                        <input class="form-control" name="cards_{{ $playerName }}" />
+                    </div>
                 </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>E cards:</strong>
-                    <input class="form-control" name="cards_1" />
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>S cards:</strong>
-                    <input class="form-control" name="cards_2" />
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>W cards:</strong>
-                    <input class="form-control" name="cards_3" />
-                </div>
-            </div>
+            @endfor
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

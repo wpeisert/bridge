@@ -50,15 +50,15 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>NS vulnerable:</strong>
-                    <input type="hidden" name="vulnerable_02" value="0" />
-                    <input type="checkbox" class="form-control" name="vulnerable_02" @checked($deal->vulnerable_02) value="1" style="width: 15px"/>
+                    <input type="hidden" name="vulnerable_NS" value="0" />
+                    <input type="checkbox" class="form-control" name="vulnerable_NS" @checked($deal->vulnerable_NS) value="1" style="width: 15px"/>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>WE vulnerable:</strong>
-                    <input type="hidden" name="vulnerable_13" value="0" />
-                    <input type="checkbox" class="form-control" name="vulnerable_13" @checked($deal->vulnerable_13) value="1" style="width: 15px"/>
+                    <input type="hidden" name="vulnerable_WE" value="0" />
+                    <input type="checkbox" class="form-control" name="vulnerable_WE" @checked($deal->vulnerable_WE) value="1" style="width: 15px"/>
                 </div>
             </div>
 
@@ -71,12 +71,13 @@
 
             @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
                 @php
-                    $getter = 'cards_' . $iter;
+                    $playerName = $PLAYERS_NAMES[$iter];
+                    $getter = 'cards_' . $playerName;
                 @endphp
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>{{ $PLAYERS_NAMES[$iter] }} cards:</strong>
-                        <input class="form-control" name="cards_{{ $iter }}" value="{{ $deal->$getter }}" />
+                        <strong>{{ $playerName }} cards:</strong>
+                        <input class="form-control" name="cards_{{ $playerName }}" value="{{ $deal->$getter }}" />
                     </div>
                 </div>
             @endfor

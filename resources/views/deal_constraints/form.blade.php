@@ -38,20 +38,33 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Vulnerable:</strong>
-                <select class="form-control" name="vulnerable">
-                    @foreach ($DEAL_CONSTRAINTS_VULNERABLE as $value => $text)
-                        <option value="{{ $value }}" @selected($value === ($dealConstraint->vulnerable ?? ''))>
-                            {{ $text }}
-                        </option>
-                    @endforeach
-                </select>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Vulnerable NS:</strong>
+                    <select class="form-control" name="vulnerable_NS">
+                        @foreach ($DEAL_CONSTRAINTS_VULNERABLE as $value => $text)
+                            <option value="{{ $value }}" @selected($value === ($dealConstraint->vulnerable_NS ?? ''))>
+                                {{ $text }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Vulnerable WE:</strong>
+                    <select class="form-control" name="vulnerable_WE">
+                        @foreach ($DEAL_CONSTRAINTS_VULNERABLE as $value => $text)
+                            <option value="{{ $value }}" @selected($value === ($dealConstraint->vulnerable_WE ?? ''))>
+                                {{ $text }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Dealer:</strong>
                 <select class="form-control" name="dealer">

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Bridge\Constants;
+use App\Bridge\Tools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,13 +11,25 @@ class Deal extends Model
 {
     use HasFactory;
 
+    public function __construct(array $attributes = [])
+    {
+        $fieldNames = [];
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            $fieldNames[] = 'cards_' . $playerName;
+        }
+
+        $this->fillable = array_merge($this->fillable, $fieldNames);
+
+        parent::__construct($attributes);
+    }
+
     protected $fillable = [
-        'description', 'vulnerable_02', 'vulnerable_13', 'cards_0', 'cards_1', 'cards_2', 'cards_3', 'dealer'
+        'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer'
     ];
 
     protected $casts = [
-        'vulnerable_02' => 'integer',
-        'vulnerable_13' => 'integer',
+        'vulnerable_NS' => 'integer',
+        'vulnerable_WE' => 'integer',
     ];
 
     public function quizzes()
@@ -25,9 +38,9 @@ class Deal extends Model
     }
 
 
-    public function getOneLineCards(int $user_no): string
+    public function getOneLineCards(string $playerName): string
     {
-        $member = 'cards_' . $user_no;
+        $member = 'cards_' . $playerName;
         $cards = $this->$member;
 
         return $this->decorateOneLine($cards);

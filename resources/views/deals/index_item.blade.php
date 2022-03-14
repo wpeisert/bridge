@@ -5,9 +5,9 @@
         {{ $PLAYERS_NAMES[intval($deal->dealer)] }}
         <br />
         <b>Vulnerable: </b>
-        @if ($deal->vulnerable_02 && $deal->vulnerable_13) both
-        @elseif ($deal->vulnerable_02) NS
-        @elseif ($deal->vulnerable_13) WE
+        @if ($deal->vulnerable_NS && $deal->vulnerable_WE) both
+        @elseif ($deal->vulnerable_NS) NS
+        @elseif ($deal->vulnerable_WE) WE
         @else - none -
         @endif
         <br />
@@ -15,11 +15,11 @@
         <br />
     </td>
     <td>
-        @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
-            <strong>{{ $PLAYERS_NAMES[$iter] }}:</strong>
-            {!! $deal->getOneLineCards($iter) !!}
+        @foreach ($PLAYERS_NAMES as $playerName)
+            <strong>{{ $playerName }} cards:</strong>
+            {!! $deal->getOneLineCards($playerName) !!}
             <br />
-        @endfor
+        @endforeach
     </td>
     <td>
         <form action="{{ route('deals.destroy',$deal->id) }}" method="POST">

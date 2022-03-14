@@ -37,6 +37,13 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                Vulnerable NS: {{ $quiz->deal_constraint->vulnerable_ns_human }}<br />
+                Vulnerable WE: {{ $quiz->deal_constraint->vulnerable_we_human }}<br />
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Deals count:</strong>
                 {{ $quiz->deals_count }}
             </div>

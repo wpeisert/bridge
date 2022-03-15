@@ -118,23 +118,43 @@
                     </tr>
                     <tr>
                         <th>NS</th>
-                        @foreach (['from', 'to'] as $suffix)
-                            <td>
-                                @php
-                                    $name = 'PC_02_' . $suffix;
-                                @endphp
-                                @include (
-                                    'components.select-int',
-                                    [
-                                        'name' => $name,
-                                        'value' => $dealConstraint->$name ?? $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
-                                        'defaultValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
-                                        'maxValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['maxValue'],
-                                        'edit' => 1,
-                                    ]
-                                )
-                            </td>
-                        @endforeach
+                            @foreach (['from', 'to'] as $suffix)
+                                <td>
+                                    @php
+                                        $name = 'PC_02_' . $suffix;
+                                    @endphp
+                                    @include (
+                                        'components.select-int',
+                                        [
+                                            'name' => $name,
+                                            'value' => $dealConstraint->$name ?? $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
+                                            'defaultValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
+                                            'maxValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['maxValue'],
+                                            'edit' => 1,
+                                        ]
+                                    )
+                                </td>
+                            @endforeach
+                    </tr>
+                    <tr>
+                        <th>WE</th>
+                            @foreach (['from', 'to'] as $suffix)
+                                <td>
+                                    @php
+                                        $name = 'PC_13_' . $suffix;
+                                    @endphp
+                                    @include (
+                                        'components.select-int',
+                                        [
+                                            'name' => $name,
+                                            'value' => $dealConstraint->$name ?? $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
+                                            'defaultValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['defaultValue'],
+                                            'maxValue' => $DEAL_CONSTRAINTS_FIELDS[$name]['maxValue'],
+                                            'edit' => 1,
+                                        ]
+                                    )
+                                </td>
+                            @endforeach
                     </tr>
                 </table>
             </div>

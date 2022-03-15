@@ -15,6 +15,8 @@ class Tools
 
         $fields['PC_02_from'] = ['defaultValue' => 0, 'maxValue' => Constants::MAX_PC];
         $fields['PC_02_to'] = ['defaultValue' => Constants::MAX_PC, 'maxValue' => Constants::MAX_PC];
+        $fields['PC_13_from'] = ['defaultValue' => 0, 'maxValue' => Constants::MAX_PC];
+        $fields['PC_13_to'] = ['defaultValue' => Constants::MAX_PC, 'maxValue' => Constants::MAX_PC];
 
         foreach (Constants::COLORS_NAMES as $colorName) {
             for ($playerNo = 0; $playerNo < Constants::PLAYERS_COUNT; ++$playerNo) {

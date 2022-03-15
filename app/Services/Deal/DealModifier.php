@@ -17,11 +17,11 @@ class DealModifier implements DealModifierInterface
             $deal->dealer = $this->dealConstraintsProvider->getDealer($dealConstraint);
         }
 
-        if ($this->dealConstraintsProvider->isVulnerableNsDefined($dealConstraint)) {
+        if ($this->dealConstraintsProvider->isNsVulnerableDefined($dealConstraint)) {
             $deal->vulnerable_NS = $this->dealConstraintsProvider->isNsVulnerable($dealConstraint);
         }
 
-        if ($this->dealConstraintsProvider->isVulnerableWeDefined($dealConstraint)) {
+        if ($this->dealConstraintsProvider->isWeVulnerableDefined($dealConstraint)) {
             $deal->vulnerable_WE = $this->dealConstraintsProvider->isWeVulnerable($dealConstraint);
         }
     }

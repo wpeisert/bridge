@@ -18,7 +18,7 @@ class DealConstraintsProvider implements DealConstraintsProviderInterface
         return $dealConstraint->dealer;
     }
 
-    public function isVulnerableNsDefined(DealConstraint $dealConstraint): bool
+    public function isNsVulnerableDefined(DealConstraint $dealConstraint): bool
     {
         return $dealConstraint->vulnerable_NS > 0;
     }
@@ -28,7 +28,7 @@ class DealConstraintsProvider implements DealConstraintsProviderInterface
         return $dealConstraint->vulnerable_NS == 1;
     }
 
-    public function isVulnerableWeDefined(DealConstraint $dealConstraint): bool
+    public function isWeVulnerableDefined(DealConstraint $dealConstraint): bool
     {
         return $dealConstraint->vulnerable_WE > 0;
     }

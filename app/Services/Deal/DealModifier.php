@@ -11,7 +11,7 @@ class DealModifier implements DealModifierInterface
 {
     public function __construct(private DealConstraintsProviderInterface $dealConstraintsProvider) {}
 
-    public function applyBasicDealConstraints(Deal $deal, DealConstraint $dealConstraint): void
+    public function applySettingsConstraints(Deal $deal, DealConstraint $dealConstraint): void
     {
         if ($this->dealConstraintsProvider->isDealerDefined($dealConstraint)) {
             $deal->dealer = $this->dealConstraintsProvider->getDealer($dealConstraint);

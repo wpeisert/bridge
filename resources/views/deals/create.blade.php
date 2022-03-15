@@ -66,7 +66,7 @@
                 @endphp
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>{{ $playerName }} cards:</strong>
+                        <strong>{{ $playerName }}:</strong>
                         <input class="form-control" name="cards_{{ $playerName }}" />
                     </div>
                 </div>

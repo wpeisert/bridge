@@ -2,14 +2,20 @@
 
 namespace App\Services\Deal;
 
+use App\Bridge\Constants;
 use App\Interfaces\Deal\DealCreatorInterface;
+use App\Interfaces\Deal\DealGeneratorInterface;
 use App\Interfaces\Deal\DealModifierInterface;
 use App\Models\Deal;
 use App\Models\DealConstraint;
 
 class DealCreator implements DealCreatorInterface
 {
-    public function __construct(private DealModifierInterface $dealUpdater) {}
+    public function __construct(
+        private DealModifierInterface $dealModifier,
+        private DealGeneratorInterface $dealGenerator
+    ) {}
+
     /**
      * Creates random deal, but uses deal constraints object to set up definable fields:
      *   - dealer
@@ -21,17 +27,13 @@ class DealCreator implements DealCreatorInterface
      */
     public function create(?DealConstraint $dealConstraint = null): Deal
     {
-        $deal = new Deal();
-
-        $deal->dealer = rand(0, 3);
-        $deal->vulnerable_NS = rand(0, 1);
-        $deal->vulnerable_WE = rand(0, 1);
+        $deal = $this->dealGenerator->generateRandom();
 
         if (!$dealConstraint) {
             return $deal;
         }
 
-        $this->dealUpdater->applyBasicDealConstraints($deal, $dealConstraint);
+        $this->dealModifier->applySettingsConstraints($deal, $dealConstraint);
 
         return $deal;
     }

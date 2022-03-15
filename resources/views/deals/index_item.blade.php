@@ -16,9 +16,10 @@
     </td>
     <td>
         @foreach ($PLAYERS_NAMES as $playerName)
-            <strong>{{ $playerName }} cards:</strong>
-            {!! $deal->getOneLineCards($playerName) !!}
-            <br />
+            <strong>{{ $playerName }}:</strong>
+            <div>
+                {!! $deal->getOneLineCards($playerName) !!}
+            </div>
         @endforeach
     </td>
     <td>

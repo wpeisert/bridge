@@ -18,8 +18,8 @@ class Tools
 
         foreach (Constants::COLORS_NAMES as $colorName) {
             for ($playerNo = 0; $playerNo < Constants::PLAYERS_COUNT; ++$playerNo) {
-                $fields[$colorName . '_' . $playerNo . '_from'] = ['defaultValue' => 0, 'maxValue' => Constants::MAX_CARDS_IN_COLOR];
-                $fields[$colorName . '_' . $playerNo . '_to'] = ['defaultValue' => Constants::MAX_CARDS_IN_COLOR, 'maxValue' => Constants::MAX_CARDS_IN_COLOR];
+                $fields[$colorName . '_' . $playerNo . '_from'] = ['defaultValue' => 0, 'maxValue' => Constants::CARDS_IN_COLOR_COUNT];
+                $fields[$colorName . '_' . $playerNo . '_to'] = ['defaultValue' => Constants::CARDS_IN_COLOR_COUNT, 'maxValue' => Constants::CARDS_IN_COLOR_COUNT];
             }
         }
 

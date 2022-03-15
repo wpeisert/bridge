@@ -49,8 +49,10 @@
         @foreach ($PLAYERS_NAMES as $playerName)
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>{{ $playerName }} cards:</strong>
+                    <strong>{{ $playerName }}:</strong>
+                    <div>
                     {!! $deal->getOneLineCards($playerName) !!}
+                    </div>
                 </div>
             </div>
         @endforeach

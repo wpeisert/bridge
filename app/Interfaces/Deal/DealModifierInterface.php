@@ -7,5 +7,5 @@ use App\Models\DealConstraint;
 
 interface DealModifierInterface
 {
-    public function applyBasicDealConstraints(Deal $deal, DealConstraint $dealConstraint): void;
+    public function applySettingsConstraints(Deal $deal, DealConstraint $dealConstraint): void;
 }

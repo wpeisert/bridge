@@ -1,26 +1,29 @@
 <tr>
     <td>
         <b>ID: </b>{{ $deal->id }}<br />
-        <b>Dealer: </b>
-        {{ $PLAYERS_NAMES[intval($deal->dealer)] }}
-        <br />
-        <b>Vulnerable: </b>
-        @if ($deal->vulnerable_NS && $deal->vulnerable_WE) both
-        @elseif ($deal->vulnerable_NS) NS
-        @elseif ($deal->vulnerable_WE) WE
-        @else - none -
-        @endif
-        <br />
         {{ $deal->description }}
-        <br />
     </td>
     <td>
-        @foreach ($PLAYERS_NAMES as $playerName)
-            <strong>{{ $playerName }}:</strong>
-            <div>
-                {!! $deal->getOneLineCards($playerName) !!}
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <x-deal>
+                    <x-slot name="vulnerable">NS</x-slot>
+                    <x-slot name="dealer">S</x-slot>
+                    <x-slot name="cards_N">
+                        {!! $deal->getOneLineCards('N') !!}
+                    </x-slot>
+                    <x-slot name="cards_E">
+                        {!! $deal->getOneLineCards('E') !!}
+                    </x-slot>
+                    <x-slot name="cards_S">
+                        {!! $deal->getOneLineCards('S') !!}
+                    </x-slot>
+                    <x-slot name="cards_W">
+                        {!! $deal->getOneLineCards('W') !!}
+                    </x-slot>
+                </x-deal>
             </div>
-        @endforeach
+        </div>
     </td>
     <td>
         <form action="{{ route('deals.destroy',$deal->id) }}" method="POST">

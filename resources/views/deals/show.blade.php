@@ -15,47 +15,32 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>ID:</strong>
-                {{ $deal->id }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Dealer: </strong>
-                {{ $PLAYERS_NAMES[intval($deal->dealer)] }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>NS vulnerable:</strong>
-                {{ $deal->vulnerable_NS }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>WE vulnerable:</strong>
-                {{ $deal->vulnerable_WE }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+                {{ $deal->id }}<br />
                 <strong>Description:</strong>
                 {{ $deal->description }}
             </div>
         </div>
 
-        @foreach ($PLAYERS_NAMES as $playerName)
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>{{ $playerName }}:</strong>
-                    <div>
-                    {!! $deal->getOneLineCards($playerName) !!}
-                    </div>
-                </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <x-deal>
+                    <x-slot name="vulnerable">NS</x-slot>
+                    <x-slot name="dealer">S</x-slot>
+                    <x-slot name="cards_N">
+                        {!! $deal->getOneLineCards('N') !!}
+                    </x-slot>
+                    <x-slot name="cards_E">
+                        {!! $deal->getOneLineCards('E') !!}
+                    </x-slot>
+                    <x-slot name="cards_S">
+                        {!! $deal->getOneLineCards('S') !!}
+                    </x-slot>
+                    <x-slot name="cards_W">
+                        {!! $deal->getOneLineCards('W') !!}
+                    </x-slot>
+                </x-deal>
             </div>
-        @endforeach
+        </div>
 
     </div>
 </x-deals-layout>

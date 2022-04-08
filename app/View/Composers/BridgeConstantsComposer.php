@@ -2,7 +2,7 @@
 
 namespace App\View\Composers;
 
-use App\Bridge\Constants;
+use App\BridgeCore\Constants;
 use Illuminate\View\View;
 
 class BridgeConstantsComposer

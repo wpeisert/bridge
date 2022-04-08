@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Interfaces\Deal;
+namespace App\Interfaces\DealConstraints;
 
 use App\Models\DealConstraint;
 
-interface DealConstraintsProviderInterface
+interface DealConstraintsDecoratorInterface
 {
     public function isDealerDefined(DealConstraint $dealConstraint): bool;
     public function getDealer(DealConstraint $dealConstraint): int;

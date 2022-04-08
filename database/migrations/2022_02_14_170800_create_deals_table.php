@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
-            foreach (\App\Bridge\Constants::PLAYERS_NAMES as $playerName) {
+            foreach (\App\BridgeCore\Constants::PLAYERS_NAMES as $playerName) {
                 $table->string('cards_' . $playerName)->default('');
             }
             $table->integer('vulnerable_NS')->default(0);

@@ -2,7 +2,6 @@
 
 namespace App\Services\Deal;
 
-use App\Bridge\Constants;
 use App\Interfaces\Deal\DealCreatorInterface;
 use App\Interfaces\Deal\DealGeneratorInterface;
 use App\Interfaces\Deal\DealModifierInterface;

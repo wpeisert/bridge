@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Bridge;
+namespace App\BridgeCore;
 
 class Tools
 {

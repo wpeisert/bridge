@@ -4,7 +4,7 @@ namespace App\Services\Deal;
 
 use App\Exceptions\DealBuilderLimitReachedException;
 use App\Interfaces\Deal\DealBuilderInterface;
-use App\Interfaces\Deal\DealConstraintsVerifierInterface;
+use App\Interfaces\DealConstraints\DealConstraintsVerifierInterface;
 use App\Interfaces\Deal\DealCreatorInterface;
 use App\Models\Deal;
 use App\Models\DealConstraint;

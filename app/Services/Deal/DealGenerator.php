@@ -2,7 +2,7 @@
 
 namespace App\Services\Deal;
 
-use App\Bridge\Constants;
+use App\BridgeCore\Constants;
 use App\Interfaces\Deal\DealGeneratorInterface;
 use App\Interfaces\RandomSeederInterface;
 use App\Models\Deal;

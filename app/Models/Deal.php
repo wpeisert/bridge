@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Bridge\Constants;
-use App\Bridge\Tools;
+use App\BridgeCore\Constants;
+use App\BridgeCore\Tools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Deal;
+namespace App\Services\DealConstraints;
 
-use App\Bridge\Constants;
-use App\Interfaces\Deal\DealConstraintsProviderInterface;
+use App\BridgeCore\Constants;
+use App\Interfaces\DealConstraints\DealConstraintsDecoratorInterface;
 use App\Models\DealConstraint;
 
-class DealConstraintsProvider implements DealConstraintsProviderInterface
+class DealConstraintsDecorator implements DealConstraintsDecoratorInterface
 {
     public function isDealerDefined(DealConstraint $dealConstraint): bool
     {

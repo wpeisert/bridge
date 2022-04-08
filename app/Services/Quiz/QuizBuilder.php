@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Deal;
+namespace App\Services\Quiz;
 
 use App\Exceptions\DealBuilderLimitReachedException;
 use App\Interfaces\Deal\DealBuilderInterface;
-use App\Interfaces\Deal\QuizBuilderInterface;
+use App\Interfaces\Quiz\QuizBuilderInterface;
 use App\Models\Quiz;
 
 class QuizBuilder implements QuizBuilderInterface

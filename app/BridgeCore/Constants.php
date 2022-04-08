@@ -21,7 +21,7 @@ class Constants
     public static function get(): array
     {
         return [
-            'DEAL_CONSTRAINTS_FIELDS' => Tools::getDealConstraintsFields(),
+            'DEAL_CONSTRAINTS_FIELDS' => Tools::getDealConstraintFields(),
             'PLAYERS_COUNT' => self::PLAYERS_COUNT,
             'PLAYERS_NAMES' => self::PLAYERS_NAMES,
             'COLORS_SYMBOLS' => self::COLORS_SYMBOLS,

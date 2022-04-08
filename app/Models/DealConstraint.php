@@ -21,7 +21,7 @@ class DealConstraint extends Model
     public function __construct(array $attributes = [])
     {
         $fieldNames = array_reduce(
-            array_keys(Tools::getDealConstraintsFields()),
+            array_keys(Tools::getDealConstraintFields()),
             function($carry, $item) {
                 $carry[] = $item;
                 return $carry;
@@ -51,9 +51,9 @@ class DealConstraint extends Model
     public function getConstraintsHumanAttribute()
     {
         $constraints = [];
-        foreach (Tools::getDealConstraintsFields() as $name => $field) {
+        foreach (Tools::getDealConstraintFields() as $name => $field) {
             if ($field['defaultValue'] !== $this->$name) {
-                $constraints[] = ['name' => Tools::parseDealConstraintsFieldName($name), 'value' => $this->$name];
+                $constraints[] = ['name' => Tools::parseDealConstraintFieldName($name), 'value' => $this->$name];
             }
         }
         return $constraints;

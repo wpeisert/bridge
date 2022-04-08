@@ -4,7 +4,7 @@ namespace App\BridgeCore;
 
 class Tools
 {
-    public static function getDealConstraintsFields(): array
+    public static function getDealConstraintFields(): array
     {
         $fields = [];
 
@@ -32,7 +32,7 @@ class Tools
      * @param string $name
      * @return string
      */
-    public static function parseDealConstraintsFieldName(string $name): string
+    public static function parseDealConstraintFieldName(string $name): string
     {
         return str_replace(
             array_merge(['PC'], Constants::COLORS_NAMES, array_keys(Constants::PLAYERS_NAMES), ['_', 'from', 'to']),

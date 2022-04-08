@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Services\Deal;
+namespace App\Services\DealBuilder;
 
 use App\Exceptions\DealBuilderLimitReachedException;
-use App\Interfaces\Deal\DealBuilderInterface;
-use App\Interfaces\DealConstraints\DealConstraintsVerifierInterface;
-use App\Interfaces\Deal\DealCreatorInterface;
 use App\Models\Deal;
 use App\Models\DealConstraint;
 
@@ -13,7 +10,7 @@ class DealBuilder implements DealBuilderInterface
 {
     public function __construct(
         private DealCreatorInterface $dealCreator,
-        private DealConstraintsVerifierInterface $dealConstraintsVerifier
+        private DealConstraintVerifierInterface $DealConstraintVerifier
     ) {}
 
     /**
@@ -33,7 +30,7 @@ class DealBuilder implements DealBuilderInterface
             if (!$dealConstraint) {
                 return $deal;
             }
-            if ($this->dealConstraintsVerifier->verify($deal, $dealConstraint)) {
+            if ($this->DealConstraintVerifier->verify($deal, $dealConstraint)) {
                 return $deal;
             }
         }

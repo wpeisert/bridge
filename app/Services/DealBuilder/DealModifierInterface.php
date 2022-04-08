@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Deal;
+namespace App\Services\DealBuilder;
 
 use App\Models\Deal;
 use App\Models\DealConstraint;

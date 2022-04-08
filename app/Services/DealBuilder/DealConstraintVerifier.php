@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Services\DealConstraints;
+namespace App\Services\DealBuilder;
 
-use App\Interfaces\DealConstraints\DealConstraintsVerifierInterface;
-use App\Interfaces\Deal\DealDecoratorFactoryInterface;
-use App\Interfaces\Deal\DealDecoratorInterface;
+use App\Services\DealDecorator\DealDecoratorFactoryInterface;
+use App\Services\DealDecorator\DealDecoratorInterface;
 use App\Models\Deal;
 use App\Models\DealConstraint;
 
-class DealConstraintsVerifier implements DealConstraintsVerifierInterface
+class DealConstraintVerifier implements DealConstraintVerifierInterface
 {
     private DealDecoratorInterface $deal;
 

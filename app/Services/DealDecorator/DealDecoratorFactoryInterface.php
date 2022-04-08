@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Interfaces\Deal;
-
+namespace App\Services\DealDecorator;
 
 use App\Models\Deal;
 

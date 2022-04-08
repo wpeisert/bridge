@@ -1,11 +1,7 @@
 <?php
 
+namespace App\Services\DealDecorator;
 
-namespace App\Services\Deal;
-
-
-use App\Interfaces\Deal\DealDecoratorFactoryInterface;
-use App\Interfaces\Deal\DealDecoratorInterface;
 use App\Models\Deal;
 
 class DealDecoratorFactory implements DealDecoratorFactoryInterface

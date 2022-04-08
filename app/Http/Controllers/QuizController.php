@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\Quiz\QuizBuilderInterface;
+use App\Services\Quiz\QuizBuilderInterface;
 use App\Models\DealConstraint;
 use App\Models\Quiz;
 use Illuminate\Http\Request;

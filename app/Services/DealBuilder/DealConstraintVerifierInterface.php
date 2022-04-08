@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Interfaces\DealConstraints;
+namespace App\Services\DealBuilder;
 
 use App\Models\Deal;
 use App\Models\DealConstraint;
 
-interface DealConstraintsVerifierInterface
+interface DealConstraintVerifierInterface
 {
     public function verify(Deal $deal, DealConstraint $dealConstraint): bool;
 }

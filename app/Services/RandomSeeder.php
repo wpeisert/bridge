@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Interfaces\RandomSeederInterface;
-
 class RandomSeeder implements RandomSeederInterface
 {
     public function seed(int $seed = 0)

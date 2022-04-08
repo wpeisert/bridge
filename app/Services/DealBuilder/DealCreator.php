@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Services\Deal;
+namespace App\Services\DealBuilder;
 
-use App\Interfaces\Deal\DealCreatorInterface;
-use App\Interfaces\Deal\DealGeneratorInterface;
-use App\Interfaces\Deal\DealModifierInterface;
 use App\Models\Deal;
 use App\Models\DealConstraint;
 

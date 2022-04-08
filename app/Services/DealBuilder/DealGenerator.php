@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Services\Deal;
+namespace App\Services\DealBuilder;
 
 use App\BridgeCore\Constants;
-use App\Interfaces\Deal\DealGeneratorInterface;
-use App\Interfaces\RandomSeederInterface;
+use App\Services\RandomSeederInterface;
 use App\Models\Deal;
 
 class DealGenerator implements DealGeneratorInterface
@@ -31,7 +30,7 @@ class DealGenerator implements DealGeneratorInterface
         return $deal;
     }
 
-    private function generateRandomCards()
+    private function generateRandomCards(): array
     {
         $playersCardsArr = [];
         $perm = $this->getRandomPermutation(Constants::COLORS_COUNT * Constants::CARDS_IN_COLOR_COUNT);

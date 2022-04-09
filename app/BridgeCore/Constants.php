@@ -15,6 +15,7 @@ class Constants
     public const COLORS_SYMBOLS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
     public const COLORS_COLORS = ['000077', 'ee0000', 'ee4400', '008800'];
     public const CARDS = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
+    public const CARDS_PC = [4, 3, 2, 1];
     public const CARDS_IN_COLOR_COUNT = 13;
     public const MAX_PC = 40;
 

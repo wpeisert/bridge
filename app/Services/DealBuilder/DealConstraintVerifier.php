@@ -2,6 +2,7 @@
 
 namespace App\Services\DealBuilder;
 
+use App\BridgeCore\Tools;
 use App\Services\DealConstraint\DealConstraintDecoratorFactoryInterface;
 use App\Services\DealDecorator\DealDecoratorFactoryInterface;
 use App\Services\DealDecorator\DealDecoratorInterface;
@@ -22,8 +23,19 @@ class DealConstraintVerifier implements DealConstraintVerifierInterface
         $dealDecorator = $this->dealDecoratorFactory->decorate($deal);
         $dealConstraintDecorator = $this->dealConstraintDecoratorFactory->decorate($dealConstraint);
 
-
+        foreach (array_keys(Tools::getDealConstraintFields()) as $field) {
+            $split = explode('_', $field);
+            $directionPart = array_pop($split); // from, to
+            $fieldName = implode('_', $split);
+            $limitValue = $dealConstraint->$field;
+            $actualValue = $dealDecorator->getValue($fieldName);
+            if ($directionPart === 'from' && $limitValue > $actualValue) {
+                return false;
+            }
+            if ($directionPart === 'to' && $limitValue < $actualValue) {
+                return false;
+            }
+        }
         return true;
-        // TODO: Implement verify() method.
     }
 }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->smallInteger('vulnerable_WE');
             $table->smallInteger('dealer');
 
-            foreach (Tools::getDealConstraintsFields() as $name => $field) {
+            foreach (Tools::getDealConstraintFields() as $name => $field) {
                 $table->integer($name)->default($field['defaultValue']);
             }
 

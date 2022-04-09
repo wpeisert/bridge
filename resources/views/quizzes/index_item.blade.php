@@ -9,7 +9,7 @@
         {{ $quiz->description }}
     </td>
     <td>
-        {{ $quiz->deals_count }} / {{ $quiz->existing_deals_count }}
+        {{ $quiz->existing_deals_count }} / {{ $quiz->deals_count }}
     </td>
     <td>
         Dealer: {{ $quiz->deal_constraint->dealer_human }}<br />

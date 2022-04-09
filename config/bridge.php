@@ -12,5 +12,5 @@ return [
     |
     */
 
-    'deal_builder_trials_limit' => env('DEAL_BUILDER_TRIALS_LIMIT', 100),
+    'deal_builder_trials_limit' => env('DEAL_BUILDER_TRIALS_LIMIT', 5000),
 ];

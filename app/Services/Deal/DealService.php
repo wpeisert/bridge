@@ -11,9 +11,13 @@ class DealService implements DealServiceInterface
         $sum = array_reduce(
             str_split($cards),
             function ($sum, $card) {
-                $index = array_search($card, Constants::CARDS);
-                $pc = (Constants::CARDS_PC[$index ?? 666] ?? 0);
-                return $sum + $pc;
+                if (in_array($card, Constants::CARDS)) {
+                    $index = array_search($card, Constants::CARDS);
+                    $pc = Constants::CARDS_PC[$index] ?? 0;
+                    $sum += $pc;
+                }
+
+                return $sum;
             },
             0
         );
@@ -21,7 +25,7 @@ class DealService implements DealServiceInterface
         return $sum;
     }
 
-    public function getCardsCount(string $cards, int $colorNo, int $playerNo): int
+    public function getCardsCount(string $cards, int $colorNo): int
     {
         $cardsArray = explode('.', $cards);
 

@@ -55,6 +55,6 @@ class DealDecorator implements DealDecoratorInterface
         $cards = $this->deal->$field;
         $colorNo = array_search($colorName, Constants::COLORS_NAMES);
 
-        return $this->dealService->getCardsCount($cards, $colorNo, $playerNo);
+        return $this->dealService->getCardsCount($cards, $colorNo);
     }
 }

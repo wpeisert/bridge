@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\BridgeCore\Constants;
-use App\BridgeCore\Tools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,6 +43,20 @@ class Deal extends Model
         $cards = $this->$member;
 
         return $this->decorateOneLine($cards);
+    }
+
+    public function getVulnerableHumanAttribute()
+    {
+        if ($this->vulnerable_NS && $this->vulnerable_WE) {
+            return 'both';
+        }
+        if (!$this->vulnerable_NS && $this->vulnerable_WE) {
+            return 'WE';
+        }
+        if ($this->vulnerable_NS && !$this->vulnerable_WE) {
+            return 'NS';
+        }
+        return ' - ';
     }
 
     private function decorateOneLine(string $cards)

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\BiddingRepositoryInterface;
+use App\Repositories\BiddingRepositoryInterface;
 use App\Services\Deal\DealService;
 use App\Services\Deal\DealServiceInterface;
 use App\Services\DealBuilder\DealBuilder;

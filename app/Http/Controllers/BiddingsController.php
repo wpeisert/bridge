@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BiddingRepositoryInterface;
+use App\Interfaces\BiddingRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

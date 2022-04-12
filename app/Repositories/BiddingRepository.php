@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Services\BiddingRepositoryInterface;
+use App\Interfaces\BiddingRepositoryInterface;
 use App\Models\User;
 
 class BiddingRepository implements BiddingRepositoryInterface

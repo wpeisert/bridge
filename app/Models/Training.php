@@ -28,8 +28,18 @@ class Training extends Model
         return $this->belongsTo(Quiz::class);
     }
 
+    public function biddings()
+    {
+        return $this->hasMany(Bidding::class);
+    }
+
     public function getUser(string $userName)
     {
         return $this->belongsTo(User::class, 'user_id_' . $userName)->first();
+    }
+
+    public function isStarted(): bool
+    {
+        return $this->biddings()->count();
     }
 }

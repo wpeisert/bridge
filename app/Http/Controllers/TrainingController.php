@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidding;
 use App\Models\Quiz;
 use App\Models\Training;
 use App\Models\User;
@@ -88,6 +89,10 @@ class TrainingController extends Controller
      */
     public function update(Request $request, Training $training)
     {
+        if ($training->isStarted()) {
+            return redirect()->route('trainings.index')
+                ->with('danger','Training already started and cannot be changed');
+        }
         $training->update($request->all());
 
         return redirect()->route('trainings.index')
@@ -102,9 +107,36 @@ class TrainingController extends Controller
      */
     public function destroy(Training $training)
     {
+        if ($training->isStarted()) {
+            return redirect()->route('trainings.index')
+                ->with('danger','Training already started and cannot be changed');
+        }
         $training->delete();
 
         return redirect()->route('trainings.index')
             ->with('success','Training deleted successfully');
+    }
+
+    public function start(Training $training)
+    {
+        if ($training->isStarted()) {
+            return redirect()->route('trainings.index')
+                ->with('danger','Training already started and cannot be started again');
+        }
+
+        /*
+        Bidding::create(
+            [
+                'training_id' => $training->id,
+                'deal_id' => 1,
+                'current_user_name' => 'N',
+                'status' => 'qwertty',
+            ]
+        );
+        */
+
+        return redirect()->route('trainings.index')
+            ->with('danger','TO BE DONE...')
+            ->with('success', 'Training started successfully!');
     }
 }

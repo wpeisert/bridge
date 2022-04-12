@@ -16,10 +16,16 @@
     <td>
         <form action="{{ route('trainings.destroy',$training->id) }}" method="POST">
             <a class="btn btn-info" href="{{ route('trainings.show',$training->id) }}">Show</a>
-            <a class="btn btn-primary" href="{{ route('trainings.edit',$training->id) }}">Edit</a>
+            @if (!$training->isStarted())
+            <a class="btn btn-info" href="{{ route('trainings.edit',$training->id) }}">Edit</a>
+            @endif
             @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            @if (!$training->isStarted())
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a class="btn btn-primary" href="{{ route('trainings.start',$training->id) }}">Start!</a>
+            @endif
+
         </form>
     </td>
 </tr>

@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'training_id', 'deal_id', 'current_user_name', 'status'
+    ];
+
+    public function training()
+    {
+        return $this->belongsTo(Training::class);
+    }
+
+    public function deal()
+    {
+        return $this->belongsTo(Deal::class);
+    }
 
     public function bids()
     {

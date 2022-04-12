@@ -65,7 +65,7 @@ class Deal extends Model
         $cardsArr = explode('.', $cards);
         for ($iter = 0; $iter < 4; ++$iter) {
             $result .= '<span style="color: #' . Constants::COLORS_COLORS[$iter] . ';">' . Constants::COLORS_SYMBOLS[$iter] . '</span>';
-            $result .= $cardsArr[$iter] ? ' ' . str_replace('T', '10', $cardsArr[$iter]) : '-';
+            $result .= isset($cardsArr[$iter]) && $cardsArr[$iter] ? ' ' . str_replace('T', '10', $cardsArr[$iter]) : '-';
             $result .= '<br />';
         }
 

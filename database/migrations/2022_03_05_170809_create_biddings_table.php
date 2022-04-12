@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('biddings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('deal_id')->unsigned();
-            $table->smallInteger('current_user_no')->comment("0, 1, 2, 3");
+            $table->bigInteger('training_id')->unsigned();
+            $table->string('current_user_name')->comment("N, E, S, W");
             $table->string('status')->comment('preparing, pending, finished');
             $table->text('comments');
-            $table->timestamps();
             $table->foreign('deal_id')->references('id')->on('deals');
+            $table->foreign('training_id')->references('id')->on('trainings');
+            $table->timestamps();
         });
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\BiddingsController;
 use App\Http\Controllers\DealConstraintController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,8 @@ Route::resource('deals', DealController::class)->middleware(['auth', 'verified']
 Route::get('quizzes/{quiz}/generate-deals', [QuizController::class, 'generateDeals'])->middleware(['auth', 'verified'])->name('quizzes.generate-deals');
 
 Route::resource('quizzes', QuizController::class)->middleware(['auth', 'verified']);
+
+Route::resource('trainings', TrainingController::class)->middleware(['auth', 'verified']);
 
 Route::resource('deal_constraints', DealConstraintController::class)->middleware(['auth', 'verified']);
 

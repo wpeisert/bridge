@@ -1,4 +1,4 @@
-<b>{{ __( $title ) }}</b> <br />
+<b>{{ __( $title ) }} DEF</b> <br />
 @foreach($biddingsByUser as $biddings)
     {{ $biddings['partner_name'] }}:
     @foreach($biddings['biddings'] as $bidding)

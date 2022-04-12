@@ -18,7 +18,7 @@ class BiddingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         $preparing = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'preparing');
         $pending = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'pending');

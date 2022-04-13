@@ -26,6 +26,8 @@
         <tr>
             <th>ID</th>
             <th>Quiz</th>
+            <th>Deals cnt.</th>
+            <th>Constraints</th>
             <th>N</th>
             <th>E</th>
             <th>S</th>

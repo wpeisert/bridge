@@ -5,6 +5,20 @@
     <td>
         {{ $training->quiz->name }}
     </td>
+    <td>
+        {{ $training->quiz->deals_count }}
+    </td>
+    <td>
+        Dealer: {{ $training->quiz->deal_constraint->dealer_human }}<br />
+        Vulnerable NS: {{ $training->quiz->deal_constraint->vulnerable_ns_human }}<br />
+        Vulnerable WE: {{ $training->quiz->deal_constraint->vulnerable_we_human }}<br />
+        Constraints:
+        <ul style="list-style-type: disc; margin-left: 30px">
+            @foreach ($training->quiz->deal_constraint->constraints_human as $constraint)
+                <li>{!! $constraint['name']  !!} {{ $constraint['value'] }}</li>
+            @endforeach
+        </ul>
+    </td>
     @foreach ($PLAYERS_NAMES as $playerName)
         <td>
             @php

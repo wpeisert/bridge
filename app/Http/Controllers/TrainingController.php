@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bidding;
 use App\Models\Quiz;
 use App\Models\Training;
 use App\Models\User;
+use App\Services\Training\TrainingBuilderInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TrainingController extends Controller
 {
-    public function __construct() {}
+    public function __construct(private TrainingBuilderInterface $trainingBuilder) {}
 
     /**
      * Display a listing of the resource.
@@ -135,8 +135,9 @@ class TrainingController extends Controller
         );
         */
 
+        $createdCount = $this->trainingBuilder->build($training);
+
         return redirect()->route('trainings.index')
-            ->with('danger','TO BE DONE...')
-            ->with('success', 'Training started successfully!');
+            ->with('success', $createdCount . ' biddings started successfully');
     }
 }

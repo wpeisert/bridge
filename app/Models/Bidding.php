@@ -24,7 +24,7 @@ class Bidding extends Model
 
     public function bids()
     {
-        return $this->hasMany(Bid::class)->orderBy('bidding_lp')->orderBy('id');
+        return $this->hasMany(Bid::class)->orderBy('id');
     }
 
     public function users()

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBiddingRequest;
 use App\Http\Requests\UpdateBiddingRequest;
+use App\Models\Bid;
 use App\Models\Bidding;
 
 class BiddingController extends Controller
 {
+    private const MAX_PER_PAGE = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,9 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        //
+        $biddings = Bidding::latest()->paginate(self::MAX_PER_PAGE);
+        return view('biddings.index',compact('biddings'))
+            ->with('i', (request()->input('page', 1) - 1) * self::MAX_PER_PAGE);
     }
 
     /**
@@ -61,7 +66,7 @@ class BiddingController extends Controller
      */
     public function edit(Bidding $bidding)
     {
-        //
+        return view('biddings.edit', compact('bidding'));
     }
 
     /**
@@ -79,11 +84,16 @@ class BiddingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Http\Requests\UpdateBiddingRequest  $request
      * @param  \App\Models\Bidding  $bidding
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bidding $bidding)
+    public function placeBid(UpdateBiddingRequest $request, Bidding $bidding)
     {
-        //
+        $bid = new Bid(['bid' => '6h']);
+        $bidding->bids()->save($bid);
+
+        return redirect()->route('biddings.edit', [$bidding->id])
+            ->with('success','Bid placed successfully');
     }
 }

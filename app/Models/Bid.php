@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\BridgeCore\Tools;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Bid extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'bid'
+    ];
+
 
     public function bidding()
     {

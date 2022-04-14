@@ -68,8 +68,8 @@
             <div class="form-group">
                 <strong>Dealer:</strong>
                 <select class="form-control" name="dealer">
-                    @foreach ($DEAL_CONSTRAINTS_DEALER as $value => $text)
-                        <option value="{{ $value }}" @selected($value === ($dealConstraint->dealer ?? ''))>
+                    @foreach ($DEAL_CONSTRAINTS_DEALER as $text)
+                        <option value="{{ $text }}" @selected($text === ($dealConstraint->dealer ?? ''))>
                             {{ $text }}
                         </option>
                     @endforeach

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bidding extends Model
 {
     protected $fillable = [
-        'training_id', 'deal_id', 'current_user_name', 'status'
+        'training_id', 'deal_id', 'current_user', 'status'
     ];
 
     public function training()

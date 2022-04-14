@@ -124,17 +124,6 @@ class TrainingController extends Controller
                 ->with('danger','Training already started and cannot be started again');
         }
 
-        /*
-        Bidding::create(
-            [
-                'training_id' => $training->id,
-                'deal_id' => 1,
-                'current_user_name' => 'N',
-                'status' => 'qwertty',
-            ]
-        );
-        */
-
         $createdCount = $this->trainingBuilder->build($training);
 
         return redirect()->route('trainings.index')

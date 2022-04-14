@@ -31,8 +31,8 @@
                 <div class="form-group">
                     <strong>Dealer:</strong>
                     <select class="form-control" name="dealer">
-                        @foreach ($PLAYERS_NAMES as $no => $player)
-                            <option value="{{ $no }}">
+                        @foreach ($PLAYERS_NAMES as $player)
+                            <option value="{{ $player }}">
                                 {{ $player }}
                             </option>
                         @endforeach

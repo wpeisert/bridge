@@ -16,7 +16,7 @@ class DealGenerator implements DealGeneratorInterface
 
         $deal = new Deal();
 
-        $deal->dealer = rand(0, Constants::PLAYERS_COUNT - 1);
+        $deal->dealer = Constants::PLAYERS_NAMES[rand(0, Constants::PLAYERS_COUNT - 1)];
         $deal->vulnerable_NS = rand(0, 1);
         $deal->vulnerable_WE = rand(0, 1);
 

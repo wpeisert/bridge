@@ -12,10 +12,10 @@ class DealConstraintDecorator implements DealConstraintDecoratorInterface
 
     public function isDealerDefined(): bool
     {
-        return in_array(Constants::DEAL_CONSTRAINTS_DEALER[$this->dealConstraint->dealer],Constants::PLAYERS_NAMES);
+        return in_array($this->dealConstraint->dealer,Constants::PLAYERS_NAMES);
     }
 
-    public function getDealer(): int
+    public function getDealer(): string
     {
         return $this->dealConstraint->dealer;
     }

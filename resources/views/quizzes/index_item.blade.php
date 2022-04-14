@@ -12,7 +12,7 @@
         {{ $quiz->existing_deals_count }} / {{ $quiz->deals_count }}
     </td>
     <td>
-        Dealer: {{ $quiz->deal_constraint->dealer_human }}<br />
+        Dealer: {{ $quiz->deal_constraint->dealer }}<br />
         Vulnerable NS: {{ $quiz->deal_constraint->vulnerable_ns_human }}<br />
         Vulnerable WE: {{ $quiz->deal_constraint->vulnerable_we_human }}<br />
         Constraints:

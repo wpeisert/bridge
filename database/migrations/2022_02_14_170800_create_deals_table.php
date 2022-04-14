@@ -20,7 +20,7 @@ return new class extends Migration
             }
             $table->integer('vulnerable_NS')->default(0);
             $table->integer('vulnerable_WE')->default(0);
-            $table->smallInteger('dealer')->default(0);
+            $table->string('dealer');
             $table->text('description')->nullable();
             $table->timestamps();
         });

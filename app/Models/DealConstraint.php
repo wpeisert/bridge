@@ -43,11 +43,6 @@ class DealConstraint extends Model
         return Constants::DEAL_CONSTRAINTS_VULNERABLE[intval($this->vulnerable_WE)];
     }
 
-    public function getDealerHumanAttribute()
-    {
-        return Constants::DEAL_CONSTRAINTS_DEALER[intval($this->dealer)];
-    }
-
     public function getConstraintsHumanAttribute()
     {
         $constraints = [];

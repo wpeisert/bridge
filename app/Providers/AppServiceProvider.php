@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Repositories\BiddingRepositoryInterface;
+use App\Services\Bidding\BiddingBuilder;
+use App\Services\Bidding\BiddingBuilderInterface;
 use App\Services\Deal\DealService;
 use App\Services\Deal\DealServiceInterface;
 use App\Services\DealBuilder\DealBuilder;
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DealConstraintDecoratorFactoryInterface::class, DealConstraintDecoratorFactory::class);
         $this->app->bind(DealServiceInterface::class, DealService::class);
         $this->app->bind(TrainingBuilderInterface::class, TrainingBuilder::class);
+        $this->app->bind(BiddingBuilderInterface::class, BiddingBuilder::class);
     }
 
     /**

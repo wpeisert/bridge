@@ -13,7 +13,7 @@
         WE: {{ $dealConstraint->vulnerable_we_human }}<br />
     </td>
     <td>
-        {{ $dealConstraint->dealer_human }}
+        {{ $dealConstraint->dealer }}
     </td>
     <td>
         @foreach ($dealConstraint->constraints_human as $constraint)

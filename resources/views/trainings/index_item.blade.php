@@ -9,7 +9,7 @@
         {{ $training->quiz->deals_count }}
     </td>
     <td>
-        Dealer: {{ $training->quiz->deal_constraint->dealer_human }}<br />
+        Dealer: {{ $training->quiz->deal_constraint->dealer }}<br />
         Vulnerable NS: {{ $training->quiz->deal_constraint->vulnerable_ns_human }}<br />
         Vulnerable WE: {{ $training->quiz->deal_constraint->vulnerable_we_human }}<br />
         Constraints:

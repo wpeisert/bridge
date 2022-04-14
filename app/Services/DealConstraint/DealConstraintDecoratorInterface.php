@@ -5,7 +5,7 @@ namespace App\Services\DealConstraint;
 interface DealConstraintDecoratorInterface
 {
     public function isDealerDefined(): bool;
-    public function getDealer(): int;
+    public function getDealer(): string;
 
     public function isNsVulnerableDefined(): bool;
     public function isNsVulnerable(): bool;

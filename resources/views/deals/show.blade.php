@@ -24,8 +24,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <x-deal>
-                    <x-slot name="vulnerable">NS</x-slot>
-                    <x-slot name="dealer">S</x-slot>
+                    <x-slot name="vulnerable">{{ $deal->vulnerable_human }}</x-slot>
+                    <x-slot name="dealer">{{ $deal->dealer }}</x-slot>
                     <x-slot name="cards_N">
                         {!! $deal->getOneLineCards('N') !!}
                     </x-slot>

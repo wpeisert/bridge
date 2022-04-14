@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <a class="btn btn-primary" href="javascript:history.back();"> Back</a>
+                <h2>Show Deal (ID: {{ $deal->id }})</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('deals.index') }}"> Deals list</a>
@@ -14,8 +14,6 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>ID:</strong>
-                {{ $deal->id }}<br />
                 <strong>Description:</strong>
                 {{ $deal->description }}
             </div>

@@ -1,6 +1,6 @@
 <x-deal-constraints-layout>
 
-    <x-slot name="subtitle">Show deal constraints</x-slot>
+    <x-slot name="subtitle">Show deal constraints (ID: {{ $dealConstraint->id }})</x-slot>
 
     @include (
         'deal_constraints.form',

@@ -15,15 +15,6 @@
 @endif
 
     <div class="row">
-        @if (isset($dealConstraint))
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>ID: </strong>
-                {{ $dealConstraint->id ?? '' }}
-            </div>
-        </div>
-        @endif
-
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>

@@ -1,15 +1,8 @@
 <x-quizzes-layout>
 
-    <x-slot name="subtitle">Show quiz</x-slot>
+    <x-slot name="subtitle">Show quiz (ID: {{ $quiz->id }})</x-slot>
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>ID:</strong>
-                {{ $quiz->id }}
-            </div>
-        </div>
-
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>

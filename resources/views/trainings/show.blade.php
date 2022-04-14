@@ -1,6 +1,6 @@
 <x-trainings-layout>
 
-    <x-slot name="subtitle">Show training</x-slot>
+    <x-slot name="subtitle">Show training (ID: {{ $training->id }})</x-slot>
 
     @include (
         'trainings.form',

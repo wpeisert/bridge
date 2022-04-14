@@ -1,19 +1,12 @@
 <x-quizzes-layout>
 
-    <x-slot name="subtitle">Edit quiz</x-slot>
+    <x-slot name="subtitle">Edit quiz (ID: {{ $quiz->id }})</x-slot>
 
     <form action="{{ route('quizzes.update',$quiz->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>ID: </strong>
-                    {{ $quiz->id }}
-                </div>
-            </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>

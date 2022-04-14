@@ -59,9 +59,9 @@ class Tools
         if (intval($bid[0]) === 0) {
             switch ($bid) {
                 case 'dbl':
-                    return '<span style="font-weight: bold; color: #' . Constants::DBL_COLOR . ';">' . 'X' . '</span>';
+                    return '<span style="font-weight: bold; color: #' . Constants::DBL_COLOR . ';">' . 'x' . '</span>';
                 case 'rdbl':
-                    return '<span style="font-weight: bold; color: #' . Constants::RDBL_COLOR . ';">' . 'XX' . '</span>';
+                    return '<span style="font-weight: bold; color: #' . Constants::RDBL_COLOR . ';">' . 'xx' . '</span>';
                 default:
                     return $bid;
             }

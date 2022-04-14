@@ -59,7 +59,9 @@
                 <tr>
                         @endif
                     @endforeach
+                    @if (!$bidding->is_finished)
                     <td> ? </td>
+                    @endif
                 </tr>
             </table>
         </div>

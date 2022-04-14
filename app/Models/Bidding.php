@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
 {
+    private const STATUS_FINISHED = 'finished';
+
     protected $fillable = [
         'training_id', 'deal_id', 'current_user', 'status'
     ];
@@ -28,5 +30,10 @@ class Bidding extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('user_no', 'should_bid')->withTimestamps();
+    }
+
+    public function getIsFinishedAttribute()
+    {
+        return $this->status === self::STATUS_FINISHED;
     }
 }

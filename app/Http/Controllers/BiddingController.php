@@ -48,7 +48,7 @@ class BiddingController extends Controller
     public function show(Bidding $bidding)
     {
         return view(
-            'bridge.bidding',
+            'biddings.show',
             ['bidding' => $bidding]
         );
     }

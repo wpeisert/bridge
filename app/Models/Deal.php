@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\BridgeCore\Constants;
+use App\BridgeCore\Tools;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,14 +62,6 @@ class Deal extends Model
 
     private function decorateOneLine(string $cards)
     {
-        $result = '';
-        $cardsArr = explode('.', $cards);
-        for ($iter = 0; $iter < 4; ++$iter) {
-            $result .= '<span style="color: #' . Constants::COLORS_COLORS[$iter] . ';">' . Constants::COLORS_SYMBOLS[$iter] . '</span>';
-            $result .= isset($cardsArr[$iter]) && $cardsArr[$iter] ? ' ' . str_replace('T', '10', $cardsArr[$iter]) : '-';
-            $result .= '<br />';
-        }
-
-        return $result;
+        return Tools::decorateOneLine($cards);
     }
 }

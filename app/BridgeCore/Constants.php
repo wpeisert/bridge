@@ -18,6 +18,8 @@ class Constants
     public const CARDS_PC = [4, 3, 2, 1];
     public const CARDS_IN_COLOR_COUNT = 13;
     public const MAX_PC = 40;
+    public const DBL_COLOR = 'ee0000';
+    public const RDBL_COLOR = '0033ee';
 
     public static function get(): array
     {

@@ -6,7 +6,10 @@
         {{ $training->quiz->name }}
     </td>
     <td>
-        {{ $training->quiz->deals_count }}
+        {{ $training->quiz->deals_count }}<br />
+        @foreach ($training->biddings as $bidding)
+            <a href="{{ route('biddings.show', $bidding->id) }}">[{{ $loop->iteration }}]</a> &nbsp;
+        @endforeach
     </td>
     <td>
         Dealer: {{ $training->quiz->deal_constraint->dealer }}<br />

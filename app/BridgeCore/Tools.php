@@ -40,4 +40,42 @@ class Tools
             $name
         );
     }
+
+    public static function decorateOneLine(string $cards)
+    {
+        $result = '';
+        $cardsArr = explode('.', $cards);
+        for ($iter = 0; $iter < 4; ++$iter) {
+            $result .= '<span style="color: #' . Constants::COLORS_COLORS[$iter] . ';">' . Constants::COLORS_SYMBOLS[$iter] . '</span>';
+            $result .= isset($cardsArr[$iter]) && $cardsArr[$iter] ? ' ' . str_replace('T', '10', $cardsArr[$iter]) : '-';
+            $result .= '<br />';
+        }
+
+        return $result;
+    }
+
+    public static function decorateBid(string $bid): string
+    {
+        if (intval($bid[0]) === 0) {
+            switch ($bid) {
+                case 'dbl':
+                    return '<span style="font-weight: bold; color: #' . Constants::DBL_COLOR . ';">' . 'X' . '</span>';
+                case 'rdbl':
+                    return '<span style="font-weight: bold; color: #' . Constants::RDBL_COLOR . ';">' . 'XX' . '</span>';
+                default:
+                    return $bid;
+            }
+        }
+
+        $color = strtoupper(substr($bid, 1));
+        $colorNo = array_search($color, Constants::COLORS_NAMES);
+        $decorated = $bid[0] . '';
+        if ($colorNo === false) {
+            $decorated .= $color;
+        } else {
+            $decorated .= '<span style="color: #' . Constants::COLORS_COLORS[$colorNo] . ';">' . Constants::COLORS_SYMBOLS[$colorNo] . '</span>';
+        }
+
+        return $decorated;
+    }
 }

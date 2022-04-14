@@ -27,8 +27,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/biddings', [BiddingsController::class, 'index'])->middleware(['auth', 'verified'])->name('biddings');
-Route::get('/bidding/{bidding}', [BiddingController::class, 'show'])->middleware(['auth', 'verified'])->name('bidding');
+Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);
 
 Route::resource('deals', DealController::class)->middleware(['auth', 'verified']);
 

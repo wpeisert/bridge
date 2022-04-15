@@ -102,8 +102,12 @@ class BiddingController extends Controller
                 ->with('danger',"Bid " . Tools::decorateBid($bidTxt) . " illegal, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
         }
 
-        $bid = new Bid(['bid' => $bidTxt]);
+        $bid = new Bid(array_merge($request->all(), ['user_id' => Auth::id()]));
         $bidding->bids()->save($bid);
+        $bidding->increaseCurrentUser();
+        if (0 === count($this->ruleChecker->getPossibleBids($bidding))) {
+            $bidding->update(['status' => 'finished', 'current_user' => '']);
+        }
 
         return redirect()->route('biddings.edit', [$bidding->id])
             ->with('success',"Bid " . Tools::decorateBid($bidTxt) . " placed successfully, user id: " . Auth::id() . ' name: ' . Auth::user()->name);

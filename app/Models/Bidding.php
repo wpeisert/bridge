@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\BridgeCore\Constants;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
@@ -35,5 +36,14 @@ class Bidding extends Model
     public function getIsFinishedAttribute()
     {
         return $this->status === self::STATUS_FINISHED;
+    }
+
+    public function increaseCurrentUser()
+    {
+        $currentUser = $this->current_user;
+        $currentUserIndex = array_search($currentUser, Constants::PLAYERS_NAMES);
+        $nextUserIndex = ($currentUserIndex+1) % count(Constants::PLAYERS_NAMES);
+        $nextUser = Constants::PLAYERS_NAMES[$nextUserIndex];
+        $this->update(['current_user' => $nextUser]);
     }
 }

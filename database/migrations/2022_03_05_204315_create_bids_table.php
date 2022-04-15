@@ -18,6 +18,8 @@ return new class extends Migration
             $table->bigInteger('bidding_id')->unsigned();
             $table->bigInteger('user_id')->unsigned()->comment('User that placed the bid')->default(0);
             $table->string('bid')->comment('pass, 1c, 1d, 1h, 1s, 1nt, 7nt, dbl, rdbl');
+            $table->smallInteger('alert')->comment('0 - no alert, 1 - alert')->default(0);
+            $table->string('alert_description')->default('');
             $table->timestamps();
 
             $table->foreign('bidding_id')->references('id')->on('biddings')->onDelete('cascade');

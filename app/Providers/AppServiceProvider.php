@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Repositories\BiddingRepositoryInterface;
 use App\Services\Bidding\BiddingBuilder;
 use App\Services\Bidding\BiddingBuilderInterface;
+use App\Services\Bidding\RuleChecker;
+use App\Services\Bidding\RuleCheckerInterface;
 use App\Services\Deal\DealService;
 use App\Services\Deal\DealServiceInterface;
 use App\Services\DealBuilder\DealBuilder;
@@ -59,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DealServiceInterface::class, DealService::class);
         $this->app->bind(TrainingBuilderInterface::class, TrainingBuilder::class);
         $this->app->bind(BiddingBuilderInterface::class, BiddingBuilder::class);
+        $this->app->bind(RuleCheckerInterface::class, RuleChecker::class);
     }
 
     /**

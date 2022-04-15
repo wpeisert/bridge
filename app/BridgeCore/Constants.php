@@ -20,6 +20,9 @@ class Constants
     public const MAX_PC = 40;
     public const DBL_COLOR = 'ee0000';
     public const RDBL_COLOR = '0033ee';
+    public const BIDS_COLORS = ['c', 'd', 'h', 's', 'nt'];
+    public const BIDS_MAX_LEVEL = 7;
+    public const BIDS_SPECIAL = ['pass', 'dbl', 'rdbl'];
 
     public static function get(): array
     {
@@ -32,8 +35,13 @@ class Constants
             'DEAL_CONSTRAINTS_DEALER' => self::DEAL_CONSTRAINTS_DEALER,
             'COLORS_COUNT' => self::COLORS_COUNT,
             'COLORS_NAMES' => self::COLORS_NAMES,
-            'MAX_PC' => self::MAX_PC,
             'CARDS_IN_COLOR_COUNT' => self::CARDS_IN_COLOR_COUNT,
+            'MAX_PC' => self::MAX_PC,
+            'DBL_COLOR' => self::DBL_COLOR,
+            'RDBL_COLOR' => self::RDBL_COLOR,
+            'BIDS_COLORS' => self::BIDS_COLORS,
+            'BIDS_MAX_LEVEL' => self::BIDS_MAX_LEVEL,
+            'BIDS_SPECIAL' => self::BIDS_SPECIAL,
         ];
     }
 }

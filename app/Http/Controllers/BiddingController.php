@@ -7,11 +7,14 @@ use App\Http\Requests\StoreBiddingRequest;
 use App\Http\Requests\UpdateBiddingRequest;
 use App\Models\Bid;
 use App\Models\Bidding;
+use App\Services\Bidding\RuleCheckerInterface;
 use Illuminate\Support\Facades\Auth;
 
 class BiddingController extends Controller
 {
     private const MAX_PER_PAGE = 10;
+
+    public function __construct(private RuleCheckerInterface $ruleChecker) {}
 
     /**
      * Display a listing of the resource.
@@ -68,7 +71,8 @@ class BiddingController extends Controller
      */
     public function edit(Bidding $bidding)
     {
-        return view('biddings.edit', compact('bidding'));
+        $possibleBids = $this->ruleChecker->getPossibleBids($bidding);
+        return view('biddings.edit', compact('bidding', 'possibleBids'));
     }
 
     /**

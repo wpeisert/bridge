@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\BridgeCore\Tools;
 use App\Http\Requests\StoreBiddingRequest;
 use App\Http\Requests\UpdateBiddingRequest;
 use App\Models\Bid;
 use App\Models\Bidding;
+use Illuminate\Support\Facades\Auth;
 
 class BiddingController extends Controller
 {
@@ -90,10 +92,11 @@ class BiddingController extends Controller
      */
     public function placeBid(UpdateBiddingRequest $request, Bidding $bidding)
     {
-        $bid = new Bid(['bid' => '6h']);
+        $bidTxt = $request->get('bid');
+        $bid = new Bid(['bid' => $bidTxt]);
         $bidding->bids()->save($bid);
 
         return redirect()->route('biddings.edit', [$bidding->id])
-            ->with('success','Bid placed successfully');
+            ->with('success',"Bid " . Tools::decorateBid($bidTxt) . " placed successfully, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
     }
 }

@@ -2,6 +2,12 @@
     <x-slot name="backButtonRoute">{{ 'biddings.index' }}</x-slot>
     <x-slot name="subtitle">{{ isset($edit) ? 'Edit' : 'Show' }} bidding (ID: {{ $bidding->id }})</x-slot>
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{!! $message !!}</p>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -44,7 +50,24 @@
             <table>
                 <tr>
                     @foreach ($PLAYERS_NAMES as $playerName)
-                        <th style="width: 80px; height: 30px; vertical-align: top;">{{ $playerName }}</th>
+                        @php
+                            $player = $bidding->training->getUser($playerName);
+                        @endphp
+                        <th>
+                        @if (isset($player))
+                            {{ $player->name }}
+                        @endif
+                        </th>
+                    @endforeach
+                </tr>
+                <tr>
+                    @foreach ($PLAYERS_NAMES as $playerName)
+                        @php
+                            $fieldName = 'user_id_' . $playerName;
+                            $you = Auth::user()->id === $bidding->training->$fieldName;
+                        @endphp
+
+                        <th style="width: 80px; height: 30px; vertical-align: top;">{{ $playerName }} @if ($you)(You)@endif</th>
                     @endforeach
                 </tr>
                 <tr>

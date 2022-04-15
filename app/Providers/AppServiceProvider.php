@@ -7,6 +7,10 @@ use App\Services\Bidding\BiddingBuilder;
 use App\Services\Bidding\BiddingBuilderInterface;
 use App\Services\Bidding\RuleChecker;
 use App\Services\Bidding\RuleCheckerInterface;
+use App\Services\BiddingParser\BiddingParser;
+use App\Services\BiddingParser\BiddingParserFactory;
+use App\Services\BiddingParser\BiddingParserFactoryInterface;
+use App\Services\BiddingParser\BiddingParserInterface;
 use App\Services\Deal\DealService;
 use App\Services\Deal\DealServiceInterface;
 use App\Services\DealBuilder\DealBuilder;
@@ -62,6 +66,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TrainingBuilderInterface::class, TrainingBuilder::class);
         $this->app->bind(BiddingBuilderInterface::class, BiddingBuilder::class);
         $this->app->bind(RuleCheckerInterface::class, RuleChecker::class);
+        $this->app->bind(BiddingParserFactoryInterface::class, BiddingParserFactory::class);
+        $this->app->bind(BiddingParserInterface::class, BiddingParser::class);
     }
 
     /**

@@ -16,10 +16,21 @@ class RuleChecker implements RuleCheckerInterface
             return [];
         }
 
-        // pass
-        $bids = ['pass'];
-
         $biddingParser = $this->biddingParserFactory->parse($bidding);
+
+        $bids = [];
+
+        // pass
+        if (
+            $biddingParser->isPass(-1) &&
+            $biddingParser->isPass(-2) &&
+            $biddingParser->isPass(-3) &&
+            $biddingParser->getBid(-4)
+        ) {
+            return $bids;
+        } else {
+            $bids[] = 'pass';
+        }
 
         // dbl
         if (

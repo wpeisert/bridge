@@ -97,6 +97,11 @@ class BiddingController extends Controller
     public function placeBid(UpdateBiddingRequest $request, Bidding $bidding)
     {
         $bidTxt = $request->get('bid');
+        if (!in_array($bidTxt, $this->ruleChecker->getPossibleBids($bidding))) {
+            return redirect()->route('biddings.edit', [$bidding->id])
+                ->with('danger',"Bid " . Tools::decorateBid($bidTxt) . " illegal, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
+        }
+
         $bid = new Bid(['bid' => $bidTxt]);
         $bidding->bids()->save($bid);
 

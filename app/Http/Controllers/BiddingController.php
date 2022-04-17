@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BridgeCore\Tools;
+use App\Events\BidExpectedEvent;
 use App\Http\Requests\StoreBiddingRequest;
 use App\Http\Requests\UpdateBiddingRequest;
 use App\Models\Bid;
@@ -108,6 +109,8 @@ class BiddingController extends Controller
         if (0 === count($this->ruleChecker->getPossibleBids($bidding))) {
             $bidding->update(['status' => 'finished', 'current_user' => '']);
         }
+
+        BidExpectedEvent::dispatch($bidding);
 
         return redirect()->route('biddings.edit', [$bidding->id])
             ->with('success',"Bid " . Tools::decorateBid($bidTxt) . " placed successfully, user id: " . Auth::id() . ' name: ' . Auth::user()->name);

@@ -75,7 +75,10 @@ class BiddingController extends Controller
      */
     public function edit(Bidding $bidding)
     {
-        $possibleBids = $this->ruleChecker->getPossibleBids($bidding);
+        $possibleBids = [];
+        if ($this->biddingService->canUserPlaceBid($bidding, Auth::id())) {
+            $possibleBids = $this->ruleChecker->getPossibleBids($bidding);
+        }
         return view('biddings.edit', compact('bidding', 'possibleBids'));
     }
 
@@ -102,11 +105,10 @@ class BiddingController extends Controller
     {
         $bidTxt = $request->get('bid');
 
-        if (!in_array($bidTxt, $this->ruleChecker->getPossibleBids($bidding))) {
+        if (!$this->biddingService->canPlaceBid($bidding, Auth::id(), $bidTxt)) {
             return redirect()->route('biddings.edit', [$bidding->id])
                 ->with('danger',"Bid " . Tools::decorateBid($bidTxt) . " illegal, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
         }
-
         $this->biddingService->placeBid($bidding, array_merge($request->all(), ['user_id' => Auth::id()]));
 
         return redirect()->route('biddings.edit', [$bidding->id])

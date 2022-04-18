@@ -12,6 +12,30 @@ class BiddingService implements BiddingServiceInterface
 {
     public function __construct(private RuleCheckerInterface $ruleChecker) {}
 
+
+    public function isBidCorrect(Bidding $bidding, string $bid): bool
+    {
+        return in_array($bid, $this->ruleChecker->getPossibleBids($bidding));
+    }
+
+    public function canUserPlaceBid(Bidding $bidding, int $userId): bool
+    {
+        return $bidding->current_user_id == $userId;
+    }
+
+    public function canPlaceBid(Bidding $bidding, int $userId, string $bid): bool
+    {
+        if (!$this->canUserPlaceBid($bidding, $userId)) {
+            return false;
+        }
+
+        if (!$this->isBidCorrect($bidding, $bid)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function placeBid(Bidding $bidding, mixed $createData)
     {
         if (!is_array($createData)) {
@@ -21,12 +45,13 @@ class BiddingService implements BiddingServiceInterface
             $createData['user_id'] = 0;
         }
 
-        if ($createData['user_id'] != $bidding->current_user_id) {
+        if (!$this->canPlaceBid($bidding, $createData['user_id'], $createData['bid'])) {
             Log::error(
-                "placeBid failed",
+                "placeBid not allowed",
                 [
                     '$bidding->current_user_id' =>  $bidding->current_user_id,
                     '$createData[user_id]' => $createData['user_id'],
+                    '$createData[bid]' => $createData['bid'],
                 ]
             );
 

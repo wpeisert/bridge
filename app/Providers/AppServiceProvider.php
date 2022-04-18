@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Repositories\BiddingRepositoryInterface;
+use App\Services\Bidding\BiddingService;
+use App\Services\Bidding\BiddingServiceInterface;
 use App\Services\Bidding\BiddingBuilder;
 use App\Services\Bidding\BiddingBuilderInterface;
 use App\Services\Bidding\RuleChecker;
@@ -68,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RuleCheckerInterface::class, RuleChecker::class);
         $this->app->bind(BiddingParserFactoryInterface::class, BiddingParserFactory::class);
         $this->app->bind(BiddingParserInterface::class, BiddingParser::class);
+        $this->app->bind(BiddingServiceInterface::class, BiddingService::class);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\BridgeCore\Constants;
+use App\Services\Bidding\RuleCheckerInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
@@ -38,12 +38,9 @@ class Bidding extends Model
         return $this->status === self::STATUS_FINISHED;
     }
 
-    public function increaseCurrentPlayer()
+    public function getCurrentUserIdAttribute(): int
     {
-        $currentPlayer = $this->current_player;
-        $currentPlayerIndex = array_search($currentPlayer, Constants::PLAYERS_NAMES);
-        $nextPlayerIndex = ($currentPlayerIndex+1) % count(Constants::PLAYERS_NAMES);
-        $nextPlayer = Constants::PLAYERS_NAMES[$nextPlayerIndex];
-        $this->update(['current_player' => $nextPlayer]);
+        $player = $this->training->getUser($this->current_player);
+        return $player ? $player->id : 0;
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('deal_id')->unsigned();
             $table->bigInteger('training_id')->unsigned();
-            $table->string('current_user')->comment("N, E, S, W");
+            $table->string('current_player')->comment("N, E, S, W");
             $table->string('status')->comment('preparing, pending, finished');
             $table->foreign('deal_id')->references('id')->on('deals');
             $table->foreign('training_id')->references('id')->on('trainings');

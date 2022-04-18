@@ -11,7 +11,7 @@ class BiddingBuilder implements BiddingBuilderInterface
     {
         $bidding = new Bidding();
         $bidding->deal_id = $deal->id;
-        $bidding->current_user = $deal->dealer;
+        $bidding->current_player = $deal->dealer;
         $bidding->status = '';
 
         return $bidding;

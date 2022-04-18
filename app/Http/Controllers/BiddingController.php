@@ -105,9 +105,9 @@ class BiddingController extends Controller
 
         $bid = new Bid(array_merge($request->all(), ['user_id' => Auth::id()]));
         $bidding->bids()->save($bid);
-        $bidding->increaseCurrentUser();
+        $bidding->increaseCurrentPlayer();
         if (0 === count($this->ruleChecker->getPossibleBids($bidding))) {
-            $bidding->update(['status' => 'finished', 'current_user' => '']);
+            $bidding->update(['status' => 'finished', 'current_player' => '']);
         }
 
         BidExpectedEvent::dispatch($bidding);

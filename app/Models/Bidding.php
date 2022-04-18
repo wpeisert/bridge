@@ -10,7 +10,7 @@ class Bidding extends Model
     private const STATUS_FINISHED = 'finished';
 
     protected $fillable = [
-        'training_id', 'deal_id', 'current_user', 'status'
+        'training_id', 'deal_id', 'current_player', 'status'
     ];
 
     public function training()
@@ -38,12 +38,12 @@ class Bidding extends Model
         return $this->status === self::STATUS_FINISHED;
     }
 
-    public function increaseCurrentUser()
+    public function increaseCurrentPlayer()
     {
-        $currentUser = $this->current_user;
-        $currentUserIndex = array_search($currentUser, Constants::PLAYERS_NAMES);
-        $nextUserIndex = ($currentUserIndex+1) % count(Constants::PLAYERS_NAMES);
-        $nextUser = Constants::PLAYERS_NAMES[$nextUserIndex];
-        $this->update(['current_user' => $nextUser]);
+        $currentPlayer = $this->current_player;
+        $currentPlayerIndex = array_search($currentPlayer, Constants::PLAYERS_NAMES);
+        $nextPlayerIndex = ($currentPlayerIndex+1) % count(Constants::PLAYERS_NAMES);
+        $nextPlayer = Constants::PLAYERS_NAMES[$nextPlayerIndex];
+        $this->update(['current_player' => $nextPlayer]);
     }
 }

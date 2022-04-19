@@ -20,6 +20,7 @@ class DealAnalyseListener implements ShouldQueue
      */
     public function handle(DealCreatedEvent $event)
     {
-        // do deal analysis
+        return;
+        // @TODO do deal analysis
     }
 }

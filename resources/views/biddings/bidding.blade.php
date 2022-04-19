@@ -17,9 +17,17 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                @php
+                    $youPlayer = false;
+                @endphp
                 @foreach($PLAYERS_NAMES as $playerName)
                     @php
                         $player = $bidding->training->getUser($playerName);
+                        $fieldName = 'user_id_' . $playerName;
+                        $you = Auth::user()->id === $bidding->training->$fieldName;
+                        if ($you) {
+                            $youPlayer = true;
+                        }
                     @endphp
                     @if (isset($player))
                         {{ $playerName }}: {{ $player->name }} &nbsp;
@@ -43,7 +51,7 @@
                         @endphp
 
                         <x-slot :name="$slotName">
-                            @if ($you || ($isHuman && $bidding->is_finished))
+                            @if (!$youPlayer || $you || ($isHuman && $bidding->is_finished))
                                 {!! $bidding->deal->getOneLineCards($playerName) !!}
                             @endif
                         </x-slot>

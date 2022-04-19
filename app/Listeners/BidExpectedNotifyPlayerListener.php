@@ -29,6 +29,6 @@ class BidExpectedNotifyPlayerListener implements ShouldQueue
             return;
         }
         Mail::to($user)
-            ->send(new BidExpectedMail($event->bidding));
+            ->send(new BidExpectedMail($bidding));
     }
 }

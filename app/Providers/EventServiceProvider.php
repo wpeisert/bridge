@@ -23,8 +23,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         BidExpectedEvent::class => [
             BidExpectedNotifyAdminListener::class,
+            BidExpectedNotifyPlayerListener::class,
             MakeComputerBidListener::class,
-            BidExpectedNotifyPlayerListener::class
         ],
     ];
 

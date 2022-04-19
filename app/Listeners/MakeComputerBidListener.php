@@ -12,8 +12,6 @@ class MakeComputerBidListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    public $queue = 'high';
-
     private const COMPUTER_USER_ID = 0;
 
     public function __construct(private BiddingServiceInterface $biddingService) {}

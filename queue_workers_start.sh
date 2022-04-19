@@ -1,4 +1,6 @@
 #!/bin/sh
 
-php artisan queue:work --queue=high &
+php artisan queue:restart
+
+php artisan queue:work --queue=slow &
 php artisan queue:work &

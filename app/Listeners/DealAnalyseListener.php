@@ -10,6 +10,8 @@ class DealAnalyseListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
+    public $queue = 'slow';
+
     public function __construct() {}
 
     /**

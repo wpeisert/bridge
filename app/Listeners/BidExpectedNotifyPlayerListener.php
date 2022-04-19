@@ -13,8 +13,6 @@ class BidExpectedNotifyPlayerListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    public $queue = 'high';
-
     public function __construct(private BiddingServiceInterface $biddingService) {}
 
     /**

@@ -33,18 +33,24 @@
                 <x-deal>
                     <x-slot name="vulnerable">{{ $bidding->deal->vulnerable_human }}</x-slot>
                     <x-slot name="dealer">{{ $bidding->deal->dealer }}</x-slot>
-                    <x-slot name="cards_N">
-                        {!! $bidding->deal->getOneLineCards('N') !!}
-                    </x-slot>
-                    <x-slot name="cards_E">
-                        {!! $bidding->deal->getOneLineCards('E') !!}
-                    </x-slot>
-                    <x-slot name="cards_S">
-                        {!! $bidding->deal->getOneLineCards('S') !!}
-                    </x-slot>
-                    <x-slot name="cards_W">
-                        {!! $bidding->deal->getOneLineCards('W') !!}
-                    </x-slot>
+
+                    @foreach ($PLAYERS_NAMES as $playerName)
+                        @php
+                            $slotName = 'cards_' . $playerName;
+                            $fieldName = 'user_id_' . $playerName;
+                            $you = Auth::user()->id === $bidding->training->$fieldName;
+                            $isHuman = $bidding->training->$fieldName != 0;
+                        @endphp
+
+                        <x-slot :name="$slotName">
+                            @if ($you || ($isHuman && $bidding->is_finished))
+                                {!! $bidding->deal->getOneLineCards($playerName) !!}
+                            @endif
+                        </x-slot>
+
+                    @endforeach
+
+
                 </x-deal>
             </div>
         </div>

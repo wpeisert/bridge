@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\BridgeCore\Tools;
-use App\Events\BidExpectedEvent;
 use App\Http\Requests\StoreBiddingRequest;
 use App\Http\Requests\UpdateBiddingRequest;
 use App\Models\Bidding;
@@ -78,6 +77,10 @@ class BiddingController extends Controller
         $possibleBids = [];
         if ($this->biddingService->canUserPlaceBid($bidding, Auth::id())) {
             $possibleBids = $this->ruleChecker->getPossibleBids($bidding);
+        } else {
+            if (!$bidding->is_finished) {
+                header("Refresh:5");
+            }
         }
         return view('biddings.edit', compact('bidding', 'possibleBids'));
     }

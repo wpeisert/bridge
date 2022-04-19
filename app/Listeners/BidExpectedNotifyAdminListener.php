@@ -12,6 +12,8 @@ class BidExpectedNotifyAdminListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
+    public $queue = 'high';
+
     /**
      * Create the event listener.
      *

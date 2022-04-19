@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Events\BidExpectedEvent;
+use App\Events\DealCreatedEvent;
 use App\Listeners\BidExpectedNotifyAdminListener;
 use App\Listeners\BidExpectedNotifyPlayerListener;
+use App\Listeners\DealAnalyseListener;
 use App\Listeners\MakeComputerBidListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -25,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
             BidExpectedNotifyAdminListener::class,
             BidExpectedNotifyPlayerListener::class,
             MakeComputerBidListener::class,
+        ],
+        DealCreatedEvent::class => [
+            DealAnalyseListener::class
         ],
     ];
 

@@ -2,9 +2,11 @@
 
 namespace App\Services\Quiz;
 
+use App\Events\DealCreatedEvent;
 use App\Exceptions\DealBuilderLimitReachedException;
 use App\Services\DealBuilder\DealBuilderInterface;
 use App\Models\Quiz;
+use Illuminate\Support\Facades\Log;
 
 class QuizBuilder implements QuizBuilderInterface
 {
@@ -18,10 +20,11 @@ class QuizBuilder implements QuizBuilderInterface
             try {
                 $deal = $this->dealBuilder->build($quiz->deal_constraint);
                 $deal->save();
+                DealCreatedEvent::dispatch($deal);
                 $quiz->deals()->attach($deal);
                 ++$createdCount;
             } catch (DealBuilderLimitReachedException $e) {
-                // silent
+                Log::debug('dealBuilder', ['msg' => $e->getMessage()]);
             }
         }
 

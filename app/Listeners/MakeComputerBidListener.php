@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 class MakeComputerBidListener implements ShouldQueue
 {
-    private const COMPUTER_USER_ID = 0;
-
     use InteractsWithQueue;
+
+    public $queue = 'high';
+
+    private const COMPUTER_USER_ID = 0;
 
     public function __construct(private BiddingServiceInterface $biddingService) {}
 

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\Bidding\RuleCheckerInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model

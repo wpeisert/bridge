@@ -4,11 +4,11 @@ namespace App\Providers;
 
 use App\Events\BidExpectedEvent;
 use App\Listeners\BidExpectedNotifyAdminListener;
+use App\Listeners\BidExpectedNotifyPlayerListener;
 use App\Listeners\MakeComputerBidListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -24,6 +24,7 @@ class EventServiceProvider extends ServiceProvider
         BidExpectedEvent::class => [
             BidExpectedNotifyAdminListener::class,
             MakeComputerBidListener::class,
+            BidExpectedNotifyPlayerListener::class
         ],
     ];
 

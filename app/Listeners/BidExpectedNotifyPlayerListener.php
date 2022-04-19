@@ -4,23 +4,16 @@ namespace App\Listeners;
 
 use App\Events\BidExpectedEvent;
 use App\Mail\BidExpectedMail;
+use App\Services\Bidding\BiddingServiceInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class BidExpectedNotifyAdminListener implements ShouldQueue
+class BidExpectedNotifyPlayerListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(private BiddingServiceInterface $biddingService) {}
 
     /**
      * Handle the event.
@@ -30,10 +23,12 @@ class BidExpectedNotifyAdminListener implements ShouldQueue
      */
     public function handle(BidExpectedEvent $event)
     {
-        /*
-        Mail::to('info@sauron.pl')
+        $bidding = $event->bidding;
+        $user = $bidding->training->getUser($bidding->current_player);
+        if (!$user) {
+            return;
+        }
+        Mail::to($user)
             ->send(new BidExpectedMail($event->bidding));
-        */
-        return;
     }
 }

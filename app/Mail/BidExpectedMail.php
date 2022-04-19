@@ -11,15 +11,7 @@ class BidExpectedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(private Bidding $bidding)
-    {
-        //
-    }
+    public function __construct(private Bidding $bidding) {}
 
     /**
      * Build the message.
@@ -28,6 +20,8 @@ class BidExpectedMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.bid_expected')->with('id', $this->bidding->id);
+        return $this
+            ->subject(view('emails.bid_expected.subject')->with(['bidding' => $this->bidding]))
+            ->view('emails.bid_expected.html')->with(['bidding' => $this->bidding]);
     }
 }

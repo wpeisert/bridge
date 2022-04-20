@@ -2,45 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\BiddingRepositoryInterface;
-use Illuminate\Http\Request;
+use App\Repositories\TrainingRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class BiddingsController extends Controller
 {
-    public function __construct(protected BiddingRepositoryInterface $biddingRepository)
+    public function __construct(protected TrainingRepositoryInterface $trainingRepository)
     {
     }
 
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $preparing = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'preparing');
-        $pending = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'pending');
-        $finished = $this->biddingRepository->getUserAllBiddings(Auth::user(), 'finished');
-
-        return view('bridge.biddings',
-            [
-                'allBiddings' => [
-                    [
-                        'title' => 'Current biddings',
-                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $pending]]
-                    ],
-                    [
-                        'title' => 'Preparing biddings',
-                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $preparing]]
-                    ],
-                    [
-                        'title' => 'Finished biddings',
-                        'biddingsByUser' => [['partner_name' => 'XX Zenon XX', 'biddings' => $finished]]
-                    ],
-                ],
-            ]
+        $userId = Auth::id();
+        $activeTrainings = $this->trainingRepository->splitUserTrainings(
+            $this->trainingRepository->getUserTrainings($userId, true)
         );
+        $finishedTrainings = $this->trainingRepository->getUserTrainings($userId, false);
+
+        header("Refresh:5");
+        return view('bridge.trainings', compact('activeTrainings', 'finishedTrainings'));
     }
 }

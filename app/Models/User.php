@@ -41,9 +41,4 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function biddings()
-    {
-        return $this->belongsToMany(Bidding::class)->withPivot('user_no', 'should_bid')->withTimestamps();
-    }
 }

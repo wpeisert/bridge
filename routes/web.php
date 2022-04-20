@@ -23,9 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', [BiddingsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+*/
 
 Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);
 Route::put('biddings/{bidding}/place-bid', [BiddingController::class, 'placeBid'])->middleware(['auth', 'verified'])->name('biddings.place-bid');

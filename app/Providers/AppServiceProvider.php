@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\BiddingRepositoryInterface;
+use App\Repositories\TrainingRepositoryInterface;
 use App\Services\Bidding\BiddingService;
 use App\Services\Bidding\BiddingServiceInterface;
 use App\Services\Bidding\BiddingBuilder;
@@ -35,7 +35,7 @@ use App\Services\DealDecorator\DealDecoratorFactoryInterface;
 use App\Services\DealDecorator\DealDecoratorInterface;
 use App\Services\Quiz\QuizBuilderInterface;
 use App\Services\RandomSeederInterface;
-use App\Repositories\BiddingRepository;
+use App\Repositories\TrainingRepository;
 use App\Services\Quiz\QuizBuilder;
 use App\Services\RandomSeeder;
 use App\Services\Training\TrainingBuilder;
@@ -51,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BiddingRepositoryInterface::class, BiddingRepository::class);
+        $this->app->bind(TrainingRepositoryInterface::class, TrainingRepository::class);
 
         $this->app->bind(QuizBuilderInterface::class, QuizBuilder::class);
         $this->app->bind(DealBuilderInterface::class, DealBuilder::class);

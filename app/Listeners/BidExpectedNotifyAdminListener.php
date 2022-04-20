@@ -30,10 +30,7 @@ class BidExpectedNotifyAdminListener implements ShouldQueue
      */
     public function handle(BidExpectedEvent $event)
     {
-        /*
         Mail::to('info@sauron.pl')
             ->send(new BidExpectedMail($event->bidding));
-        */
-        return;
     }
 }

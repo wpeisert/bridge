@@ -95,7 +95,7 @@ class BiddingParser implements BiddingParserInterface
         }
         $color = substr($bid, 1);
         for ($iter = $bidIndex % 2; $iter < count($this->bids); $iter += 2) {
-            if (false !== strpos($this->bids[$iter], $color)) {
+            if (substr($this->bids[$iter], 1) === $color) {
                 return $this->bids[$iter];
             }
         }

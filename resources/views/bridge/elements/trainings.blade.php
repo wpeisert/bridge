@@ -13,7 +13,7 @@
     @endforeach
     <br />
     @foreach ($training->biddings as $bidding)
-        <a href="{{ route('biddings.show', $bidding->id) }}">[{{ $loop->iteration }}]</a> &nbsp;
+        <a href="{{ route('biddings.show', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContract() !!} ]</a> &nbsp;
     @endforeach
     <br />
 @endforeach

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TrainingRepositoryInterface;
+use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class BiddingsController extends Controller
 {
-    public function __construct(protected TrainingRepositoryInterface $trainingRepository)
-    {
-    }
+    public function __construct(
+        private TrainingRepositoryInterface $trainingRepository,
+        private BiddingParserFactoryInterface $biddingParserFactory
+    ) {}
 
     /**
      * Handle the incoming request.
@@ -25,6 +27,8 @@ class BiddingsController extends Controller
         $finishedTrainings = $this->trainingRepository->getUserTrainings($userId, false);
 
         header("Refresh:5");
+        $biddingParser = $this->biddingParserFactory;
+        return view('bridge.trainings', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
         return view('bridge.trainings', compact('activeTrainings', 'finishedTrainings'));
     }
 }

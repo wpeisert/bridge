@@ -3,8 +3,9 @@
 namespace App\Services\BiddingParser;
 
 use App\BridgeCore\Constants;
-use App\Models\Bid;
+use App\BridgeCore\Tools;
 use App\Models\Bidding;
+use App\Services\Bidding\PlayerServiceInterface;
 
 class BiddingParser implements BiddingParserInterface
 {
@@ -14,6 +15,8 @@ class BiddingParser implements BiddingParserInterface
      * @var string[]
      */
     private array $bids;
+
+    public function __construct(private PlayerServiceInterface $playerService) {}
 
     public function setBidding(Bidding $bidding)
     {
@@ -59,5 +62,43 @@ class BiddingParser implements BiddingParserInterface
             return $this->bids[$count + $index];
         }
         return '';
+    }
+
+    public function getContract(): string
+    {
+        $lastColorBid = $this->getLastColorBid();
+        if (!$lastColorBid) {
+            return 'pass';
+        }
+
+        $lastColorBidIndex = array_search($lastColorBid, $this->bids);
+        $firstColorBid = $this->getFirstColorBidInPairForBid($lastColorBid);
+        $firstColorBidIndex = array_search($firstColorBid, $this->bids);
+
+        $player = $this->playerService->increasePlayer($this->bidding->deal->dealer, $firstColorBidIndex);
+        $contract = $player . ' ' . Tools::decorateBid($lastColorBid);
+        $bids = array_slice($this->bids, $lastColorBidIndex);
+        if (array_search('rdbl', $bids)) {
+            $contract .= 'xx';
+        } elseif (array_search('dbl', $bids)) {
+            $contract .= 'x';
+        }
+
+        return $contract;
+    }
+
+    public function getFirstColorBidInPairForBid(string $bid): string
+    {
+        $bidIndex = array_search($bid, $this->bids);
+        if ($bidIndex === false) {
+            return '';
+        }
+        $color = substr($bid, 1);
+        for ($iter = $bidIndex % 2; $iter < count($this->bids); $iter += 2) {
+            if (false !== strpos($this->bids[$iter], $color)) {
+                return $this->bids[$iter];
+            }
+        }
+        throw new \Exception("not implemented");
     }
 }

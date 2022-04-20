@@ -2,7 +2,6 @@
 
 namespace App\Services\Bidding;
 
-use App\BridgeCore\Constants;
 use App\Events\BidExpectedEvent;
 use App\Models\Bid;
 use App\Models\Bidding;
@@ -10,7 +9,10 @@ use Illuminate\Support\Facades\Log;
 
 class BiddingService implements BiddingServiceInterface
 {
-    public function __construct(private RuleCheckerInterface $ruleChecker) {}
+    public function __construct(
+        private RuleCheckerInterface $ruleChecker,
+        private PlayerServiceInterface $playerService
+    ) {}
 
 
     public function isBidCorrect(Bidding $bidding, string $bid): bool
@@ -59,20 +61,11 @@ class BiddingService implements BiddingServiceInterface
         }
 
         $bidding->bids()->save(new Bid($createData));
-        $this->increaseCurrentPlayer($bidding);
+        $bidding->update(['current_player' => $this->playerService->increasePlayer($bidding->current_player)]);
         if (0 === count($this->ruleChecker->getPossibleBids($bidding))) {
             $bidding->update(['status' => 'finished', 'current_player' => '']);
         }
 
         BidExpectedEvent::dispatch($bidding);
-    }
-
-    public function increaseCurrentPlayer(Bidding $bidding)
-    {
-        $currentPlayer = $bidding->current_player;
-        $currentPlayerIndex = array_search($currentPlayer, Constants::PLAYERS_NAMES);
-        $nextPlayerIndex = ($currentPlayerIndex+1) % count(Constants::PLAYERS_NAMES);
-        $nextPlayer = Constants::PLAYERS_NAMES[$nextPlayerIndex];
-        $bidding->update(['current_player' => $nextPlayer]);
     }
 }

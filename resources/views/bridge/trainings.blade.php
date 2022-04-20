@@ -14,6 +14,7 @@
                         [
                             'title' => 'Active trainings',
                             'trainings' => $activeTrainings,
+                            'biddingParser' => $biddingParser,
                         ]
                     )
                 </div>
@@ -23,6 +24,7 @@
                         [
                             'title' => 'Finished trainings',
                             'trainings' => $finishedTrainings,
+                            'biddingParser' => $biddingParser,
                         ]
                     )
                 </div>

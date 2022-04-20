@@ -99,6 +99,6 @@ class BiddingParser implements BiddingParserInterface
                 return $this->bids[$iter];
             }
         }
-        throw new \Exception("not implemented");
+        return '';
     }
 }

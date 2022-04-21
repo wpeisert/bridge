@@ -17,6 +17,10 @@ use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use App\Services\BiddingParser\BiddingParserInterface;
 use App\Services\Deal\DealService;
 use App\Services\Deal\DealServiceInterface;
+use App\Services\DealAnalyser\DealAnalyser;
+use App\Services\DealAnalyser\DealAnalyserFactory;
+use App\Services\DealAnalyser\DealAnalyserFactoryInterface;
+use App\Services\DealAnalyser\DealAnalyserInterface;
 use App\Services\DealBuilder\DealBuilder;
 use App\Services\DealBuilder\DealBuilderInterface;
 use App\Services\DealBuilder\DealConstraintVerifier;
@@ -72,6 +76,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RuleCheckerInterface::class, RuleChecker::class);
         $this->app->bind(BiddingParserFactoryInterface::class, BiddingParserFactory::class);
         $this->app->bind(BiddingParserInterface::class, BiddingParser::class);
+        $this->app->bind(DealAnalyserFactoryInterface::class, DealAnalyserFactory::class);
+        $this->app->bind(DealAnalyserInterface::class, DealAnalyser::class);
         $this->app->bind(BiddingServiceInterface::class, BiddingService::class);
         $this->app->bind(PlayerServiceInterface::class, PlayerService::class);
     }

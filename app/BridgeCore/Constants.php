@@ -10,8 +10,8 @@ class Constants
 
     public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'Yes', 'No'];
     public const DEAL_CONSTRAINTS_DEALER = ['N', 'E', 'S', 'W', '- any -'];
-    public const COLORS_COUNT = 4;
     public const COLORS_NAMES = ['S', 'H', 'D', 'C'];
+    public const COLORS_COUNT = 4;
     public const COLORS_SYMBOLS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
     public const COLORS_COLORS = ['000077', 'ee0000', 'ee4400', '008800'];
     public const CARDS = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -23,6 +23,7 @@ class Constants
     public const BIDS_COLORS = ['c', 'd', 'h', 's', 'nt'];
     public const BIDS_MAX_LEVEL = 7;
     public const BIDS_SPECIAL = ['pass', 'dbl', 'rdbl'];
+    public const CARDS_COUNT = self::CARDS_IN_COLOR_COUNT * self::COLORS_COUNT;
 
     public static function get(): array
     {

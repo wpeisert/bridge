@@ -2,13 +2,33 @@
 
 namespace App\Services\Hands;
 
+use App\BridgeCore\Constants;
+
 class Hands
 {
-    private $hands = [];
+    private array $hands;
 
     public function __construct(array $hands)
     {
-        $this->hands = $hands;
+        $this->hands = [];
+        $this->setHands($hands);
+    }
+
+    public function setHands(array $hands)
+    {
+        foreach ($hands as $playerName => $cards) {
+            $this->setHand($playerName, $cards);
+        }
+    }
+
+    public function setHand(string $playerName, string|Cards $cards)
+    {
+        if (!in_array($playerName, Constants::PLAYERS_NAMES)) {
+            throw new \Exception("Player name not in " . implode(',', Constants::PLAYERS_NAMES));
+        }
+
+        $this->hands[$playerName] = is_string($cards) ? new Cards($cards) : $cards;
+
     }
 
     public function getHand(string $playerName): string

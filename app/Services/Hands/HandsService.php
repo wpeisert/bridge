@@ -6,10 +6,12 @@ use App\BridgeCore\Constants;
 
 class HandsService
 {
+    public function __construct(private RandomService $randomService) {}
+
     public function generateRandomCards(): Hands
     {
         $hands = [];
-        $perm = $this->getRandomPermutation(Constants::COLORS_COUNT * Constants::CARDS_IN_COLOR_COUNT);
+        $perm = $this->randomService->getRandomPermutation(Constants::COLORS_COUNT * Constants::CARDS_IN_COLOR_COUNT);
         for ($playerNo = 0; $playerNo < Constants::PLAYERS_COUNT; ++$playerNo) {
             $hand = [];
             $playerName = Constants::PLAYERS_NAMES[$playerNo];
@@ -38,18 +40,4 @@ class HandsService
 
         return new Hands($hands);
     }
-
-
-    private function getRandomPermutation(int $size): array
-    {
-        $arr = [];
-        for ($iter = 0; $iter < $size; ++$iter) {
-            $arr[] = ['value' => $iter, 'order' => rand()];
-        }
-
-        usort($arr, function ($a, $b) { return $a['order'] < $b['order']; });
-
-        return array_map( function ($a) { return $a['value']; }, $arr );
-    }
-
 }

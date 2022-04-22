@@ -24,7 +24,7 @@ class DealGenerator implements DealGeneratorInterface
         $deal->vulnerable_NS = rand(0, 1);
         $deal->vulnerable_WE = rand(0, 1);
 
-        $hands = $this->handsService->generateRandomCards();
+        $hands = $this->handsService->generateRandomHands();
         foreach (Constants::PLAYERS_NAMES as $playerName) {
             $field = 'cards_' . $playerName;
             $deal->$field = $hands->getHand($playerName);

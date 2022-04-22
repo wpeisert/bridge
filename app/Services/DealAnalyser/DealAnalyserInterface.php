@@ -11,7 +11,7 @@ use App\Models\Deal;
  * 1'. Analizujemy tylko NS
  * 2. Dla każdej strony (np. NS) losujemy m rąk przeciwników
  * 3. Dla każdego wylosowanego rozdania pobieramy dane:
- *    - dla każdego gracza (N, E, S, W) jako rozgrywająćego:
+ *    - dla każdego gracza (N, E, S, W) jako rozgrywającego:
  *    - ile lew weźmie grając c, d, h, s, nt
  *    - zatem wynik każdego rozdania jest tablicą: 4 x 5
  * 4. Zatem mamy na koniec mamy tablicę: m(rozdania) x 4(rozgrywający) x 5(kolor)
@@ -31,7 +31,7 @@ use App\Models\Deal;
  *   - NS znajduje najcenniejsze swoje kontrakty w każdym kolorze i z każdej ręki; niższe niż najniższy z nich są odrzucane
  *   - WE znajduje najcenniejsze swoje kontrakty w każdym kolorze; niższe niż najniższy z nich są odrzucane
  *   - kończy się, gdy nie można już nic odrzucić
- * 9. KONIEC: mamy dwie listy dla
+ * 9. KONIEC: mamy dwie listy dla NS oraz WE
  */
 
 interface DealAnalyserInterface
@@ -44,6 +44,4 @@ interface DealAnalyserInterface
      * @param int $rounds
      */
     public function analyse(int $rounds = 10): void;
-
-
 }

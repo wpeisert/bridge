@@ -74,10 +74,10 @@ class Deal extends Model
         $this->$field = $cards;
     }
 
-    public function getHands(): Hands
+    public function getHands(array $playerNames = Constants::PLAYERS_NAMES): Hands
     {
         $hands = new Hands;
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
+        foreach ($playerNames as $playerName) {
             $hands->setHand($playerName, $this->getHand($playerName));
         }
         return $hands;

@@ -8,12 +8,16 @@ class Hands
 {
     private array $hands;
 
-    public function __construct(array $hands)
+    public function __construct(array $hands = [])
     {
         $this->hands = [];
         $this->setHands($hands);
     }
 
+    /**
+     * @param array $hands
+     * @throws \Exception
+     */
     public function setHands(array $hands)
     {
         foreach ($hands as $playerName => $cards) {

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bidding;
 use App\Repositories\TrainingRepositoryInterface;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use Illuminate\Support\Facades\Auth;
 
-class BiddingsController extends Controller
+class MyBiddingsController extends Controller
 {
     public function __construct(
         private TrainingRepositoryInterface $trainingRepository,
@@ -28,7 +29,21 @@ class BiddingsController extends Controller
 
         header("Refresh:5");
         $biddingParser = $this->biddingParserFactory;
-        return view('bridge.trainings', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
-        return view('bridge.trainings', compact('activeTrainings', 'finishedTrainings'));
+        return view('bridge.mytrainings', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
+    }
+
+    public function bidding(Bidding $bidding)
+    {
+        return view(
+            'bridge.mybidding',
+            ['bidding' => $bidding]
+        );
+    }
+
+    public function create()
+    {
+        return view(
+            'bridge.mybidding_create'
+        );
     }
 }

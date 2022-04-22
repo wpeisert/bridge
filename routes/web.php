@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BiddingController;
-use App\Http\Controllers\BiddingsController;
+use App\Http\Controllers\MyBiddingsController;
 use App\Http\Controllers\DealConstraintController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\QuizController;
@@ -23,13 +23,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [BiddingsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-*/
+Route::get('dashboard', [MyBiddingsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('bidding/create', [MyBiddingsController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
+Route::get('bidding/{bidding}', [MyBiddingsController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
 
 Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);
 Route::put('biddings/{bidding}/place-bid', [BiddingController::class, 'placeBid'])->middleware(['auth', 'verified'])->name('biddings.place-bid');

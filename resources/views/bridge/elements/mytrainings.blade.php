@@ -1,4 +1,5 @@
-<b>{{ __( $title ) }} </b> <br />
+<h3>{{ __( $title ) }} </h3>
+<hr />
 @foreach($trainings as $training)
 
     @foreach($PLAYERS_NAMES as $playerName)
@@ -13,7 +14,6 @@
     @endforeach
     <br />
     @foreach ($training->biddings as $bidding)
-        <a href="{{ route('biddings.show', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContract() !!} ]</a> &nbsp;
+        <a href="{{ route('mybidding', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContract() !!} ]</a> &nbsp;
     @endforeach
-    <br />
 @endforeach

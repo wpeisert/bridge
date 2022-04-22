@@ -1,5 +1,6 @@
-<b>{{ __( $title ) }} </b> <br />
+<h3>{{ __( $title ) }} </h3>
 @foreach($trainings as $train)
+    <hr />
 
     @php
         $training = $train['training']
@@ -19,10 +20,9 @@
         @if (count($train['biddings'][$stage]))
             <b>{{ $stage }}: </b>
             @foreach ($train['biddings'][$stage] as $bidding)
-                <a href="{{ route('biddings.show', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContract() !!} ]</a> &nbsp;
+                <a href="{{ route('mybidding', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContract() !!} ]</a> &nbsp;
             @endforeach
             &nbsp; &nbsp;
         @endif
     @endforeach
-    <br />
 @endforeach

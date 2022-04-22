@@ -25,6 +25,11 @@ class Hands
         }
     }
 
+    public function getHands(): array
+    {
+        return $this->hands;
+    }
+
     public function setHand(string $playerName, string|Cards $cards)
     {
         if (!in_array($playerName, Constants::PLAYERS_NAMES)) {
@@ -32,7 +37,6 @@ class Hands
         }
 
         $this->hands[$playerName] = is_string($cards) ? new Cards($cards) : $cards;
-
     }
 
     public function getHand(string $playerName): string

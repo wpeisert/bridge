@@ -46,4 +46,9 @@ class MyBiddingsController extends Controller
             'bridge.mybidding_create'
         );
     }
+
+    public function next()
+    {
+        return redirect()->route('dashboard');
+    }
 }

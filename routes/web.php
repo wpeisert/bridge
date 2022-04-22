@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('dashboard', [MyBiddingsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('bidding/create', [MyBiddingsController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
+Route::get('bidding/next', [MyBiddingsController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.next');
 Route::get('bidding/{bidding}', [MyBiddingsController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
 
 Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);

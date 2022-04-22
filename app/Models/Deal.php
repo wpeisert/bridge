@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\BridgeCore\Constants;
 use App\BridgeCore\Tools;
+use App\Services\Hands\Hands;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,10 +41,7 @@ class Deal extends Model
 
     public function getOneLineCards(string $playerName): string
     {
-        $member = 'cards_' . $playerName;
-        $cards = $this->$member;
-
-        return $this->decorateOneLine($cards);
+        return Tools::decorateOneLine($this->getHand($playerName));
     }
 
     public function getVulnerableHumanAttribute()
@@ -60,8 +58,31 @@ class Deal extends Model
         return ' - ';
     }
 
-    private function decorateOneLine(string $cards)
+    public function setHands(Hands $hands)
     {
-        return Tools::decorateOneLine($cards);
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            $this->setHand($playerName, $hands->getHand($playerName));
+        }
+    }
+
+    public function setHand(string $playerName, string $cards)
+    {
+        $field = 'cards_' . $playerName;
+        $this->$field = $cards;
+    }
+
+    public function getHands(): Hands
+    {
+        $hands = new Hands;
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            $hands->setHand($playerName, $this->getHand($playerName));
+        }
+        return $hands;
+    }
+
+    public function getHand(string $playerName): string
+    {
+        $field = 'cards_' . $playerName;
+        return $this->$field;
     }
 }

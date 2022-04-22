@@ -43,16 +43,14 @@ class DealDecorator implements DealDecoratorInterface
 
     public function getPC(int $playerNo): int
     {
-        $field = 'cards_' . Constants::PLAYERS_NAMES[$playerNo];
-        $cards = $this->deal->$field;
+        $cards = $this->deal->getHand(Constants::PLAYERS_NAMES[$playerNo]);
 
         return $this->dealService->getPC($cards);
     }
 
     public function getCardsCount(string $colorName, int $playerNo): int
     {
-        $field = 'cards_' . Constants::PLAYERS_NAMES[$playerNo];
-        $cards = $this->deal->$field;
+        $cards = $this->deal->getHand(Constants::PLAYERS_NAMES[$playerNo]);
         $colorNo = array_search($colorName, Constants::COLORS_NAMES);
 
         return $this->dealService->getCardsCount($cards, $colorNo);

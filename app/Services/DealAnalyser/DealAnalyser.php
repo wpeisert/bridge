@@ -113,7 +113,7 @@ class DealAnalyser implements DealAnalyserInterface
          */
     }
 
-    public function storeMinimax($contracts)
+    public function storeMinimax(array $contracts)
     {
 
     }

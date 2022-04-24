@@ -9,32 +9,37 @@ use Illuminate\Support\Facades\Auth;
 
 class TrainingRepository implements TrainingRepositoryInterface
 {
-    public function getUserTrainings(int $userId, bool $active = true)
+    public function getUserTrainingsActive(int $userId, bool $active = true): Builder
     {
-        $trainingsBase = Training::query()
+        $trainingsBase = $this->getUserTrainings($userId);
+
+        $trainings = $active ?
+            $trainingsBase->whereHas('biddings', function (Builder $query) {
+                $query->where('status', '<>', 'finished');
+            }
+            )
+            :
+            $trainingsBase->whereDoesntHave('biddings', function (Builder $query) {
+                $query->where('status', '<>', 'finished');
+            }
+            );
+
+        return $trainings;
+    }
+
+    public function getUserTrainings(int $userId): Builder
+    {
+        return Training::query()
             ->where(function (Builder $query) use ($userId) {
                 return $query->where('user_id_N', '=', $userId)
                     ->orWhere('user_id_E', '=', $userId)
                     ->orWhere('user_id_S', '=', $userId)
                     ->orWhere('user_id_W', '=', $userId);
-                }
-            );
-
-        $trainings = $active ?
-            $trainingsBase->whereHas('biddings', function (Builder $query) {
-                    $query->where('status', '<>', 'finished');
-                }
-            )
-            :
-            $trainingsBase->whereDoesntHave('biddings', function (Builder $query) {
-                    $query->where('status', '<>', 'finished');
-                }
-            );
-
-        return $trainings->get();
+            }
+        );
     }
 
-    public function splitUserTrainings(mixed $trainings)
+    public function splitUserTrainings(array $trainings): array
     {
         $newTrainings = [];
         foreach ($trainings as $training) {
@@ -53,5 +58,20 @@ class TrainingRepository implements TrainingRepositoryInterface
         }
 
         return $newTrainings;
+    }
+
+    public function getNextBiddingInTraining(Bidding $bidding): Bidding
+    {
+        $was = false;
+        foreach ($bidding->training->biddings as $bidd) {
+            if (!$was) {
+                if ($bidd->id === $bidding->id) {
+                    $was = true;
+                }
+                continue;
+            }
+            return $bidd;
+        }
+        return $bidding->training->biddings[0];
     }
 }

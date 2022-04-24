@@ -7,7 +7,7 @@
 
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('mybidding.next') }}">Next</a>
+                <a class="btn btn-success" href="{{ route('mybidding.next', $bidding->id) }}">Next</a>
             </div>
         </div>
 

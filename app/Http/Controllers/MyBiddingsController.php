@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bidding;
-use App\Repositories\TrainingQueryBuilderInterface;
+use App\Services\Training\TrainingQueryBuilderInterface;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use Illuminate\Support\Facades\Auth;
 

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\TrainingQueryBuilderInterface;
+use App\Services\Training\TrainingQueryBuilderInterface;
 use App\Services\Bidding\BiddingService;
 use App\Services\Bidding\BiddingServiceInterface;
 use App\Services\Bidding\BiddingBuilder;
@@ -41,7 +41,7 @@ use App\Services\DealDecorator\DealDecoratorFactoryInterface;
 use App\Services\DealDecorator\DealDecoratorInterface;
 use App\Services\Quiz\QuizBuilderInterface;
 use App\Services\RandomSeederInterface;
-use App\Repositories\TrainingQueryBuilder;
+use App\Services\Training\TrainingQueryBuilder;
 use App\Services\Quiz\QuizBuilder;
 use App\Services\RandomSeeder;
 use App\Services\Training\TrainingGenerator;

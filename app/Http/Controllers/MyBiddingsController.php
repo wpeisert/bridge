@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bidding;
-use App\Repositories\TrainingRepositoryInterface;
+use App\Repositories\TrainingQueryBuilderInterface;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class MyBiddingsController extends Controller
 {
     public function __construct(
-        private TrainingRepositoryInterface $trainingRepository,
+        private TrainingQueryBuilderInterface $trainingRepository,
         private BiddingParserFactoryInterface $biddingParserFactory
     ) {}
 

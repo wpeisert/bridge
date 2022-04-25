@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Bidding;
 use Illuminate\Database\Eloquent\Builder;
 
-interface TrainingRepositoryInterface
+interface TrainingQueryBuilderInterface
 {
     public function getUserTrainings(int $userId): Builder;
     public function getUserTrainingsActive(int $userId, bool $active = true): Builder;

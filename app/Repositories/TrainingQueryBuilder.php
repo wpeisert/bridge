@@ -7,7 +7,7 @@ use App\Models\Training;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class TrainingRepository implements TrainingRepositoryInterface
+class TrainingQueryBuilder implements TrainingQueryBuilderInterface
 {
     public function getUserTrainingsActive(int $userId, bool $active = true): Builder
     {

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\Training;
 use App\Models\User;
-use App\Services\Training\TrainingBuilderInterface;
+use App\Services\Training\TrainingGeneratorInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TrainingController extends Controller
 {
-    public function __construct(private TrainingBuilderInterface $trainingBuilder) {}
+    public function __construct(private TrainingGeneratorInterface $trainingGenerator) {}
 
     /**
      * Display a listing of the resource.
@@ -124,7 +124,7 @@ class TrainingController extends Controller
                 ->with('danger','Training already started and cannot be started again');
         }
 
-        $createdCount = $this->trainingBuilder->build($training);
+        $createdCount = $this->trainingGenerator->generate($training);
 
         return redirect()->route('trainings.index')
             ->with('success', $createdCount . ' biddings started successfully');

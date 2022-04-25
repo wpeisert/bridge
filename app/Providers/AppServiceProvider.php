@@ -44,8 +44,8 @@ use App\Services\RandomSeederInterface;
 use App\Repositories\TrainingRepository;
 use App\Services\Quiz\QuizBuilder;
 use App\Services\RandomSeeder;
-use App\Services\Training\TrainingBuilder;
-use App\Services\Training\TrainingBuilderInterface;
+use App\Services\Training\TrainingGenerator;
+use App\Services\Training\TrainingGeneratorInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -71,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DealDecoratorInterface::class, DealDecorator::class);
         $this->app->bind(DealConstraintDecoratorFactoryInterface::class, DealConstraintDecoratorFactory::class);
         $this->app->bind(DealServiceInterface::class, DealService::class);
-        $this->app->bind(TrainingBuilderInterface::class, TrainingBuilder::class);
+        $this->app->bind(TrainingGeneratorInterface::class, TrainingGenerator::class);
         $this->app->bind(BiddingBuilderInterface::class, BiddingBuilder::class);
         $this->app->bind(RuleCheckerInterface::class, RuleChecker::class);
         $this->app->bind(BiddingParserFactoryInterface::class, BiddingParserFactory::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services\Training;
 
 use App\Models\Bidding;
 use Illuminate\Database\Eloquent\Builder;

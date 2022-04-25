@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class MyBiddingsController extends Controller
 {
     public function __construct(
-        private TrainingQueryBuilderInterface $trainingRepository,
+        private TrainingQueryBuilderInterface $trainingQueryBuilder,
         private BiddingParserFactoryInterface $biddingParserFactory
     ) {}
 
@@ -22,10 +22,10 @@ class MyBiddingsController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $activeTrainings = $this->trainingRepository->splitUserTrainings(
-            $this->trainingRepository->getUserTrainingsActive($userId, true)->get()->all()
+        $activeTrainings = $this->trainingQueryBuilder->splitUserTrainings(
+            $this->trainingQueryBuilder->getUserTrainingsActive($userId, true)->get()->all()
         );
-        $finishedTrainings = $this->trainingRepository->getUserTrainingsActive($userId, false)->get()->all();
+        $finishedTrainings = $this->trainingQueryBuilder->getUserTrainingsActive($userId, false)->get()->all();
 
         header("Refresh:5");
         $biddingParser = $this->biddingParserFactory;
@@ -49,7 +49,7 @@ class MyBiddingsController extends Controller
 
     public function next(Bidding $bidding)
     {
-        $nextBidding = $this->trainingRepository->getNextBiddingInTraining($bidding);
+        $nextBidding = $this->trainingQueryBuilder->getNextBiddingInTraining($bidding);
         return redirect()->route('mybidding', $nextBidding->id);
     }
 
@@ -57,7 +57,7 @@ class MyBiddingsController extends Controller
     {
 /*
         $userId = Auth::id();
-        $nextBidding = $this->trainingRepository->getNextUserActiveBidding($userId, $bidding);
+        $nextBidding = $this->trainingQueryBuilder->getNextUserActiveBidding($userId, $bidding);
         if ($nextBidding) {
             return redirect()->route('mybidding', $nextBidding->id);
         }

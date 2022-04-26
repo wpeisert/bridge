@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Training\TrainingQueryBuilder;
 use App\Services\Training\TrainingQueryBuilderInterface;
 use App\Services\Bidding\BiddingService;
 use App\Services\Bidding\BiddingServiceInterface;
@@ -41,11 +42,12 @@ use App\Services\DealDecorator\DealDecoratorFactoryInterface;
 use App\Services\DealDecorator\DealDecoratorInterface;
 use App\Services\Quiz\QuizBuilderInterface;
 use App\Services\RandomSeederInterface;
-use App\Services\Training\TrainingQueryBuilder;
+use App\Services\Training\TrainingService;
 use App\Services\Quiz\QuizBuilder;
 use App\Services\RandomSeeder;
 use App\Services\Training\TrainingGenerator;
 use App\Services\Training\TrainingGeneratorInterface;
+use App\Services\Training\TrainingServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -57,8 +59,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(TrainingQueryBuilderInterface::class, TrainingQueryBuilder::class);
-
         $this->app->bind(QuizBuilderInterface::class, QuizBuilder::class);
         $this->app->bind(DealBuilderInterface::class, DealBuilder::class);
         $this->app->bind(DealConstraintVerifierInterface::class, DealConstraintVerifier::class);
@@ -80,6 +80,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DealAnalyserInterface::class, DealAnalyser::class);
         $this->app->bind(BiddingServiceInterface::class, BiddingService::class);
         $this->app->bind(PlayerServiceInterface::class, PlayerService::class);
+        $this->app->bind(TrainingQueryBuilderInterface::class, TrainingQueryBuilder::class);
+        $this->app->bind(TrainingServiceInterface::class, TrainingService::class);
     }
 
     /**

@@ -113,9 +113,9 @@ class QuizController extends Controller
 
     public function generateDeals(Quiz $quiz)
     {
-        $createdCount = $this->quizBuilder->build($quiz);
+        $count = $this->quizBuilder->build($quiz);
 
         return redirect()->route('quizzes.index')
-            ->with('success', $createdCount . ' deals generated successfully');
+            ->with('success', $count . ' deals generated successfully');
     }
 }

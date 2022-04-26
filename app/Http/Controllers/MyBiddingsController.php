@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Bidding;
 use App\Services\Training\TrainingQueryBuilderInterface;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
+use App\Services\Training\TrainingServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class MyBiddingsController extends Controller
 {
     public function __construct(
         private TrainingQueryBuilderInterface $trainingQueryBuilder,
-        private BiddingParserFactoryInterface $biddingParserFactory
+        private BiddingParserFactoryInterface $biddingParserFactory,
+        private TrainingServiceInterface $trainingService
     ) {}
 
     /**
@@ -22,7 +24,7 @@ class MyBiddingsController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $activeTrainings = $this->trainingQueryBuilder->splitUserTrainings(
+        $activeTrainings = $this->trainingService->splitUserTrainings(
             $this->trainingQueryBuilder->getUserTrainingsActive($userId, true)->get()->all()
         );
         $finishedTrainings = $this->trainingQueryBuilder->getUserTrainingsActive($userId, false)->get()->all();
@@ -49,7 +51,7 @@ class MyBiddingsController extends Controller
 
     public function next(Bidding $bidding)
     {
-        $nextBidding = $this->trainingQueryBuilder->getNextBiddingInTraining($bidding);
+        $nextBidding = $this->trainingService->getNextBiddingInTraining($bidding);
         return redirect()->route('mybidding', $nextBidding->id);
     }
 

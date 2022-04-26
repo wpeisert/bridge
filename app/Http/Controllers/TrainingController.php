@@ -124,9 +124,9 @@ class TrainingController extends Controller
                 ->with('danger','Training already started and cannot be started again');
         }
 
-        $createdCount = $this->trainingGenerator->generate($training);
+        $count = $this->trainingGenerator->generate($training);
 
         return redirect()->route('trainings.index')
-            ->with('success', $createdCount . ' biddings started successfully');
+            ->with('success', $count . ' biddings started successfully');
     }
 }

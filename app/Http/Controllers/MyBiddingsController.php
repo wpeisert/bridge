@@ -31,7 +31,7 @@ class MyBiddingsController extends Controller
 
         header("Refresh:5");
         $biddingParser = $this->biddingParserFactory;
-        return view('mytrainings.mytrainings', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
+        return view('mytrainings.index', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
     }
 
     public function bidding(Bidding $bidding)
@@ -45,7 +45,7 @@ class MyBiddingsController extends Controller
     public function create()
     {
         return view(
-            'mytrainings.mybidding_create'
+            'mytrainings.create'
         );
     }
 

@@ -31,7 +31,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="font-bold p-6 bg-white border-b border-gray-200">
                         @include(
-                            'bridge.elements.mytrainings_split',
+                            'mytrainings.elements.mytrainings_split',
                             [
                                 'title' => 'Active trainings',
                                 'trainings' => $activeTrainings,
@@ -41,7 +41,7 @@
                     </div>
                     <div class="font-bold p-6 bg-white border-b border-gray-200">
                         @include(
-                            'bridge.elements.mytrainings',
+                            'mytrainings.elements.mytrainings',
                             [
                                 'title' => 'Finished trainings',
                                 'trainings' => $finishedTrainings,

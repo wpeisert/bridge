@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class MyTrainingsLayout extends Component
+class MyBiddingLayout extends Component
 {
     /**
      * Get the view / contents that represents the component.
@@ -13,6 +13,6 @@ class MyTrainingsLayout extends Component
      */
     public function render()
     {
-        return view('mytrainings.layout');
+        return view('mybidding.layout');
     }
 }

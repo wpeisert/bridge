@@ -8,7 +8,7 @@ use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use App\Services\Training\TrainingServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
-class MyBiddingsController extends Controller
+class MyBiddingController extends Controller
 {
     public function __construct(
         private TrainingQueryBuilderInterface $trainingQueryBuilder,
@@ -31,13 +31,13 @@ class MyBiddingsController extends Controller
 
         header("Refresh:5");
         $biddingParser = $this->biddingParserFactory;
-        return view('mytrainings.index', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
+        return view('mybidding.index', compact('activeTrainings', 'finishedTrainings', 'biddingParser'));
     }
 
     public function bidding(Bidding $bidding)
     {
         return view(
-            'mytrainings.mybidding',
+            'mybidding.mybidding',
             ['bidding' => $bidding]
         );
     }
@@ -45,7 +45,7 @@ class MyBiddingsController extends Controller
     public function create()
     {
         return view(
-            'mytrainings.create'
+            'mybidding.create'
         );
     }
 

@@ -60,17 +60,14 @@
                 </div>
             </div>
 
-            @for ($iter = 0; $iter < $PLAYERS_COUNT; ++$iter)
-                @php
-                    $playerName = $PLAYERS_NAMES[$iter];
-                @endphp
+            @foreach ($PLAYERS_NAMES as $playerName)
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>{{ $playerName }}:</strong>
                         <input class="form-control" name="cards_{{ $playerName }}" />
                     </div>
                 </div>
-            @endfor
+            @endforeach
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

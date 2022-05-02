@@ -1,4 +1,4 @@
-<x-my-trainings-layout>
+<x-my-bidding-layout>
 
     <x-slot name="subtitle"></x-slot>
     <x-slot name="backButtonRoute"></x-slot>
@@ -16,4 +16,4 @@
             Bidding ID: {{ $bidding->id }}
         </div>
     </div>
-</x-my-trainings-layout>
+</x-my-bidding-layout>

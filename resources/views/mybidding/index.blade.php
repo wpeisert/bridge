@@ -1,4 +1,4 @@
-<x-my-trainings-layout>
+<x-my-bidding-layout>
 
     <x-slot name="subtitle"></x-slot>
     <x-slot name="backButtonRoute"></x-slot>
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="font-bold p-6 bg-white border-b border-gray-200">
             @include(
-                'mytrainings.include.mytrainings_split',
+                'mybidding.include.mybidding_split',
                 [
                     'title' => 'Active trainings',
                     'trainings' => $activeTrainings,
@@ -24,7 +24,7 @@
         </div>
         <div class="font-bold p-6 bg-white border-b border-gray-200">
             @include(
-                'mytrainings.include.mytrainings_simple',
+                'mybidding.include.mybidding_simple',
                 [
                     'title' => 'Finished trainings',
                     'trainings' => $finishedTrainings,
@@ -33,4 +33,4 @@
             )
         </div>
     </div>
-</x-my-trainings-layout>
+</x-my-bidding-layout>

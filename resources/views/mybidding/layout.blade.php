@@ -1,5 +1,5 @@
 <x-bridge-layout>
-    <x-slot name="title">My trainings</x-slot>
+    <x-slot name="title">{{ $title ?? 'My trainings' }}</x-slot>
     <x-slot name="subtitle">{{ $subtitle ?? '' }}</x-slot>
 
     @if ($message = Session::get('success'))

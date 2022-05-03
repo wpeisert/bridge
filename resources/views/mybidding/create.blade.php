@@ -2,7 +2,7 @@
 
     <x-slot name="subtitle"></x-slot>
 
-    <form action="{{ route('mybidding.create') }}" method="POST">
+    <form action="{{ route('mybidding.start') }}" method="POST">
         @csrf
         @method('PUT')
 

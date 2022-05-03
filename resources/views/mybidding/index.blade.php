@@ -1,5 +1,6 @@
 <x-my-bidding-layout>
 
+    <x-slot name="title"></x-slot>
     <x-slot name="subtitle"></x-slot>
 
     <div class="row">

@@ -1,28 +1,3 @@
-<x-biddings-layout>
-    @if (in_array($type, ['edit', 'show']))
-        <x-slot name="subtitle">{{ ucfirst($type) }} bidding (ID: {{ $bidding->id }})</x-slot>
-    @else
-        <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-right">
-                    <a class="btn btn-success" href="{{ route('mybidding.nextbid', $bidding->id) }}"> Next </a>
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{!! $message !!}</p>
-        </div>
-    @endif
-
-    @if ($message = Session::get('danger'))
-        <div class="alert alert-danger">
-            <p>{!! $message !!}</p>
-        </div>
-    @endif
-
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -117,7 +92,7 @@
                 </tr>
             </table>
 
-            @if (!$bidding->is_finished && $type === 'bid')
+            @if (!$bidding->is_finished && $type !== 'show')
                 @include (
                     'biddings.form',
                     [
@@ -129,4 +104,3 @@
         </div>
 
     </div>
-</x-biddings-layout>

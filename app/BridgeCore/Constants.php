@@ -11,6 +11,7 @@ class Constants
     public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'Yes', 'No'];
     public const DEAL_CONSTRAINTS_DEALER = ['N', 'E', 'S', 'W', '- any -'];
     public const COLORS_NAMES = ['S', 'H', 'D', 'C'];
+    public const COLORS_FULL_NAMES = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
     public const COLORS_COUNT = 4;
     public const COLORS_SYMBOLS = ['&spades;', '&hearts;', '&diams;', '&clubs;'];
     public const COLORS_COLORS = ['000077', 'ee0000', 'ee4400', '008800'];
@@ -36,6 +37,7 @@ class Constants
             'DEAL_CONSTRAINTS_DEALER' => self::DEAL_CONSTRAINTS_DEALER,
             'COLORS_COUNT' => self::COLORS_COUNT,
             'COLORS_NAMES' => self::COLORS_NAMES,
+            'COLORS_FULL_NAMES' => self::COLORS_FULL_NAMES,
             'CARDS_IN_COLOR_COUNT' => self::CARDS_IN_COLOR_COUNT,
             'MAX_PC' => self::MAX_PC,
             'DBL_COLOR' => self::DBL_COLOR,

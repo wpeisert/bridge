@@ -2,11 +2,10 @@
 
     <x-slot name="subtitle">Show deal constraints (ID: {{ $dealConstraint->id }})</x-slot>
 
-    @include (
-        'deal_constraints.form',
-        [
-            'dealConstraint' => $dealConstraint,
-        ]
-    )
+    <form>
+        <fieldset disabled="disabled">
+            @include ('deal_constraints.form_fields', ['dealConstraint' => $dealConstraint])
+        </fieldset>
+    </form>
 
 </x-deal-constraints-layout>

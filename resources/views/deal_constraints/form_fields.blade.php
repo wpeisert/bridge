@@ -1,19 +1,3 @@
-@php
-    $formAction = $formAction ?? '';
-@endphp
-
-@if ($formAction === 'update')
-<form action="{{ route('deal_constraints.update',$dealConstraint->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-@elseif (($formAction === 'store'))
-<form action="{{ route('deal_constraints.store') }}" method="POST">
-    @csrf
-@else
-    <form>
-        <fieldset disabled="disabled">
-@endif
-
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -157,8 +141,8 @@
                 <table class="table table-bordered">
                     <tr>
                         <th rowspan="2">Player</th>
-                        @foreach ($COLORS_NAMES as $colorName)
-                            <th colspan="2">{{ $colorName }}</th>
+                        @foreach ($COLORS_FULL_NAMES as $colorFullName)
+                            <th colspan="2">{{ $colorFullName }}</th>
                         @endforeach
                     </tr>
                     <tr>
@@ -195,14 +179,4 @@
 
             </div>
         </div>
-@if ($formAction)
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-@endif
     </div>
-
-@if (!$formAction)
-    </fieldset>
-@endif
-</form>

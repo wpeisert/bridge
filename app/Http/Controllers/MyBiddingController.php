@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bidding;
+use App\Models\DealConstraint;
+use App\Models\Quiz;
+use App\Models\Training;
+use App\Models\User;
+use App\Services\Quiz\QuizBuilderInterface;
+use App\Services\Training\TrainingGeneratorInterface;
 use App\Services\Training\TrainingQueryBuilderInterface;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
 use App\Services\Training\TrainingServiceInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class MyBiddingController extends Controller
 {
     public function __construct(
         private TrainingQueryBuilderInterface $trainingQueryBuilder,
         private BiddingParserFactoryInterface $biddingParserFactory,
-        private TrainingServiceInterface $trainingService
+        private TrainingServiceInterface $trainingService,
+        private QuizBuilderInterface $quizBuilder,
+        private TrainingGeneratorInterface $trainingGenerator
     ) {}
 
     /**
@@ -44,9 +53,8 @@ class MyBiddingController extends Controller
 
     public function create()
     {
-        return view(
-            'mybidding.create'
-        );
+        $users = User::all();
+        return view('mybidding.create', compact('users'));
     }
 
     public function next(Bidding $bidding)
@@ -65,5 +73,21 @@ class MyBiddingController extends Controller
         }
 */
         return redirect()->route('dashboard');
+    }
+
+    public function start(Request $request)
+    {
+        $params = $request->all();
+
+        $dealConstraints = DealConstraint::create($params);
+        $params['deal_constraint_id'] = $dealConstraints->id;
+        $quiz = Quiz::create($params);
+        $params['quiz_id'] = $quiz->id;
+        $createdDealsCount = $this->quizBuilder->build($quiz);
+        $training = Training::create($params);
+        $startedBiddingsCount = $this->trainingGenerator->generate($training);
+
+        return redirect()->route('dashboard')
+            ->with('success', $startedBiddingsCount . ' biddings started successfully');
     }
 }

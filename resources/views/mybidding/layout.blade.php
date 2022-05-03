@@ -1,7 +1,6 @@
 <x-bridge-layout>
     <x-slot name="title">My trainings</x-slot>
     <x-slot name="subtitle">{{ $subtitle ?? '' }}</x-slot>
-    <x-slot name="backButtonRoute">{{ $backButtonRoute ?? 'quizzes.index' }}</x-slot>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">

@@ -1,7 +1,6 @@
 <x-my-bidding-layout>
 
     <x-slot name="subtitle"></x-slot>
-    <x-slot name="backButtonRoute"></x-slot>
 
     <div class="row">
         <div class="col-lg-12 margin-tb">

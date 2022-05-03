@@ -1,6 +1,5 @@
 <x-biddings-layout>
     <x-slot name="subtitle"></x-slot>
-    <x-slot name="backButtonRoute"></x-slot>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">

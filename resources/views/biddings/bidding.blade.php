@@ -1,5 +1,4 @@
 <x-biddings-layout>
-    <x-slot name="backButtonRoute">{{ 'biddings.index' }}</x-slot>
     <x-slot name="subtitle">{{ isset($edit) ? 'Edit' : 'Show' }} bidding (ID: {{ $bidding->id }})</x-slot>
 
     @if ($message = Session::get('success'))

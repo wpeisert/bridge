@@ -16,12 +16,6 @@
                                 <h2>{{ $subtitle ?? ' ??? no subtitle ??? ' }}</h2>
                             </div>
 
-                            @if ($backButtonRoute && !empty($backButtonRoute->toHTML()))
-                                <div class="pull-right">
-                                    <a class="btn btn-primary" href="{{ route($backButtonRoute->toHTML()) }}"> Back </a>
-                                </div>
-                            @endif
-
                         </div>
                     </div>
 

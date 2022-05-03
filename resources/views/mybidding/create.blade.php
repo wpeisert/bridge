@@ -1,7 +1,6 @@
 <x-my-bidding-layout>
 
     <x-slot name="subtitle"></x-slot>
-    <x-slot name="backButtonRoute">{{ 'dashboard' }}</x-slot>
 
     <form action="{{ route('mybidding.create') }}" method="POST">
         @csrf

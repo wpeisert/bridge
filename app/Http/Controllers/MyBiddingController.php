@@ -7,6 +7,8 @@ use App\Models\DealConstraint;
 use App\Models\Quiz;
 use App\Models\Training;
 use App\Models\User;
+use App\Services\Bidding\BiddingServiceInterface;
+use App\Services\Bidding\RuleCheckerInterface;
 use App\Services\Quiz\QuizBuilderInterface;
 use App\Services\Training\TrainingGeneratorInterface;
 use App\Services\Training\TrainingQueryBuilderInterface;
@@ -22,7 +24,9 @@ class MyBiddingController extends Controller
         private BiddingParserFactoryInterface $biddingParserFactory,
         private TrainingServiceInterface $trainingService,
         private QuizBuilderInterface $quizBuilder,
-        private TrainingGeneratorInterface $trainingGenerator
+        private TrainingGeneratorInterface $trainingGenerator,
+        private RuleCheckerInterface $ruleChecker,
+        private BiddingServiceInterface $biddingService
     ) {}
 
     /**
@@ -45,10 +49,15 @@ class MyBiddingController extends Controller
 
     public function bidding(Bidding $bidding)
     {
-        return view(
-            'mybidding.mybidding',
-            ['bidding' => $bidding]
-        );
+        $possibleBids = [];
+        if ($this->biddingService->canUserPlaceBid($bidding, Auth::id())) {
+            $possibleBids = $this->ruleChecker->getPossibleBids($bidding);
+        } else {
+            if (!$bidding->is_finished) {
+                header("Refresh:5");
+            }
+        }
+        return view('mybidding.mybidding', compact('bidding', 'possibleBids'));
     }
 
     public function create()

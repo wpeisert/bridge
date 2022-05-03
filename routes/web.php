@@ -24,11 +24,11 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', [MyBiddingController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('bidding/create', [MyBiddingController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
-Route::put('bidding/create', [MyBiddingController::class, 'start'])->middleware(['auth', 'verified'])->name('mybidding.start');
-Route::get('bidding/next/{bidding}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.next');
-Route::get('bidding/nextbid/{bidding?}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.nextbid');
-Route::get('bidding/{bidding}', [MyBiddingController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
+Route::get('mybidding/create', [MyBiddingController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
+Route::put('mybidding/start', [MyBiddingController::class, 'start'])->middleware(['auth', 'verified'])->name('mybidding.start');
+Route::get('mybidding/next/{bidding}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.next');
+Route::get('mybidding/nextbid/{bidding?}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.nextbid');
+Route::get('mybidding/{bidding}', [MyBiddingController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
 
 Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);
 Route::put('biddings/{bidding}/place-bid', [BiddingController::class, 'placeBid'])->middleware(['auth', 'verified'])->name('biddings.place-bid');

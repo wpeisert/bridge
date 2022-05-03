@@ -1,4 +1,4 @@
-<form action="{{ route('biddings.place-bid',$bidding->id) }}" method="POST">
+<form action="{{ route('mybidding.place-bid',$bidding->id) }}" method="POST">
     @csrf
     @method('PUT')
     <input type="hidden" name="bid" value="{{ $bid }}" />

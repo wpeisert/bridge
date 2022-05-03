@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\BridgeCore\Tools;
-use App\Http\Requests\StoreBiddingRequest;
-use App\Http\Requests\UpdateBiddingRequest;
+use Illuminate\Http\Request;
 use App\Models\Bidding;
 use App\Services\Bidding\BiddingServiceInterface;
 use App\Services\Bidding\RuleCheckerInterface;
@@ -44,10 +42,10 @@ class BiddingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBiddingRequest  $request
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBiddingRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -88,33 +86,12 @@ class BiddingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBiddingRequest  $request
+     * @param  Request  $request
      * @param  \App\Models\Bidding  $bidding
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBiddingRequest $request, Bidding $bidding)
+    public function update(Request $request, Bidding $bidding)
     {
         //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Http\Requests\UpdateBiddingRequest  $request
-     * @param  \App\Models\Bidding  $bidding
-     * @return \Illuminate\Http\Response
-     */
-    public function placeBid(UpdateBiddingRequest $request, Bidding $bidding)
-    {
-        $bidTxt = $request->get('bid');
-
-        if (!$this->biddingService->canPlaceBid($bidding, Auth::id(), $bidTxt)) {
-            return redirect()->route('biddings.edit', [$bidding->id])
-                ->with('danger',"Bid " . Tools::decorateBid($bidTxt) . " illegal, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
-        }
-        $this->biddingService->placeBid($bidding, array_merge($request->all(), ['user_id' => Auth::id()]));
-
-        return redirect()->route('biddings.edit', [$bidding->id])
-            ->with('success',"Bid " . Tools::decorateBid($bidTxt) . " placed successfully, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
     }
 }

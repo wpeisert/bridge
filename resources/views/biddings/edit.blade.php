@@ -2,6 +2,6 @@
     'biddings.bidding',
     [
         'bidding' => $bidding,
-        'edit' => true
+        'type' => 'edit',
     ]
 )

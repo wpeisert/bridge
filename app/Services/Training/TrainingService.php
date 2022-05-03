@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class TrainingService implements TrainingServiceInterface
 {
+    public function __construct(private TrainingQueryBuilderInterface $trainingQueryBuilder) {}
+
     public function splitUserTrainings(array $trainings): array
     {
         $newTrainings = [];

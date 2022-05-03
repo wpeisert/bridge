@@ -1,6 +1,7 @@
 @include (
     'biddings.bidding',
     [
-        'bidding' => $bidding
+        'bidding' => $bidding,
+        'type' => 'show',
     ]
 )

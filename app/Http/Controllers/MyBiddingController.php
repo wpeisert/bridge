@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BridgeCore\Tools;
 use App\Models\Bidding;
 use App\Models\DealConstraint;
 use App\Models\Quiz;
@@ -74,13 +75,10 @@ class MyBiddingController extends Controller
 
     public function nextbid(?Bidding $bidding = null)
     {
-/*
-        $userId = Auth::id();
-        $nextBidding = $this->trainingQueryBuilder->getNextUserActiveBidding($userId, $bidding);
-        if ($nextBidding) {
-            return redirect()->route('mybidding', $nextBidding->id);
+        if ($bidding) {
+            return redirect()->route('mybidding.next', $bidding->id);
         }
-*/
+
         return redirect()->route('dashboard');
     }
 
@@ -98,5 +96,26 @@ class MyBiddingController extends Controller
 
         return redirect()->route('dashboard')
             ->with('success', $startedBiddingsCount . ' biddings started successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Request  $request
+     * @param  \App\Models\Bidding  $bidding
+     * @return \Illuminate\Http\Response
+     */
+    public function placeBid(Request $request, Bidding $bidding)
+    {
+        $bidTxt = $request->get('bid');
+
+        if (!$this->biddingService->canPlaceBid($bidding, Auth::id(), $bidTxt)) {
+            return redirect()->route('mybidding', [$bidding->id])
+                ->with('danger',"Bid " . Tools::decorateBid($bidTxt) . " illegal, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
+        }
+        $this->biddingService->placeBid($bidding, array_merge($request->all(), ['user_id' => Auth::id()]));
+
+        return redirect()->route('mybidding', [$bidding->id])
+            ->with('success',"Bid " . Tools::decorateBid($bidTxt) . " placed successfully, user id: " . Auth::id() . ' name: ' . Auth::user()->name);
     }
 }

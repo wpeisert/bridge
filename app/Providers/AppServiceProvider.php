@@ -48,6 +48,7 @@ use App\Services\RandomSeeder;
 use App\Services\Training\TrainingGenerator;
 use App\Services\Training\TrainingGeneratorInterface;
 use App\Services\Training\TrainingServiceInterface;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -91,6 +92,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(config('app.secure')) {
+            URL::forceScheme('https');
+        }
     }
 }

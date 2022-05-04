@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css', config('app.secure', false)) }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js', config('app.secure', false)) }}" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
     </head>

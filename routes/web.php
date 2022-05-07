@@ -6,6 +6,7 @@ use App\Http\Controllers\DealConstraintController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\TrainingController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    Log::debug('xxxxx get /', []);
     return view('welcome');
 });
 

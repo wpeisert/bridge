@@ -89,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
             if(config('app.secure')) {
                 $service->forceScheme('https');
             }
+            $service->forceScheme('https');
             return $service;
         });
     }

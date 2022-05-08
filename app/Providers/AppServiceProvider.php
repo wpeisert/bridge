@@ -86,7 +86,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TrainingServiceInterface::class, TrainingService::class);
 
         $this->app->extend('url', function (UrlGenerator $service, $app) {
-            $service->forceScheme('https');
+            if(config('app.secure')) {
+                $service->forceScheme('https');
+            }
             return $service;
         });
     }

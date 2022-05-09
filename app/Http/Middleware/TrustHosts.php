@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Log;
 
 class TrustHosts extends Middleware
 {
+    protected function shouldSpecifyTrustedHosts()
+    {
+        // @TODO
+        return false;
+    }
+
     /**
      * Get the host patterns that should be trusted.
      *

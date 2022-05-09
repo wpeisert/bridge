@@ -48,7 +48,6 @@ use App\Services\RandomSeeder;
 use App\Services\Training\TrainingGenerator;
 use App\Services\Training\TrainingGeneratorInterface;
 use App\Services\Training\TrainingServiceInterface;
-use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -84,14 +83,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PlayerServiceInterface::class, PlayerService::class);
         $this->app->bind(TrainingQueryBuilderInterface::class, TrainingQueryBuilder::class);
         $this->app->bind(TrainingServiceInterface::class, TrainingService::class);
-
-        $this->app->extend('url', function (UrlGenerator $service, $app) {
-            if(config('app.secure')) {
-                $service->forceScheme('https');
-            }
-            $service->forceScheme('https');
-            return $service;
-        });
     }
 
     /**

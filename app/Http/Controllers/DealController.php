@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DealCreatedEvent;
 use App\Models\Deal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -44,7 +45,8 @@ class DealController extends Controller
             'description' => 'required'
         ]);
 
-        Deal::create($request->all());
+        $deal = Deal::create($request->all());
+        DealCreatedEvent::dispatch($deal);
 
         return redirect()->route('deals.index')
             ->with('success','Deal created successfully.');

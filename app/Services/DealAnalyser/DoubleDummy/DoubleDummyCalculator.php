@@ -16,11 +16,14 @@ class DoubleDummyCalculator
         $prefix = 'cd bin && LD_LIBRARY_PATH=. ./ddcalculate ';
         $arguments = $this->prepareArguments($handsArray);
         $cmd = $prefix . $arguments;
-        exec($cmd, $output);
+        $output = [];
+        $resultCode = '---';
+        exec($cmd, $output, $resultCode);
         Log::debug('ddcalculate',
             [
                 'cmd' => $cmd,
                 'res' => print_r($output, true),
+                'code' => $resultCode,
             ]
         );
         $ddResults = [];

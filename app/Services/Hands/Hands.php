@@ -43,4 +43,14 @@ class Hands
     {
         return $this->hands[$playerName] ?? '';
     }
+
+    public function getHandsAsPBN(): string
+    {
+        $str = 'N:';
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            $str .= $this->getHand($playerName) . ' ';
+        }
+
+        return trim($str);
+    }
 }

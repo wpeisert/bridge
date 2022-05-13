@@ -13,7 +13,7 @@ use App\Services\Hands\HandsService;
 class DealAnalyser implements DealAnalyserInterface
 {
     private const MAX_DEALS_DD = 40;
-    private const ROUNDS = 10;
+    private const ROUNDS = 15;
 
     private Deal $deal;
 

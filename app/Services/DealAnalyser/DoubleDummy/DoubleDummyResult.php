@@ -25,4 +25,9 @@ class DoubleDummyResult
     {
         return $this->tricks[$playerName][$bidColor];
     }
+
+    public function getAll(): array
+    {
+        return $this->tricks;
+    }
 }

@@ -13,11 +13,9 @@ class DoubleDummyCalculator
      */
     public function calculate(array $handsArray): array
     {
-        $prefix = 'cd bin && LD_LIBRARY_PATH=. ./ddcalculate ';
+        $prefix = 'cd ' . base_path() . '/bin/ && LD_LIBRARY_PATH=. ./ddcalculate ';
         $arguments = $this->prepareArguments($handsArray);
         $cmd = $prefix . $arguments;
-        $output = [];
-        $resultCode = '---';
         exec($cmd, $output, $resultCode);
         Log::debug('ddcalculate',
             [

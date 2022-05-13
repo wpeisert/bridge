@@ -13,7 +13,7 @@ use App\Services\Hands\HandsService;
 class DealAnalyser implements DealAnalyserInterface
 {
     private const MAX_DEALS_DD = 40;
-    private const ROUNDS = 15;
+    private const ROUNDS = 40;
 
     private Deal $deal;
 
@@ -64,10 +64,12 @@ class DealAnalyser implements DealAnalyserInterface
         return $newHands;
     }
 
-    public function calculateTricksProbabilities(array $tricks): array
+    /**
+     * @param DoubleDummyResult[] $ddResults
+     * @return array
+     */
+    public function calculateTricksProbabilities(array $ddResults): array
     {
-        // TODO implement
-        return [];
         /*
          * Calculates probabilities of taking given number of tricks:
          *  - for each declarer (N, E, S, W)
@@ -76,6 +78,37 @@ class DealAnalyser implements DealAnalyserInterface
          * so it's 4x5x14 array of float
          * Note: zero entries may be not present
          */
+        $probs = [];
+
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            foreach (Constants::BIDS_COLORS as $bidColor) {
+                for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
+                    $probs[$playerName][$bidColor][$tricks] = 0;
+                }
+            }
+        }
+
+        /** @var DoubleDummyResult $ddResult */
+        foreach ($ddResults as $ddResult) {
+            foreach (Constants::PLAYERS_NAMES as $playerName) {
+                foreach (Constants::BIDS_COLORS as $bidColor) {
+                    $maxTricks = $ddResult->getTricks($playerName, $bidColor);
+                    for ($tricks = 0; $tricks <= $maxTricks; ++$tricks) {
+                        $probs[$playerName][$bidColor][$tricks]++;
+                    }
+                }
+            }
+        }
+
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+            foreach (Constants::BIDS_COLORS as $bidColor) {
+                for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
+                    $probs[$playerName][$bidColor][$tricks] /= count($ddResults);
+                }
+            }
+        }
+
+        return $probs;
     }
 
     public function getAllContracts(): array

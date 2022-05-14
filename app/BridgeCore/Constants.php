@@ -26,6 +26,80 @@ class Constants
     public const BIDS_SPECIAL = ['pass', 'dbl', 'rdbl'];
     public const CARDS_COUNT = self::CARDS_IN_COLOR_COUNT * self::COLORS_COUNT;
 
+    public const BASE_TRICKS = 6;
+    public const PENALTY_FIRST_UNDERTRICK = [
+        false /*non-vulnerable*/ => [
+            '' => 50,
+            'dbl' => 100,
+            'rdbl' => 200,
+        ],
+        true /*vulnerable*/ => [
+            '' => 100,
+            'dbl' => 200,
+            'rdbl' => 400,
+        ],
+    ];
+    public const PENALTY_SECOND_UNDERTRICK = [
+        false /*non-vulnerable*/ => [
+            '' => 50,
+            'dbl' => 200,
+            'rdbl' => 400,
+        ],
+        true /*vulnerable*/ => [
+            '' => 100,
+            'dbl' => 300,
+            'rdbl' => 600,
+        ],
+    ];
+    public const PENALTY_FOURTH_UNDERTRICK = [
+        false /*non-vulnerable*/ => [
+            '' => 0,
+            'dbl' => 100,
+            'rdbl' => 200,
+        ],
+        true /*vulnerable*/ => [
+            '' => 0,
+            'dbl' => 0,
+            'rdbl' => 0,
+        ],
+    ];
+    public const PENALTY_FOURTH_FROM = 4;
+
+    public const REWARD_FIRST_TRICK = ['c' => 20, 'd' => 20, 'h' => 30, 's' => 30, 'nt' => 40];
+    public const REWARD_NEXT_TRICK = ['c' => 20, 'd' => 20, 'h' => 30, 's' => 30, 'nt' => 30];
+    public const GAME_REQUIRED_POINTS = 100;
+    public const REWARD_SLAM = [
+        false /*non-vulnerable*/ => [
+            6 => 500,
+            7 => 1000,
+        ],
+        true /*vulnerable*/ => [
+            6 => 750,
+            7 => 1500,
+        ]
+    ];
+    public const REWARD_GAME = [
+        false /*non-vulnerable*/ => 300,
+        true /*vulnerable*/ => 500,
+    ];
+    public const REWARD_NONGAME = 50;
+    public const REWARD_DBL = [
+        '' => 0,
+        'dbl' => 50,
+        'rdbl' => 100,
+    ];
+    public const REWARD_OVERTRICKS_DBL = [
+        false /*non-vulnerable*/ => [
+            'dbl' => 100,
+            'rdbl' => 200,
+        ],
+        true /*vulnerable*/ => [
+            'dbl' => 200,
+            'rdbl' => 400,
+        ],
+    ];
+
+
     public static function get(): array
     {
         return [

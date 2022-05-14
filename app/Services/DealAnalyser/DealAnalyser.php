@@ -38,8 +38,12 @@ class DealAnalyser implements DealAnalyserInterface
         $ddResults = $this->doubleDummyCalculator->calculate($hands);
 
         $tricksProbabilities = $this->calculateTricksProbabilities($ddResults);
-        $contractsAll = $this->getAllContracts();
-        $contractsEvaluated = $this->evaluateContracts($contractsAll, $tricksProbabilities);
+
+        $contractsEvaluated = [];
+        foreach ($this->getAllContracts() as $contract) {
+            $contractsEvaluated[] = $this->evaluateContract($contract, $tricksProbabilities);
+
+        }
         $contractsFiltered = $this->removeDuplicatesFromContracts($contractsEvaluated);
         $contracts = $this->searchMinimax($contractsFiltered);
 
@@ -113,23 +117,27 @@ class DealAnalyser implements DealAnalyserInterface
 
     public function getAllContracts(): array
     {
-        // TODO implement
         return [];
         /*
          * Returns all possible contracts for all hands
-         * Number is: 1(pass) + 4(N,E,S,W)x5(c,d,h,s,nt)x7x3(pass/dbl/rdbl) = 421
+         * Number is: 4(N,E,S,W)x5(c,d,h,s,nt)x7x3(pass/dbl/rdbl) = 420
          */
+        foreach (Constants::PLAYERS_NAMES as $playerName) {
+
+        }
     }
 
-    public function evaluateContracts(array $contracts, array $tricksProbabilities): array
+    public function evaluateContract($contract, array $tricksProbabilities): array
     {
-        // TODO implement
-        return [];
         /*
-         * Evaluates contracts (always points from the point of view of NS):
-         *  - for each contract
-         *  so returns array of size 421 of float
+         * Evaluates contract (always points from the point of view of NS):
          */
+        $playerName = 'N';
+        $bidColor = 'nt';
+        $level = 3; /* 1..7 */
+        $type = 'dbl';
+        $vulnerable = in_array($playerName, ['N', 'S']) ? $this->deal->vulnerable_NS : $this->deal->vulnerable_WE;
+        $result = $this->getValue($playerName, $bidColor, $level, $tricks, $type, $vulnerable);
     }
 
     public function removeDuplicatesFromContracts(array $contracts): array

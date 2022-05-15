@@ -3,10 +3,10 @@
 namespace Tests\Unit\App\Services\Deal;
 
 use App\Services\Contract\Contract;
-use App\Services\Contract\ContractService;
+use App\Services\Contract\ContractValueService;
 use Tests\TestCase;
 
-class ContractServiceTest extends TestCase
+class ContractValueServiceTest extends TestCase
 {
     /**
      * @dataProvider contractExpectedValues
@@ -27,7 +27,7 @@ class ContractServiceTest extends TestCase
                 'vulnerable' => $vulnerable,
             ]
         );
-        $service = new ContractService();
+        $service = new ContractValueService();
         $this->assertSame($expectedValue, $service->calculateContractExpectedValue($contract, $tricksProbabilities));
     }
 
@@ -60,7 +60,7 @@ class ContractServiceTest extends TestCase
                 'vulnerable' => $vulnerable,
             ]
         );
-        $service = new ContractService();
+        $service = new ContractValueService();
         $this->assertSame($value, $service->getContractValue($contract, $tricks));
         $this->assertSame($value, intval($service->calculateContractExpectedValue($contract, [$tricks => 1])));
     }

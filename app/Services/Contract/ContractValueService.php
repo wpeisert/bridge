@@ -4,7 +4,7 @@ namespace App\Services\Contract;
 
 use App\BridgeCore\Constants;
 
-class ContractService
+class ContractValueService
 {
     /**
      * https://www.pzbs.pl/sedziowie/mpb/2007/pol/przep77.htm
@@ -15,6 +15,9 @@ class ContractService
      */
     public function getContractValue(Contract $contract, int $tricks): int
     {
+        if ($contract->bidColor === 'pass') {
+            return 0;
+        }
         $requiredTricks = Constants::BASE_TRICKS + $contract->level;
         if ($tricks < $requiredTricks) {
             $value = -$this->getPenaltyValue($requiredTricks - $tricks, $contract->type, $contract->vulnerable);
@@ -31,6 +34,9 @@ class ContractService
 
     public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): float
     {
+        if ($contract->bidColor === 'pass') {
+            return 0;
+        }
         $ev = 0.0;
         for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
             $prob = $tricksProbabilities[$tricks] ?? 0;

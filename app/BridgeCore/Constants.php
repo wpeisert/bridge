@@ -24,6 +24,7 @@ class Constants
     public const BIDS_COLORS = ['c', 'd', 'h', 's', 'nt'];
     public const BIDS_MAX_LEVEL = 7;
     public const BIDS_SPECIAL = ['pass', 'dbl', 'rdbl'];
+    public const CONTRACT_TYPES = ['', 'dbl', 'rdbl'];
     public const CARDS_COUNT = self::CARDS_IN_COLOR_COUNT * self::COLORS_COUNT;
 
     public const BASE_TRICKS = 6;

@@ -14,8 +14,6 @@ use App\Services\Hands\HandsService;
 
 class DealAnalyser implements DealAnalyserInterface
 {
-    private Deal $deal;
-
     public function __construct(
         private HandsService $handsService,
         private DoubleDummyCalculator $doubleDummyCalculator,
@@ -23,14 +21,9 @@ class DealAnalyser implements DealAnalyserInterface
         private CardsService $cardsService
     ) {}
 
-    public function setDeal(Deal $deal)
+    public function analyse(Deal $deal, int $rounds = self::ROUNDS): void
     {
-        $this->deal = $deal;
-    }
-
-    public function analyse(string $side = 'NS', int $rounds = self::ROUNDS): void
-    {
-        $dealHands = $this->deal->getHands();
+        $dealHands = $deal->getHands();
         $hands = [];
         for ($round = 0; $round < $rounds; ++$round) {
             $hands[] = $this->handsService->shuffleHands($dealHands, ['E', 'W']);
@@ -111,9 +104,6 @@ class DealAnalyser implements DealAnalyserInterface
          * Returns all possible contracts for all hands
          * Number is: 4(N,E,S,W)x5(c,d,h,s,nt)x7x3(pass/dbl/rdbl) = 420
          */
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-
-        }
     }
 
     public function removeDuplicatesFromContracts(array $contracts): array

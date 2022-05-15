@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\DealCreatedEvent;
-use App\Services\DealAnalyser\DealAnalyserFactoryInterface;
+use App\Services\DealAnalyser\DealAnalyserInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -13,7 +13,7 @@ class DealAnalyseListener implements ShouldQueue
 
     public $queue = 'slow';
 
-    public function __construct(private DealAnalyserFactoryInterface $dealAnalyserFactory) {}
+    public function __construct(private DealAnalyserInterface $dealAnalyser) {}
 
     /**
      * Handle the event.
@@ -23,6 +23,6 @@ class DealAnalyseListener implements ShouldQueue
      */
     public function handle(DealCreatedEvent $event)
     {
-        $this->dealAnalyserFactory->parse($event->deal)->analyse();
+        $this->dealAnalyser->analyse($event->deal);
     }
 }

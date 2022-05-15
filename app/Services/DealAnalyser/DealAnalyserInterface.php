@@ -39,13 +39,11 @@ interface DealAnalyserInterface
     public const MAX_DEALS_DD = 40; // DDcalc limitation
     public const ROUNDS = 40;
 
-    public function setDeal(Deal $deal);
-
     /**
      * Runs full analysis for $rounds random opponents' hands.
      *
-     * @param string $side
+     * @param Deal $deal
      * @param int $rounds
      */
-    public function analyse(string $side = 'NS', int $rounds = self::ROUNDS): void;
+    public function analyse(Deal $deal, int $rounds = self::ROUNDS): void;
 }

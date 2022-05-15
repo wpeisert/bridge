@@ -39,15 +39,6 @@ class DealAnalyser implements DealAnalyserInterface
         $this->storeMinimax($contracts);
     }
 
-    public function removeDuplicatesFromContracts(array $contracts): array
-    {
-        // TODO implement
-        return [];
-        /*
-         * If for given contract the result is same for N and S (resp. E and W), remove this duplication (S resp. W)
-         */
-    }
-
     public function searchMinimax(array $contracts): array
     {
         // TODO implement

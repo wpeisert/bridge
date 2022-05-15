@@ -6,13 +6,7 @@ use App\BridgeCore\Constants;
 
 class Hands
 {
-    private array $hands;
-
-    public function __construct(array $hands = [])
-    {
-        $this->hands = [];
-        $this->setHands($hands);
-    }
+    private array $hands = [];
 
     /**
      * @param array $hands
@@ -20,8 +14,8 @@ class Hands
      */
     public function setHands(array $hands)
     {
-        foreach ($hands as $playerName => $cards) {
-            $this->setHand($playerName, $cards);
+        foreach ($hands as $playerName => $hand) {
+            $this->setHand($playerName, $hand);
         }
     }
 
@@ -30,27 +24,13 @@ class Hands
         return $this->hands;
     }
 
-    public function setHand(string $playerName, string|Cards $cards)
+    public function setHand(string $playerName, string $hand)
     {
-        if (!in_array($playerName, Constants::PLAYERS_NAMES)) {
-            throw new \Exception("Player name not in " . implode(',', Constants::PLAYERS_NAMES));
-        }
-
-        $this->hands[$playerName] = is_string($cards) ? new Cards($cards) : $cards;
+        $this->hands[$playerName] = $hand;
     }
 
     public function getHand(string $playerName): string
     {
         return $this->hands[$playerName] ?? '';
-    }
-
-    public function getHandsAsPBN(): string
-    {
-        $str = 'N:';
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-            $str .= $this->getHand($playerName) . ' ';
-        }
-
-        return trim($str);
     }
 }

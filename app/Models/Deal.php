@@ -61,17 +61,9 @@ class Deal extends Model
     public function setHands(Hands $hands)
     {
         foreach ($hands->getHands() as $playerName => $hand) {
-            if (!in_array($playerName, Constants::PLAYERS_NAMES)) {
-                throw new \Exception(sprintf("Incorrect player name: $playerName"));
-            }
-            $this->setHand($playerName, $hand);
+            $field = 'cards_' . $playerName;
+            $this->$field = $hand;
         }
-    }
-
-    public function setHand(string $playerName, string $cards)
-    {
-        $field = 'cards_' . $playerName;
-        $this->$field = $cards;
     }
 
     public function getHands(array $playerNames = Constants::PLAYERS_NAMES): Hands

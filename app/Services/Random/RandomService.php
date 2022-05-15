@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Hands;
+namespace App\Services\Random;
 
 
 class RandomService

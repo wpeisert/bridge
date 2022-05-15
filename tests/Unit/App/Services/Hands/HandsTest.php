@@ -16,27 +16,11 @@ class HandsTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function test_should_construct_hands(string $playerName, string $cards)
-    {
-        $hands = new Hands([$playerName => $cards]);
-        $this->assertEquals($cards, $hands->getHand($playerName));
-    }
-
-    /**
-     * @dataProvider dataProvider
-     */
     public function test_should_set_hand_for_player(string $playerName, string $cards)
     {
         $hands = new Hands();
         $hands->setHand($playerName, $cards);
         $this->assertEquals($cards, $hands->getHand($playerName));
-    }
-
-    public function test_should_fail_on_setting_hand_for_incorrent_player_name()
-    {
-        $this->expectException(\Exception::class);
-        $hands = new Hands();
-        $hands->setHand('n', 'rty');
     }
 
     public function dataProvider()

@@ -4,7 +4,7 @@ namespace App\Services\DealBuilder;
 
 use App\BridgeCore\Constants;
 use App\Services\Hands\HandsService;
-use App\Services\RandomSeederInterface;
+use App\Services\Random\RandomSeederInterface;
 use App\Models\Deal;
 
 class DealGenerator implements DealGeneratorInterface

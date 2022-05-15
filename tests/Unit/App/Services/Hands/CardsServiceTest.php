@@ -2,28 +2,21 @@
 
 namespace Tests\Unit\App\Services\Deal;
 
-use App\Services\Hands\Cards;
+use App\Services\Hands\CardsService;
 use Tests\TestCase;
 
-class CardsTest extends TestCase
+class CardsServiceTest extends TestCase
 {
-    public function test_constructor()
-    {
-        $cards = new Cards('qwe');
-        $this->assertEquals('qwe', $cards);
-    }
-
     /**
-     * @dataProvider setFromNumbersDataProvider
+     * @dataProvider numbers2stringDataProvider
      */
-    public function test_setFromNumbers(array $cardsNumbers, string $cardsStr)
+    public function test_numbers2string(array $cardsNumbers, string $cardsStr)
     {
-        $cards = new Cards();
-        $cards->setFromNumbers($cardsNumbers);
-        $this->assertEquals($cardsStr, $cards);
+        $cardsService = new CardsService();
+        $this->assertEquals($cardsStr, $cardsService->numbers2string($cardsNumbers));
     }
 
-    public function setFromNumbersDataProvider()
+    public function numbers2stringDataProvider()
     {
         return [
             [[], '...'],
@@ -40,15 +33,15 @@ class CardsTest extends TestCase
     }
 
     /**
-     * @dataProvider getAsNumbersDataProvider
+     * @dataProvider string2numbersDataProvider
      */
     public function test_getAsNumbers(string $cardsStr, array $cardsNumbers)
     {
-        $cards = new Cards($cardsStr);
-        $this->assertEquals($cardsNumbers, $cards->getAsNumbers());
+        $cardsService = new CardsService();
+        $this->assertEquals($cardsNumbers, $cardsService->string2numbers($cardsStr));
     }
 
-    public function getAsNumbersDataProvider()
+    public function string2numbersDataProvider()
     {
         return [
             ['', []],
@@ -72,8 +65,8 @@ class CardsTest extends TestCase
      */
     public function test_some_random_numbers_should_be_converted_properly(array $cardsNumbers)
     {
-        $cards = new Cards();
-        $newNumbers = $cards->setFromNumbers($cardsNumbers)->getAsNumbers();
+        $cardsService = new CardsService();
+        $newNumbers = $cardsService->string2numbers($cardsService->numbers2string($cardsNumbers));
         sort($cardsNumbers);
         sort($newNumbers);
         $this->assertEquals($cardsNumbers, $newNumbers);

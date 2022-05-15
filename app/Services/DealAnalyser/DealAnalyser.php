@@ -8,7 +8,7 @@ use App\Services\Contract\Contract;
 use App\Services\Contract\ContractService;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyCalculator;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyResult;
-use App\Services\Hands\Cards;
+use App\Services\Hands\CardsService;
 use App\Services\Hands\Hands;
 use App\Services\Hands\HandsService;
 
@@ -19,7 +19,8 @@ class DealAnalyser implements DealAnalyserInterface
     public function __construct(
         private HandsService $handsService,
         private DoubleDummyCalculator $doubleDummyCalculator,
-        private ContractService $contractService
+        private ContractService $contractService,
+        private CardsService $cardsService
     ) {}
 
     public function setDeal(Deal $deal)
@@ -32,7 +33,7 @@ class DealAnalyser implements DealAnalyserInterface
         $dealHands = $this->deal->getHands();
         $hands = [];
         for ($round = 0; $round < $rounds; ++$round) {
-            $hands[] = $this->shuffle($dealHands, ['E', 'W']);
+            $hands[] = $this->handsService->shuffleHands($dealHands, ['E', 'W']);
         }
 
         $ddResults = $this->doubleDummyCalculator->calculate($hands);
@@ -56,24 +57,6 @@ class DealAnalyser implements DealAnalyserInterface
         $contracts = $this->searchMinimax($contractsFiltered);
 
         $this->storeMinimax($contracts);
-    }
-
-    public function shuffle(Hands $hands, array $playersNames): Hands
-    {
-        $cardsNumbers = [];
-        foreach ($playersNames as $playerName) {
-            $cards = new Cards($hands->getHand($playerName));
-            $cardsNumbers = array_merge($cardsNumbers, $cards->getAsNumbers());
-        }
-        $newHands = $this->handsService->shuffleCards($cardsNumbers, $playersNames);
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-            if (in_array($playerName, $playersNames)) {
-                continue;
-            }
-            $newHands->setHand($playerName, $hands->getHand($playerName));
-        }
-
-        return $newHands;
     }
 
     /**

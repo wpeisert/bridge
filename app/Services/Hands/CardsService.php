@@ -6,50 +6,47 @@ namespace App\Services\Hands;
 
 use App\BridgeCore\Constants;
 
-class Cards
+class CardsService
 {
-    public function __construct(private string $cards = '') {}
-
-    public function __toString(): string
+    public function numbers2string($cardsNumbers): string
     {
-        return $this->cards;
-    }
-
-    public function setFromNumbers($cardsNumbers): Cards
-    {
-        $hand = [];
+        $cards = [];
         for ($colorNo = 0; $colorNo < Constants::COLORS_COUNT; ++$colorNo) {
-            $hand[$colorNo] = [];
+            $cards[$colorNo] = [];
         }
         foreach ($cardsNumbers as $cardNo) {
             $cardColorNo = intdiv($cardNo, Constants::PLAYERS_CARDS_COUNT);
             $cardInColorNo = $cardNo % Constants::PLAYERS_CARDS_COUNT;
-            $hand[$cardColorNo][] = $cardInColorNo;
+            $cards[$cardColorNo][] = $cardInColorNo;
         }
         for ($colorNo = 0; $colorNo < Constants::COLORS_COUNT; ++$colorNo) {
-            sort($hand[$colorNo]);
+            sort($cards[$colorNo]);
             array_walk(
-                $hand[$colorNo],
+                $cards[$colorNo],
                 function (&$cardInColorNo, $key) {
                     $cardInColorNo = Constants::CARDS[$cardInColorNo];
                 }
             );
-            $hand[$colorNo] = implode('', $hand[$colorNo]);
+            $cards[$colorNo] = implode('', $cards[$colorNo]);
         }
 
-        $this->cards = implode('.', $hand);
+        $hand = implode('.', $cards);
 
-        return $this;
+        return $hand;
     }
 
-    public function getAsNumbers(): array
+    /**
+     * @param string $hand
+     * @return int[]
+     */
+    public function string2numbers(string $hand): array
     {
         $cardsNumbers = [];
-        $hand = explode('.', $this->cards);
+        $cards = explode('.', $hand);
         for ($colorNo = 0; $colorNo < Constants::COLORS_COUNT; ++$colorNo) {
-            $len = strlen($hand[$colorNo] ?? '');
+            $len = strlen($cards[$colorNo] ?? '');
             for ($pos = 0; $pos < $len; ++$pos) {
-                $card = $hand[$colorNo][$pos];
+                $card = $cards[$colorNo][$pos];
                 $cardsNumbers[] = $colorNo * Constants::CARDS_IN_COLOR_COUNT + array_search($card, Constants::CARDS);
             }
         }

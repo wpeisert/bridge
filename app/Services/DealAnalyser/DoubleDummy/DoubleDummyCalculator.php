@@ -3,10 +3,13 @@
 namespace App\Services\DealAnalyser\DoubleDummy;
 
 use App\Services\Hands\Hands;
+use App\Services\Hands\HandsService;
 use Illuminate\Support\Facades\Log;
 
 class DoubleDummyCalculator
 {
+    public function __construct(private HandsService $handsService) {}
+
     /**
      * @param Hands[] $handsArray
      * @return DoubleDummyResult[]
@@ -42,7 +45,7 @@ class DoubleDummyCalculator
         $arguments = '';
         /** @var Hands $hands */
         foreach ($handsArray as $hands) {
-            $arguments .= '"' . $hands->getHandsAsPBN() . '"' . ' ';
+            $arguments .= '"' . $this->handsService->getHandsAsPBN($hands) . '"' . ' ';
         }
 
         return trim($arguments);

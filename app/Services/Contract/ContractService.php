@@ -9,31 +9,27 @@ class ContractService
     /**
      * https://www.pzbs.pl/sedziowie/mpb/2007/pol/przep77.htm
      *
-     * @param string $playerName
-     * @param string $bidColor
-     * @param int $level
+     * @param Contract $contract
      * @param int $tricks
-     * @param string $type
-     * @param bool $vulnerable
      * @return int
      */
-    public function getValue(string $playerName, string $bidColor, int $level, int $tricks, string $type, bool $vulnerable): int
+    public function getValue(Contract $contract, int $tricks): int
     {
-        $requiredTricks = Constants::BASE_TRICKS + $level;
+        $requiredTricks = Constants::BASE_TRICKS + $contract->level;
         if ($tricks < $requiredTricks) {
-            $value = -$this->getPenaltyValue($requiredTricks - $tricks, $type, $vulnerable);
+            $value = -$this->getPenaltyValue($requiredTricks - $tricks, $contract->type, $contract->vulnerable);
         } else {
-            $value = $this->getSuccessValue($bidColor, $level, $tricks, $type, $vulnerable);
+            $value = $this->getSuccessValue($contract->bidColor, $contract->level, $tricks, $contract->type, $contract->vulnerable);
         }
 
-        if (in_array($playerName, ['W', 'E'])) {
+        if (in_array($contract->declarer, ['W', 'E'])) {
             $value = -$value;
         }
 
         return $value;
     }
 
-    public function getPenaltyValue(int $tricksBelow, string $type, bool $vulnerable): int
+    private function getPenaltyValue(int $tricksBelow, string $type, bool $vulnerable): int
     {
         $value = Constants::PENALTY_FIRST_UNDERTRICK[$vulnerable][$type]
             + ($tricksBelow - 1) * Constants::PENALTY_SECOND_UNDERTRICK[$vulnerable][$type];
@@ -44,7 +40,7 @@ class ContractService
         return $value;
     }
 
-    public function getSuccessValue(string $bidColor, int $level, int $tricks, string $type, bool $vulnerable): int
+    private function getSuccessValue(string $bidColor, int $level, int $tricks, string $type, bool $vulnerable): int
     {
         $declaredValue = Constants::REWARD_FIRST_TRICK[$bidColor]
             + ($level - 1) * Constants::REWARD_NEXT_TRICK[$bidColor];

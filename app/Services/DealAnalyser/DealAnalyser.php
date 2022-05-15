@@ -4,6 +4,8 @@ namespace App\Services\DealAnalyser;
 
 use App\BridgeCore\Constants;
 use App\Models\Deal;
+use App\Services\Contract\Contract;
+use App\Services\Contract\ContractService;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyCalculator;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyResult;
 use App\Services\Hands\Cards;
@@ -19,7 +21,8 @@ class DealAnalyser implements DealAnalyserInterface
 
     public function __construct(
         private HandsService $handsService,
-        private DoubleDummyCalculator $doubleDummyCalculator
+        private DoubleDummyCalculator $doubleDummyCalculator,
+        private ContractService $contractService
     ) {}
 
     public function setDeal(Deal $deal)
@@ -127,17 +130,10 @@ class DealAnalyser implements DealAnalyserInterface
         }
     }
 
-    public function evaluateContract($contract, array $tricksProbabilities): array
+    public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): array
     {
-        /*
-         * Evaluates contract (always points from the point of view of NS):
-         */
-        $playerName = 'N';
-        $bidColor = 'nt';
-        $level = 3; /* 1..7 */
-        $type = 'dbl';
-        $vulnerable = in_array($playerName, ['N', 'S']) ? $this->deal->vulnerable_NS : $this->deal->vulnerable_WE;
-        $result = $this->getValue($playerName, $bidColor, $level, $tricks, $type, $vulnerable);
+
+        $result = $this->contractService->getValue($contract, $tricks);
     }
 
     public function removeDuplicatesFromContracts(array $contracts): array

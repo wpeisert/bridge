@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\App\Services\Deal;
 
+use App\Services\Contract\Contract;
 use App\Services\Contract\ContractService;
 use Tests\TestCase;
 
@@ -12,10 +13,19 @@ class ContractServiceTest extends TestCase
      *
      * @return void
      */
-    public function test_values(string $playerName, string $bidColor, int $level, int $tricks, string $type, bool $vulnerable, int $value)
+    public function test_values(string $declarer, string $bidColor, int $level, int $tricks, string $type, bool $vulnerable, int $value)
     {
+        $contract = Contract::create(
+            [
+                'declarer' => $declarer,
+                'bidColor' => $bidColor,
+                'level' => $level,
+                'type' => $type,
+                'vulnerable' => $vulnerable,
+            ]
+        );
         $service = new ContractService();
-        $this->assertSame($value, $service->getValue($playerName, $bidColor, $level, $tricks, $type, $vulnerable));
+        $this->assertSame($value, $service->getValue($contract, $tricks));
     }
 
     public function contractValues()

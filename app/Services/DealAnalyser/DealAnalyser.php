@@ -44,9 +44,17 @@ class DealAnalyser implements DealAnalyserInterface
 
         $contractsEvaluated = [];
         foreach ($this->getAllContracts() as $contract) {
-            $contractsEvaluated[] = $this->evaluateContract($contract, $tricksProbabilities);
+            $ev = $this->contractService->calculateContractExpectedValue(
+                $contract,
+                $tricksProbabilities[$contract->declarer][$contract->bidColor]
+            );
 
+            $contractsEvaluated[] = [
+                'contract' => $contract,
+                'ev' => $ev,
+            ];
         }
+
         $contractsFiltered = $this->removeDuplicatesFromContracts($contractsEvaluated);
         $contracts = $this->searchMinimax($contractsFiltered);
 
@@ -126,14 +134,6 @@ class DealAnalyser implements DealAnalyserInterface
         foreach (Constants::PLAYERS_NAMES as $playerName) {
 
         }
-    }
-
-    public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): float
-    {
-        return $this->contractService->calculateContractExpectedValue(
-            $contract,
-            $tricksProbabilities[$contract->declarer][$contract->bidColor]
-        );
     }
 
     public function removeDuplicatesFromContracts(array $contracts): array

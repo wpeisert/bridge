@@ -2,15 +2,12 @@
 
 namespace App\Services\DealAnalyser;
 
-use App\BridgeCore\Constants;
 use App\Models\Deal;
-use App\Services\Contract\Contract;
 use App\Services\Contract\ContractService;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyCalculator;
-use App\Services\DealAnalyser\DoubleDummy\DoubleDummyResult;
 use App\Services\Hands\CardsService;
-use App\Services\Hands\Hands;
 use App\Services\Hands\HandsService;
+use App\Services\ProbabilityCalculator\ProbabilityCalculator;
 
 class DealAnalyser implements DealAnalyserInterface
 {
@@ -18,7 +15,8 @@ class DealAnalyser implements DealAnalyserInterface
         private HandsService $handsService,
         private DoubleDummyCalculator $doubleDummyCalculator,
         private ContractService $contractService,
-        private CardsService $cardsService
+        private CardsService $cardsService,
+        private ProbabilityCalculator $probabilityCalculator
     ) {}
 
     public function analyse(Deal $deal, int $rounds = self::ROUNDS): void
@@ -31,13 +29,13 @@ class DealAnalyser implements DealAnalyserInterface
 
         $ddResults = $this->doubleDummyCalculator->calculate($hands);
 
-        $tricksProbabilities = $this->calculateTricksProbabilities($ddResults);
+        $tricksProbabilities = $this->probabilityCalculator->calculateTricksProbabilities($ddResults);
 
         $contractsEvaluated = [];
         foreach ($this->getAllContracts() as $contract) {
             $ev = $this->contractService->calculateContractExpectedValue(
                 $contract,
-                $tricksProbabilities[$contract->declarer][$contract->bidColor]
+                $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
             );
 
             $contractsEvaluated[] = [
@@ -50,51 +48,6 @@ class DealAnalyser implements DealAnalyserInterface
         $contracts = $this->searchMinimax($contractsFiltered);
 
         $this->storeMinimax($contracts);
-    }
-
-    /**
-     * @param DoubleDummyResult[] $ddResults
-     * @return array
-     */
-    public function calculateTricksProbabilities(array $ddResults): array
-    {
-        /*
-         * Calculates probabilities of taking given number of tricks:
-         *  - for each declarer (N, E, S, W)
-         *  - for each color (c, d, h, s, nt)
-         *  - for each number of tricks (0..13)
-         * so it's 4x5x14 array of float
-         * Note: zero entries may be not present
-         */
-        $probs = [];
-
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-            foreach (Constants::BIDS_COLORS as $bidColor) {
-                for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
-                    $probs[$playerName][$bidColor][$tricks] = 0;
-                }
-            }
-        }
-
-        /** @var DoubleDummyResult $ddResult */
-        foreach ($ddResults as $ddResult) {
-            foreach (Constants::PLAYERS_NAMES as $playerName) {
-                foreach (Constants::BIDS_COLORS as $bidColor) {
-                    $maxTricks = $ddResult->getTricks($playerName, $bidColor);
-                    $probs[$playerName][$bidColor][$maxTricks]++;
-                }
-            }
-        }
-
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-            foreach (Constants::BIDS_COLORS as $bidColor) {
-                for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
-                    $probs[$playerName][$bidColor][$tricks] /= count($ddResults);
-                }
-            }
-        }
-
-        return $probs;
     }
 
     public function getAllContracts(): array

@@ -33,11 +33,12 @@ class ContractService
     {
         $ev = 0.0;
         for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
-            if ($tricksProbabilities[$tricks] < 0.000000001) {
+            $prob = $tricksProbabilities[$tricks] ?? 0;
+            if ($prob < 0.000000001) {
                 continue;
             }
             $result = $this->getContractValue($contract, $tricks);
-            $ev += $result * $tricksProbabilities[$tricks];
+            $ev += $result * $prob;
         }
 
         return $ev;

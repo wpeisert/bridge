@@ -13,7 +13,7 @@ class ContractService
      * @param int $tricks
      * @return int
      */
-    public function getValue(Contract $contract, int $tricks): int
+    public function getContractValue(Contract $contract, int $tricks): int
     {
         $requiredTricks = Constants::BASE_TRICKS + $contract->level;
         if ($tricks < $requiredTricks) {
@@ -27,6 +27,20 @@ class ContractService
         }
 
         return $value;
+    }
+
+    public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): float
+    {
+        $ev = 0.0;
+        for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
+            if ($tricksProbabilities[$tricks] < 0.000000001) {
+                continue;
+            }
+            $result = $this->getContractValue($contract, $tricks);
+            $ev += $result * $tricksProbabilities[$tricks];
+        }
+
+        return $ev;
     }
 
     private function getPenaltyValue(int $tricksBelow, string $type, bool $vulnerable): int

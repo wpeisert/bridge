@@ -100,9 +100,7 @@ class DealAnalyser implements DealAnalyserInterface
             foreach (Constants::PLAYERS_NAMES as $playerName) {
                 foreach (Constants::BIDS_COLORS as $bidColor) {
                     $maxTricks = $ddResult->getTricks($playerName, $bidColor);
-                    for ($tricks = 0; $tricks <= $maxTricks; ++$tricks) {
-                        $probs[$playerName][$bidColor][$tricks]++;
-                    }
+                    $probs[$playerName][$bidColor][$maxTricks]++;
                 }
             }
         }
@@ -130,10 +128,12 @@ class DealAnalyser implements DealAnalyserInterface
         }
     }
 
-    public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): array
+    public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): float
     {
-
-        $result = $this->contractService->getValue($contract, $tricks);
+        return $this->contractService->calculateContractExpectedValue(
+            $contract,
+            $tricksProbabilities[$contract->declarer][$contract->bidColor]
+        );
     }
 
     public function removeDuplicatesFromContracts(array $contracts): array

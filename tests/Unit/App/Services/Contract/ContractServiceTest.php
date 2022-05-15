@@ -9,11 +9,45 @@ use Tests\TestCase;
 class ContractServiceTest extends TestCase
 {
     /**
+     * @dataProvider contractExpectedValues
+     *
+     * @return void
+     */
+    public function test_calculateContractExpectedValue(
+        string $declarer, string $bidColor, int $level, string $type, bool $vulnerable,
+        array $tricksProbabilities,
+        float $expectedValue
+    ) {
+        $contract = Contract::create(
+            [
+                'declarer' => $declarer,
+                'bidColor' => $bidColor,
+                'level' => $level,
+                'type' => $type,
+                'vulnerable' => $vulnerable,
+            ]
+        );
+        $service = new ContractService();
+        $this->assertSame($expectedValue, $service->calculateContractExpectedValue($contract, $tricksProbabilities));
+    }
+
+    public function contractExpectedValues()
+    {
+        return [
+            ['N', 's', 4, '', false, [0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0], 185.0],
+            ['N', 's', 4, 'dbl', false, [0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0], 245.0],
+            ['N', 's', 4, '', true, [0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0], 260.0],
+            ['E', 's', 4, '', true, [0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0], -260.0],
+            ['N', 's', 4, 'dbl', true, [0,0,0,0,0,0,0,0,0,0.5,0.5,0,0,0], 295.0],
+        ];
+    }
+
+    /**
      * @dataProvider contractValues
      *
      * @return void
      */
-    public function test_values(string $declarer, string $bidColor, int $level, int $tricks, string $type, bool $vulnerable, int $value)
+    public function test_getContractValue(string $declarer, string $bidColor, int $level, int $tricks, string $type, bool $vulnerable, int $value)
     {
         $contract = Contract::create(
             [
@@ -25,7 +59,7 @@ class ContractServiceTest extends TestCase
             ]
         );
         $service = new ContractService();
-        $this->assertSame($value, $service->getValue($contract, $tricks));
+        $this->assertSame($value, $service->getContractValue($contract, $tricks));
     }
 
     public function contractValues()

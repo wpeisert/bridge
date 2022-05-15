@@ -62,6 +62,7 @@ class ContractServiceTest extends TestCase
         );
         $service = new ContractService();
         $this->assertSame($value, $service->getContractValue($contract, $tricks));
+        $this->assertSame($value, intval($service->calculateContractExpectedValue($contract, [$tricks => 1])));
     }
 
     public function contractValues()

@@ -36,12 +36,16 @@ use App\Models\Deal;
 
 interface DealAnalyserInterface
 {
+    public const MAX_DEALS_DD = 40; // DDcalc limitation
+    public const ROUNDS = 40;
+
     public function setDeal(Deal $deal);
 
     /**
      * Runs full analysis for $rounds random opponents' hands.
      *
+     * @param string $side
      * @param int $rounds
      */
-    public function analyse(int $rounds = 10): void;
+    public function analyse(string $side = 'NS', int $rounds = self::ROUNDS): void;
 }

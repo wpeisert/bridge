@@ -14,9 +14,6 @@ use App\Services\Hands\HandsService;
 
 class DealAnalyser implements DealAnalyserInterface
 {
-    private const MAX_DEALS_DD = 40;
-    private const ROUNDS = 40;
-
     private Deal $deal;
 
     public function __construct(
@@ -30,7 +27,7 @@ class DealAnalyser implements DealAnalyserInterface
         $this->deal = $deal;
     }
 
-    public function analyse(int $rounds = self::ROUNDS): void
+    public function analyse(string $side = 'NS', int $rounds = self::ROUNDS): void
     {
         $dealHands = $this->deal->getHands();
         $hands = [];

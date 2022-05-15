@@ -23,9 +23,9 @@ class HandsService
      */
     public function shuffleCards(array $cardsNumbers, array $playerNames): Hands
     {
-        if (count($cardsNumbers) !== count($playerNames) * Constants::CARDS_IN_COLOR_COUNT) {
+        if (count($cardsNumbers) !== count($playerNames) * Constants::PLAYERS_CARDS_COUNT) {
             throw new \Exception(
-                sprintf("%d cards cannot be shuffled amongs %d players", count($cardsNumbers), count($playerNames))
+                sprintf("%d cards cannot be shuffled amongst %d players", count($cardsNumbers), count($playerNames))
             );
         }
         $shuffledCardsNumbers = $this->randomService->shuffle($cardsNumbers);

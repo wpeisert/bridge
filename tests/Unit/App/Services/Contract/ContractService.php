@@ -5,7 +5,7 @@ namespace Tests\Unit\App\Services\Contract;
 use App\BridgeCore\Constants;
 use App\Services\Contract\Contract;
 use App\Services\Contract\ContractValueService;
-use App\Services\ProbabilityCalculator\TricksProbabilities;
+use App\Services\DealAnalyser\ProbabilityCalculator\TricksProbabilities;
 
 class ContractService
 {
@@ -13,41 +13,62 @@ class ContractService
 
     /**
      * @param Contract[] $contracts
+     * @param string $side
+     * @param bool $vulnerable
      * @param TricksProbabilities $tricksProbabilities
      * @return array
      */
-    public function evaluateContracts(array $contracts, TricksProbabilities $tricksProbabilities): array
+    public function evaluateContracts(array $contracts, string $side, bool $vulnerable, TricksProbabilities $tricksProbabilities): array
     {
         $contractsEvaluated = [];
 
         foreach ($contracts as $contract) {
-            foreach (['NS', 'EW'] as $side) {
-                $ev = [];
-                $contractsTmp = [];
-                foreach (str_split($side) as $declarer) {
-                    $contract->declarer = $declarer;
-                    $contractsTmp[] = clone $contract;
-                    $ev[] = $this->contractValueService->calculateContractExpectedValue(
-                        $contract,
-                        $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
-                    );
-                }
+            $contract->vulnerable = $vulnerable;
+            $evalRes = $this->evaluateContract(
+                $contract,
+                $side,
+                $tricksProbabilities
+            );
 
-                $contractsEvaluated[] = [
-                    'contract' => $contractsTmp[0],
-                    'ev' => $ev[0],
-                ];
-                if ($ev[0] !== $ev[1]) {
-                    $contractsEvaluated[] = [
-                        'contract' => $contractsTmp[1],
-                        'ev' => $ev[1],
-                    ];
-                }
-            }
+            $contractsEvaluated = array_merge($contractsEvaluated, $evalRes);
         }
 
         return $contractsEvaluated;
     }
+
+    /**
+     * @param Contract $contract
+     * @param string $side
+     * @param TricksProbabilities $tricksProbabilities
+     * @return array
+     */
+    public function evaluateContract(Contract $contract, string $side, TricksProbabilities $tricksProbabilities): array
+    {
+        $ev = [];
+        $contractsTmp = [];
+        foreach (str_split($side) as $declarer) {
+            $contract->declarer = $declarer;
+            $contractsTmp[] = clone $contract;
+            $ev[] = $this->contractValueService->calculateContractExpectedValue(
+                $contract,
+                $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
+            );
+        }
+
+        $contractsEvaluated[] = [
+            'contract' => $contractsTmp[0],
+            'ev' => $ev[0],
+        ];
+        if ($ev[0] !== $ev[1]) {
+            $contractsEvaluated[] = [
+                'contract' => $contractsTmp[1],
+                'ev' => $ev[1],
+            ];
+        }
+
+        return $contractsEvaluated;
+    }
+
 
     public function getAllContractsNoDeclarer(): array
     {

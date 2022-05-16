@@ -45,5 +45,7 @@ interface DealAnalyserInterface
      * @param Deal $deal
      * @param int $rounds
      */
-    public function analyse(Deal $deal, int $rounds = self::ROUNDS): void;
+    public function analyse(Deal $deal, int $rounds = self::ROUNDS);
+
+    public function analyseSide(Deal $deal, string $side, int $rounds = self::ROUNDS);
 }

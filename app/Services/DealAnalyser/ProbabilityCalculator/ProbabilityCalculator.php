@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ProbabilityCalculator;
+namespace App\Services\DealAnalyser\ProbabilityCalculator;
 
 use App\BridgeCore\Constants;
 use App\Services\DealAnalyser\DoubleDummy\DoubleDummyResult;

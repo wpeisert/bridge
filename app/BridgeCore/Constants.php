@@ -6,6 +6,7 @@ class Constants
 {
     public const PLAYERS_COUNT = 4;
     public const PLAYERS_NAMES = ['N', 'E', 'S', 'W'];
+    public const SIDES = ['NS', 'WE'];
     public const PLAYERS_CARDS_COUNT = 13;
 
     public const DEAL_CONSTRAINTS_VULNERABLE = ['- any -', 'Yes', 'No'];

@@ -79,46 +79,25 @@ class Tools
         return $decorated;
     }
 
-    /**
-     * $card example: AS (Ace Spade), 2H (2 Heart)
-     *
-     * @param string $card
-     * @return int
-     * @throws \Exception
-     */
-    public static function card2number(string $card): int
+    public static function getPartner(string $playerName): string
     {
-        $number = $card[0];
-        $numberIndex = array_search($number, Constants::CARDS);
-        if (false === $numberIndex) {
-            throw new \Exception("Bad card: " . $card);
+        switch ($playerName) {
+            case 'N': return 'S';
+            case 'S': return 'N';
+            case 'E': return 'W';
+            case 'W': return 'E';
         }
-
-        $color = $card[1];
-        $colorIndex = array_search($color, Constants::COLORS_NAMES);
-        if (false === $colorIndex) {
-            throw new \Exception("Bad card: " . $card);
-        }
-
-        return $numberIndex + Constants::CARDS_IN_COLOR_COUNT * $colorIndex;
     }
 
-    /**
-     * $card example: AS (Ace Spade), 2H (2 Heart)
-     *
-     * @param int $number
-     * @return string
-     * @throws \Exception
-     */
-    public static function number2card(int $number): string
+    public static function getFirstPlayerInSide(string $playerName): string
     {
-        if ($number < 0 || $number >= Constants::CARDS_COUNT) {
-            throw new \Exception("Bad card number: " . $number);
+        switch ($playerName) {
+            case 'N':
+            case 'S':
+                return 'N';
+            case 'E':
+            case 'W':
+                return 'E';
         }
-
-        $numberIndex = $number % Constants::CARDS_IN_COLOR_COUNT;
-        $colorIndex = intdiv($number, Constants::CARDS_IN_COLOR_COUNT);
-
-        return Constants::CARDS[$numberIndex] . Constants::COLORS_NAMES[$colorIndex];
     }
 }

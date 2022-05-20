@@ -13,24 +13,21 @@ class ContractService
 
     /**
      * @param Contract[] $contracts
-     * @param bool $vulnerableNS
-     * @param bool $vulnerableWE
      * @param TricksProbabilities $tricksProbabilities
      * @return array
      */
-    public function evaluateContracts(array $contracts, bool $vulnerableNS, bool $vulnerableWE, TricksProbabilities $tricksProbabilities): array
+    public function evaluateContracts(array $contracts, TricksProbabilities $tricksProbabilities): array
     {
         $contractsEvaluated = [];
 
         foreach ($contracts as $contract) {
-            $contract->vulnerable = in_array($contract->declarer, ['N', 'S']) ? $vulnerableNS : $vulnerableWE;
             $ev = $this->contractValueService->calculateContractExpectedValue(
                 $contract,
                 $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
             );
 
-            $contractsEvaluated[$contract->getHash()] = [
-                'contract' => clone $contract,
+            $contractsEvaluated[] = [
+                'contract' => $contract,
                 'ev' => $ev
             ];
         }
@@ -38,25 +35,38 @@ class ContractService
         return $contractsEvaluated;
     }
 
-    public function getAllContracts(): array
+    /**
+     * @param array $params
+     * @return Contract[]
+     */
+    public function getAllContracts(array $params = []): array
     {
-        /*
-         * Returns all possible contracts
-         * Number is: 2(NS,WE)x5(c,d,h,s,nt)x7x3(pass/dbl/rdbl)x2(players in pair) = 420
-         */
+        $sides = $params['sides'] ?? Constants::SIDES;
+        $levels = $params['levels'] ?? range(1, Constants::BIDS_MAX_LEVEL);
+        $bidColors = $params['bidColors'] ?? Constants::BIDS_COLORS;
+        $contractTypes = $params['contractTypes'] ?? Constants::CONTRACT_TYPES;
+        $declarers = $params['declarers'] ?? Constants::PLAYERS_NAMES;
+        $vulnerable_NS = $params['vulnerable_NS'] ?? false;
+        $vulnerable_WE = $params['vulnerable_WE'] ?? false;
+
         $contracts = [];
 
-        foreach (['NS', 'WE'] as $side) {
-            for ($level = 1; $level <= Constants::BIDS_MAX_LEVEL; ++$level) {
-                foreach (Constants::BIDS_COLORS as $bidColor) {
-                    foreach (Constants::CONTRACT_TYPES as $type) {
+        foreach ($sides as $side) {
+            foreach ($levels as $level) {
+                foreach ($bidColors as $bidColor) {
+                    foreach ($contractTypes as $type) {
                         foreach (str_split($side) as $declarer) {
+                            if (!in_array($declarer, $declarers)) {
+                                continue;
+                            }
+                            $vulnerable = in_array($declarer, str_split('NS')) ? $vulnerable_NS : $vulnerable_WE;
                             $contracts[] = Contract::create(
                                 [
                                     'declarer' => $declarer,
                                     'type' => $type,
                                     'level' => $level,
-                                    'bidColor' => $bidColor
+                                    'bidColor' => $bidColor,
+                                    'vulnerable' => $vulnerable,
                                 ]
                             );
                         }

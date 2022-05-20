@@ -5,13 +5,15 @@ namespace App\Services\DealAnalyser;
 use App\Models\Deal;
 use App\Services\Contract\Contract;
 use App\Services\DealAnalyser\ProbabilityCalculator\ProbabilityCalculator;
+use App\Services\EvaluatedContractsFilters\SameResultForBothDeclarersInSide;
 use Tests\Unit\App\Services\Contract\ContractService;
 
 class DealAnalyser implements DealAnalyserInterface
 {
     public function __construct(
         private ProbabilityCalculator $probabilityCalculator,
-        private ContractService $contractService
+        private ContractService $contractService,
+        private SameResultForBothDeclarersInSide $sameResultForBothDeclarersInSide
     ) {}
 
     public function analyse(Deal $deal, int $rounds = self::ROUNDS)
@@ -31,11 +33,26 @@ class DealAnalyser implements DealAnalyserInterface
         $tricksProbabilities = $this->probabilityCalculator->calculateHandsTricksProbabilities($deal->getHands(), $side, $rounds);
 
         $contractsEvaluated = $this->contractService->evaluateContracts(
-            $this->contractService->getAllContracts(),
-            $deal->vulnerable_NS,
-            $deal->vulnerable_WE,
+            $this->contractService->getAllContracts(
+                [
+                    'vulnerable_NS' => $deal->vulnerable_NS,
+                    'vulnerable_WE' => $deal->vulnerable_WE,
+                ]
+            ),
             $tricksProbabilities
         );
+
+        $contractsFiltered0 = [];
+        /** @var Contract $contractEv */
+        foreach ($contractsEvaluated as $contractEv) {
+            $contractsFiltered0[$contractEv['contract']->getHash()] = $contractEv;
+        }
+
+        $contractsFiltered1 = $this->sameResultForBothDeclarersInSide->filter($contractsFiltered0);
+
+        $a = 1;
+
+        $this->uuuu();
 
         // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 

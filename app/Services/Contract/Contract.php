@@ -21,4 +21,14 @@ class Contract
 
         return $contract;
     }
+
+    public function getHash(): string
+    {
+        return self::calculateHash($this->declarer, $this->level, $this->bidColor, $this->type, $this->vulnerable);
+    }
+
+    public static function calculateHash(string $declarer, int $level, string $bidColor, string $type, bool $vulnerable): string
+    {
+        return $declarer . strval($level) . $bidColor . $type . ($vulnerable ? '(vuln)' : '');
+    }
 }

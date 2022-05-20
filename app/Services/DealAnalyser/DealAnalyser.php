@@ -4,16 +4,20 @@ namespace App\Services\DealAnalyser;
 
 use App\Models\Deal;
 use App\Services\Contract\Contract;
+use App\Services\Contract\ContractService;
 use App\Services\DealAnalyser\ProbabilityCalculator\ProbabilityCalculator;
+use App\Services\EvaluatedContractsFilters\DblRdbl;
+use App\Services\EvaluatedContractsFilters\Minimax;
 use App\Services\EvaluatedContractsFilters\SameResultForBothDeclarersInSide;
-use Tests\Unit\App\Services\Contract\ContractService;
 
 class DealAnalyser implements DealAnalyserInterface
 {
     public function __construct(
         private ProbabilityCalculator $probabilityCalculator,
         private ContractService $contractService,
-        private SameResultForBothDeclarersInSide $sameResultForBothDeclarersInSide
+        private SameResultForBothDeclarersInSide $sameResultForBothDeclarersInSide,
+        private DblRdbl $dblRdbl,
+        private Minimax $minimax
     ) {}
 
     public function analyse(Deal $deal, int $rounds = self::ROUNDS)
@@ -50,7 +54,9 @@ class DealAnalyser implements DealAnalyserInterface
 
         $contractsFiltered1 = $this->sameResultForBothDeclarersInSide->filter($contractsFiltered0);
 
-        $a = 1;
+        $contractsFiltered2 = $this->dblRdbl->filter($contractsFiltered1);
+
+        $contractsFiltered3 = $this->minimax->filter($contractsFiltered2);
 
         $this->uuuu();
 

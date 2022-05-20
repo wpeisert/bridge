@@ -1,10 +1,8 @@
 <?php
 
-namespace Tests\Unit\App\Services\Contract;
+namespace App\Services\Contract;
 
 use App\BridgeCore\Constants;
-use App\Services\Contract\Contract;
-use App\Services\Contract\ContractValueService;
 use App\Services\DealAnalyser\ProbabilityCalculator\TricksProbabilities;
 
 class ContractService
@@ -76,5 +74,18 @@ class ContractService
         }
 
         return $contracts;
+    }
+
+    /**
+     * @param Contract $contract1
+     * @param Contract $contract2
+     * @return bool
+     */
+    public function isLower(Contract $contract1, Contract $contract2): bool
+    {
+        return $contract1->level < $contract2->level ||
+            $contract1->level === $contract2->level &&
+                array_search($contract1->bidColor, Constants::BIDS_COLORS)
+                < array_search($contract2->bidColor, Constants::BIDS_COLORS);
     }
 }

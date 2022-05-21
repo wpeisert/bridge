@@ -69,6 +69,13 @@
                 </div>
             @endforeach
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Analysis:</strong>
+                    <textarea name="analysis" class="form-control" style="height:100px"></textarea>
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

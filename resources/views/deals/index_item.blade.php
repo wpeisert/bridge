@@ -21,6 +21,10 @@
                     <x-slot name="cards_W">
                         {!! $deal->getOneLineCards('W') !!}
                     </x-slot>
+
+                    <x-slot name="analysis">
+                        {!! nl2br($deal->analysis) !!}
+                    </x-slot>
                 </x-deal>
             </div>
         </div>

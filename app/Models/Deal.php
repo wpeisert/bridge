@@ -25,7 +25,7 @@ class Deal extends Model
     }
 
     protected $fillable = [
-        'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer'
+        'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer', 'analysis'
     ];
 
     protected $casts = [

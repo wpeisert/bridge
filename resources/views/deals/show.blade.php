@@ -40,5 +40,12 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Analysis:</strong><br />
+                {!! nl2br($deal->analysis) !!}
+            </div>
+        </div>
+
     </div>
 </x-deals-layout>

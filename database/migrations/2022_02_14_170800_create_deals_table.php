@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('vulnerable_WE')->default(0);
             $table->string('dealer');
             $table->text('description')->nullable();
+            $table->longtext('analysis')->nullable();
             $table->timestamps();
         });
     }

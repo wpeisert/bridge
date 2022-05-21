@@ -22,17 +22,23 @@ class DealAnalyser implements DealAnalyserInterface
 
     public function analyse(Deal $deal, int $rounds = self::ROUNDS)
     {
-        $contractsNS = $this->analyseSide($deal, 'NS', $rounds);
-        $contractsWE = $this->analyseSide($deal, 'EW', $rounds);
-        $contractPASS = [
-            'contract' => Contract::create(['bidColor' => 'pass']),
-            'ev' => 0,
-        ];
+        /*
+         * ['side' => 'NS', 'contract' => Contract, 'ev' => 123.5]
+         */
+        $minimaxNS = $this->analyseSide($deal, 'NS', $rounds);
+        $minimaxWE = $this->analyseSide($deal, 'EW', $rounds);
 
-        $this->storeMinimax($contracts);
+        $analysis =
+            'minimax NS: '
+            . (is_string($minimaxNS['contract']) ? $minimaxNS['contract'] : $minimaxNS['contract']->getHash() . ' ev: ' . $minimaxNS['ev']) . "\n"
+            . 'minimax WE: '
+            . (is_string($minimaxWE['contract']) ? $minimaxWE['contract'] : $minimaxWE['contract']->getHash() . ' ev: ' . $minimaxWE['ev']) . "\n"
+        ;
+
+        $deal->update(['analysis' => $deal->analysis . $analysis]);
     }
 
-    public function analyseSide(Deal $deal, string $side, int $rounds = self::ROUNDS)
+    public function analyseSide(Deal $deal, string $side, int $rounds = self::ROUNDS): array
     {
         $tricksProbabilities = $this->probabilityCalculator->calculateHandsTricksProbabilities($deal->getHands(), $side, $rounds);
 
@@ -56,19 +62,11 @@ class DealAnalyser implements DealAnalyserInterface
 
         $contractsFiltered2 = $this->dblRdbl->filter($contractsFiltered1);
 
-        $contractsFiltered3 = $this->minimax->filter($contractsFiltered2);
+        /*
+         * ['side' => 'NS', 'contract' => Contract, 'ev' => 123.5]
+         */
+        $minimax = $this->minimax->filter($contractsFiltered2);
 
-        $this->uuuu();
-
-        // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-        usort(
-            $contractsEvaluated,
-            function ($a, $b) {
-                return ($a['ev'] < $b['ev']) ? -1 : 1;
-            }
-        );
-
-        return $contractsEvaluated;
+        return $minimax;
     }
 }

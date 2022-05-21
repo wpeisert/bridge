@@ -1,9 +1,10 @@
 <x-deal-constraints-layout>
 
-    <x-slot name="subtitle">Create new deal constraints</x-slot>
+    <x-slot name="subtitle">Edit deal constraints</x-slot>
 
-    <form action="{{ route('deal_constraints.store') }}" method="POST">
+    <form action="{{ route('deal_constraints.update',$dealConstraint->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         @include ('deal_constraints.form_fields')
 

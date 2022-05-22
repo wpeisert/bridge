@@ -25,7 +25,8 @@ class Deal extends Model
     }
 
     protected $fillable = [
-        'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer', 'analysis'
+        'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer',
+        'minimax_NS', 'minimax_WE', 'tricks_probabilities_NS', 'tricks_probabilities_WE'
     ];
 
     protected $casts = [
@@ -37,7 +38,6 @@ class Deal extends Model
     {
         return $this->belongsToMany(Quiz::class)->withTimestamps();
     }
-
 
     public function getOneLineCards(string $playerName): string
     {
@@ -56,6 +56,11 @@ class Deal extends Model
             return 'NS';
         }
         return ' - ';
+    }
+
+    public function getAnalysisAttribute()
+    {
+        return 'minimax NS: ' . $this->minimax_NS . "\n" . 'minimax WE: ' . $this->minimax_WE;
     }
 
     public function setHands(Hands $hands)

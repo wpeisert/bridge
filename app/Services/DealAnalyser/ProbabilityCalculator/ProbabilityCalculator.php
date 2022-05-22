@@ -50,28 +50,24 @@ class ProbabilityCalculator
          */
         $probs = [];
 
-        foreach (Constants::PLAYERS_NAMES as $playerName) {
-            foreach (Constants::BIDS_COLORS as $bidColor) {
-                for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
-                    $probs[$playerName][$bidColor][$tricks] = 0;
-                }
-            }
-        }
-
         /** @var DoubleDummyResult $ddResult */
         foreach ($ddResults as $ddResult) {
             foreach (Constants::PLAYERS_NAMES as $playerName) {
                 foreach (Constants::BIDS_COLORS as $bidColor) {
                     $maxTricks = $ddResult->getTricks($playerName, $bidColor);
-                    $probs[$playerName][$bidColor][$maxTricks]++;
+                    $probs[$playerName][$bidColor][$maxTricks] = isset($probs[$playerName][$bidColor][$maxTricks])
+                        ? $probs[$playerName][$bidColor][$maxTricks]++ : 1;
                 }
             }
         }
 
+        $count = count($ddResults);
         foreach (Constants::PLAYERS_NAMES as $playerName) {
             foreach (Constants::BIDS_COLORS as $bidColor) {
                 for ($tricks = 0; $tricks <= Constants::PLAYERS_CARDS_COUNT; ++$tricks) {
-                    $probs[$playerName][$bidColor][$tricks] /= count($ddResults);
+                    if (isset($probs[$playerName][$bidColor][$tricks])) {
+                        $probs[$playerName][$bidColor][$tricks] /= $count;
+                    }
                 }
             }
         }

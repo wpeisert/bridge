@@ -22,23 +22,11 @@ class DealAnalyser implements DealAnalyserInterface
 
     public function analyse(Deal $deal, int $rounds = self::ROUNDS)
     {
-        /*
-         * ['side' => 'NS', 'contract' => Contract, 'ev' => 123.5]
-         */
-        $minimaxNS = $this->analyseSide($deal, 'NS', $rounds);
-        $minimaxWE = $this->analyseSide($deal, 'EW', $rounds);
-
-        $analysis =
-            'minimax NS: '
-            . (is_string($minimaxNS['contract']) ? $minimaxNS['contract'] : $minimaxNS['contract']->getHash() . ' ev: ' . $minimaxNS['ev']) . "\n"
-            . 'minimax WE: '
-            . (is_string($minimaxWE['contract']) ? $minimaxWE['contract'] : $minimaxWE['contract']->getHash() . ' ev: ' . $minimaxWE['ev']) . "\n"
-        ;
-
-        $deal->update(['analysis' => $deal->analysis . $analysis]);
+        $this->analyseSide($deal, 'NS', $rounds);
+        $this->analyseSide($deal, 'WE', $rounds);
     }
 
-    public function analyseSide(Deal $deal, string $side, int $rounds = self::ROUNDS): array
+    public function analyseSide(Deal $deal, string $side, int $rounds = self::ROUNDS)
     {
         $tricksProbabilities = $this->probabilityCalculator->calculateHandsTricksProbabilities($deal->getHands(), $side, $rounds);
 
@@ -67,6 +55,13 @@ class DealAnalyser implements DealAnalyserInterface
          */
         $minimax = $this->minimax->filter($contractsFiltered2);
 
-        return $minimax;
+        $minimaxSide = is_string($minimax['contract']) ? $minimax['contract'] : $minimax['contract']->getHash() . ' ev: ' . $minimax['ev'];
+
+        $deal->update(
+            [
+                'minimax_' . $side => $minimaxSide,
+                'tricks_probabilities_' . $side => $tricksProbabilities->getSerialized(),
+            ]
+        );
     }
 }

@@ -10,4 +10,14 @@ class TricksProbabilities
     {
         return $this->probs[$playerName][$bidColor];
     }
+
+    public function getSerialized(): string
+    {
+        return serialize($this->probs);
+    }
+
+    public static function createFromSerialized(string $serialized): TricksProbabilities
+    {
+        return new TricksProbabilities(unserialize($serialized));
+    }
 }

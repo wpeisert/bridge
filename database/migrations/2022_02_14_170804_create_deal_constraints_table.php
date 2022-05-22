@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('deal_constraints', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->smallInteger('vulnerable_NS');
             $table->smallInteger('vulnerable_WE');
             $table->string('dealer');

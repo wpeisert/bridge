@@ -22,7 +22,10 @@ return new class extends Migration
             $table->integer('vulnerable_WE')->default(0);
             $table->string('dealer');
             $table->text('description')->nullable();
-            $table->longtext('analysis')->nullable();
+            $table->string('minimax_NS')->nullable();
+            $table->string('minimax_WE')->nullable();
+            $table->longtext('tricks_probabilities_NS')->nullable();
+            $table->longtext('tricks_probabilities_WE')->nullable();
             $table->timestamps();
         });
     }

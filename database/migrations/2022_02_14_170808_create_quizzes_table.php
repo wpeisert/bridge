@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('deal_constraint_id')->unsigned();
-            $table->string('name');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->integer('deals_count')->default(10);
             $table->timestamps();
 

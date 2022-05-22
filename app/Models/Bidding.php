@@ -9,7 +9,7 @@ class Bidding extends Model
     private const STATUS_FINISHED = 'finished';
 
     protected $fillable = [
-        'training_id', 'deal_id', 'current_player', 'status'
+        'training_id', 'deal_id', 'current_player', 'status', 'result_NS', 'result_WE'
     ];
 
     public function training()

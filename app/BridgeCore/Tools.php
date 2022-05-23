@@ -89,6 +89,18 @@ class Tools
         }
     }
 
+    public static function getPlayerSide(string $playerName): string
+    {
+        switch ($playerName) {
+            case 'N':
+            case 'S':
+                return 'NS';
+            case 'E':
+            case 'W':
+            return 'WE';
+        }
+    }
+
     public static function getFirstPlayerInSide(string $playerName): string
     {
         switch ($playerName) {

@@ -3,9 +3,12 @@
 namespace App\Services\Bidding;
 
 use App\BridgeCore\Constants;
+use App\BridgeCore\Tools;
 use App\Events\BidExpectedEvent;
 use App\Models\Bid;
 use App\Models\Bidding;
+use App\Services\BiddingParser\BiddingParserFactoryInterface;
+use App\Services\Contract\ContractValueService;
 use App\Services\DealAnalyser\ProbabilityCalculator\TricksProbabilities;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +16,9 @@ class BiddingService implements BiddingServiceInterface
 {
     public function __construct(
         private RuleCheckerInterface $ruleChecker,
-        private PlayerServiceInterface $playerService
+        private PlayerServiceInterface $playerService,
+        private BiddingParserFactoryInterface $biddingParserFactory,
+        private ContractValueService $contractValueService
     ) {}
 
 
@@ -81,14 +86,23 @@ class BiddingService implements BiddingServiceInterface
 
     public function calculateResults(Bidding $bidding): array
     {
-        return []; // tmp
         $res = [];
         foreach (Constants::SIDES as $side) {
             $fieldname = 'tricks_probabilities_' . $side;
             $serializedProbabilities = $bidding->deal->$fieldname;
             $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
+            $contract = $this->biddingParserFactory->parse($bidding)->getContractWithoutVulnerability();
+            $declarerPair = Tools::getPlayerSide($contract->declarer);
+            $vulnerableFieldName = 'vulnerable_' . $declarerPair;
+            $contract->vulnerable = $bidding->deal->$vulnerableFieldName;
 
+            $ev = $this->contractValueService->calculateContractExpectedValue(
+                $contract,
+                $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
+            );
+
+            $res['result_' . $declarerPair] = $ev;
         }
-
+        return $res;
     }
 }

@@ -28,12 +28,12 @@ class Minimax
                 } else {
                     $newContract = [
                         'side' => $side,
-                        'contract' => 'pass',
+                        'contract' => Contract::PASS(),
                         'ev' => 0
                     ];
                 }
 
-                if (is_string($newContract['contract']) && $newContract['contract'] === 'pass' && count($bidding) > 0) {
+                if ($newContract['contract']->isPass() && count($bidding) > 0) {
                     $contractEvaluated = array_pop($bidding);
                     return $contractEvaluated;
                 }

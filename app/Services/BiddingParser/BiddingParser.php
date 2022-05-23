@@ -65,9 +65,36 @@ class BiddingParser implements BiddingParserInterface
         return '';
     }
 
-    public function getContract(): Contract
+    public function getContractWithoutVulnerability(): Contract
     {
+        $lastColorBid = $this->getLastColorBid();
+        if (!$lastColorBid) {
+            return Contract::PASS();
+        }
 
+        $lastColorBidIndex = array_search($lastColorBid, $this->bids);
+        $firstColorBid = $this->getFirstColorBidInPairForBid($lastColorBid);
+        $firstColorBidIndex = array_search($firstColorBid, $this->bids);
+
+        $declarer = $this->playerService->increasePlayer($this->bidding->deal->dealer, $firstColorBidIndex);
+        $bidColor = substr($lastColorBid, 1);
+        $level = intval($lastColorBid[0]);
+        $type = '';
+        $bids = array_slice($this->bids, $lastColorBidIndex);
+        if (array_search('rdbl', $bids)) {
+            $type = 'rdbl';
+        } elseif (array_search('dbl', $bids)) {
+            $type = 'dbl';
+        }
+
+        return Contract::create(
+            [
+                'declarer' => $declarer,
+                'bidColor' => $bidColor,
+                'level' => $level,
+                'type' => $type
+            ]
+        );
     }
 
     public function getContractAsString(): string

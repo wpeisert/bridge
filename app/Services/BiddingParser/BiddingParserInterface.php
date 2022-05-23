@@ -11,7 +11,7 @@ interface BiddingParserInterface
     public function isDbl(int $index): bool;
     public function getLastColorBid(): string;
     public function getBid(int $index): string;
-    public function getContract(): Contract;
+    public function getContractWithoutVulnerability(): Contract;
     public function getContractAsString(): string;
     public function getFirstColorBidInPairForBid(string $bid): string;
 }

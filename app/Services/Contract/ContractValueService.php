@@ -15,7 +15,7 @@ class ContractValueService
      */
     public function getContractValue(Contract $contract, int $tricks): int
     {
-        if ($contract->bidColor === 'pass') {
+        if ($contract->isPass()) {
             return 0;
         }
         $requiredTricks = Constants::BASE_TRICKS + $contract->level;
@@ -34,7 +34,7 @@ class ContractValueService
 
     public function calculateContractExpectedValue(Contract $contract, array $tricksProbabilities): float
     {
-        if ($contract->bidColor === 'pass') {
+        if ($contract->isPass()) {
             return 0;
         }
         $ev = 0.0;

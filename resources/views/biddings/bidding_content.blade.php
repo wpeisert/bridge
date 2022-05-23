@@ -103,7 +103,7 @@
 
             @if ($bidding->is_finished)
                 <br /><br /><b>Analysis:</b> <br />
-                {!! nl2br($bidding->deal->analysis) !!}
+                {!! nl2br($bidding->analysis) !!}
             @endif
 
         </div>

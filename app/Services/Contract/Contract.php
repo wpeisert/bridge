@@ -31,4 +31,20 @@ class Contract
     {
         return $declarer . strval($level) . $bidColor . $type . ($vulnerable ? '(vuln)' : '');
     }
+
+    public static function PASS(): Contract
+    {
+        if (!isset(self::$PASS)) {
+            self::$PASS = Contract::create(['bidColor' => 'pass']);
+        }
+
+        return self::$PASS;
+    }
+
+    public function isPass(): bool
+    {
+        return 'pass' === $this->bidColor;
+    }
+
+    private static Contract $PASS;
 }

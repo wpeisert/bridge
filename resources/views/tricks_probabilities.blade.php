@@ -2,7 +2,7 @@
     <tr style="border: 1px solid silver; vertical-align: top;">
         <td></td>
         @foreach ($PLAYERS_NAMES as $player)
-        <td style="border: 1px solid silver"><b>{{ $player }}</b></td>
+        <td style="border: 1px solid silver; padding: 3px;"><b>{{ $player }}</b></td>
         @endforeach
     </tr>
     @foreach ($BIDS_COLORS as $bidColor)

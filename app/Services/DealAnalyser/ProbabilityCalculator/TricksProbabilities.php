@@ -20,4 +20,9 @@ class TricksProbabilities
     {
         return new TricksProbabilities(unserialize($serialized));
     }
+
+    public function getHtml(): string
+    {
+        return str_replace("\n", "", view('tricks_probabilities', ['probs' => $this->probs])->render());
+    }
 }

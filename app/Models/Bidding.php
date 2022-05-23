@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\BridgeCore\Constants;
 use App\Services\BiddingParser\BiddingParser;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
+use App\Services\DealAnalyser\ProbabilityCalculator\TricksProbabilities;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
@@ -47,9 +49,18 @@ class Bidding extends Model
 
     public function getAnalysisAttribute(): string
     {
-        return $this->deal->analysis . "\n" .
-            'Contract: ' . app()->make(BiddingParserFactoryInterface::class)->parse($this)->getContractAsString() . "\n" .
-            'Result NS: ' . $this->result_NS . "\n" .
-            'Result WE: ' . $this->result_WE;
+        $res = '';
+        foreach (Constants::SIDES as $side) {
+            $fieldname = 'tricks_probabilities_' . $side;
+            $serializedProbabilities = $this->deal->$fieldname;
+            $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
+            $res .= "Trick probabilities $side: \n" . $tricksProbabilities->getHtml() . "\n";
+        }
+
+        return $this->deal->analysis . "<hr>"
+            . 'Contract: ' . app()->make(BiddingParserFactoryInterface::class)->parse($this)->getContractAsString() . "<hr>"
+            . 'Result NS: ' . $this->result_NS . "\n"
+            . 'Result WE: ' . $this->result_WE . "\n<hr>"
+            . $res;
     }
 }

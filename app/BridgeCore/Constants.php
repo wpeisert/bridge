@@ -121,6 +121,7 @@ class Constants
             'BIDS_COLORS' => self::BIDS_COLORS,
             'BIDS_MAX_LEVEL' => self::BIDS_MAX_LEVEL,
             'BIDS_SPECIAL' => self::BIDS_SPECIAL,
+            'PLAYERS_CARDS_COUNT' => self::PLAYERS_CARDS_COUNT,
         ];
     }
 }

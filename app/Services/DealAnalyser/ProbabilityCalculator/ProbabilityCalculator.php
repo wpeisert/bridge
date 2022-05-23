@@ -56,7 +56,7 @@ class ProbabilityCalculator
                 foreach (Constants::BIDS_COLORS as $bidColor) {
                     $maxTricks = $ddResult->getTricks($playerName, $bidColor);
                     $probs[$playerName][$bidColor][$maxTricks] = isset($probs[$playerName][$bidColor][$maxTricks])
-                        ? $probs[$playerName][$bidColor][$maxTricks]++ : 1;
+                        ? $probs[$playerName][$bidColor][$maxTricks] + 1 : 1;
                 }
             }
         }

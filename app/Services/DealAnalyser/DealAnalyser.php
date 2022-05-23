@@ -55,11 +55,10 @@ class DealAnalyser implements DealAnalyserInterface
          */
         $minimax = $this->minimax->filter($contractsFiltered2);
 
-        $minimaxSide = is_string($minimax['contract']) ? $minimax['contract'] : $minimax['contract']->getHash() . ' ev: ' . $minimax['ev'];
-
         $deal->update(
             [
-                'minimax_' . $side => $minimaxSide,
+                'minimax_contract_' . $side => $minimax['contract']->getHash(),
+                'minimax_ev_' . $side => $minimax['ev'],
                 'tricks_probabilities_' . $side => $tricksProbabilities->getSerialized(),
             ]
         );

@@ -26,7 +26,9 @@ class Deal extends Model
 
     protected $fillable = [
         'description', 'vulnerable_NS', 'vulnerable_WE', 'dealer',
-        'minimax_NS', 'minimax_WE', 'tricks_probabilities_NS', 'tricks_probabilities_WE'
+        'minimax_contract_NS', 'minimax_ev_NS',
+        'minimax_contract_WE', 'minimax_ev_WE',
+        'tricks_probabilities_NS', 'tricks_probabilities_WE'
     ];
 
     protected $casts = [
@@ -60,7 +62,8 @@ class Deal extends Model
 
     public function getAnalysisAttribute()
     {
-        return 'minimax NS: ' . $this->minimax_NS . "\n" . 'minimax WE: ' . $this->minimax_WE;
+        return 'minimax NS: ' . $this->minimax_contract_NS . ' ev: ' . $this->minimax_ev_NS . "\n" .
+            'minimax WE: ' . $this->minimax_contract_WE . ' ev: ' . $this->minimax_ev_WE;
     }
 
     public function setHands(Hands $hands)

@@ -86,23 +86,25 @@ class BiddingService implements BiddingServiceInterface
 
     public function calculateResults(Bidding $bidding): array
     {
-        $res = [];
+        $actualContract = $this->biddingParserFactory->parse($bidding)->getContractWithoutVulnerability();
+        $declarerPair = Tools::getPlayerSide($actualContract->declarer);
+        $vulnerableFieldName = 'vulnerable_' . $declarerPair;
+        $actualContract->vulnerable = $bidding->deal->$vulnerableFieldName;
+
+        $res = ['contract' => $actualContract->getHash()];
         foreach (Constants::SIDES as $side) {
             $fieldname = 'tricks_probabilities_' . $side;
             $serializedProbabilities = $bidding->deal->$fieldname;
             $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
-            $contract = $this->biddingParserFactory->parse($bidding)->getContractWithoutVulnerability();
-            $declarerPair = Tools::getPlayerSide($contract->declarer);
-            $vulnerableFieldName = 'vulnerable_' . $declarerPair;
-            $contract->vulnerable = $bidding->deal->$vulnerableFieldName;
 
             $ev = $this->contractValueService->calculateContractExpectedValue(
-                $contract,
-                $tricksProbabilities->getProbabilities($contract->declarer, $contract->bidColor)
+                $actualContract,
+                $tricksProbabilities->getProbabilities($actualContract->declarer, $actualContract->bidColor)
             );
 
             $res['result_' . $declarerPair] = $ev;
         }
+
         return $res;
     }
 }

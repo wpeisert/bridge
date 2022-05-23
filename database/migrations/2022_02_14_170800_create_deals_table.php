@@ -22,10 +22,15 @@ return new class extends Migration
             $table->integer('vulnerable_WE')->default(0);
             $table->string('dealer');
             $table->text('description')->nullable();
-            $table->string('minimax_NS')->nullable();
-            $table->string('minimax_WE')->nullable();
+
+            $table->string('minimax_contract_NS')->nullable();
+            $table->decimal('minimax_ev_NS')->nullable();
+            $table->string('minimax_contract_WE')->nullable();
+            $table->decimal('minimax_ev_WE')->nullable();
+
             $table->longtext('tricks_probabilities_NS')->nullable();
             $table->longtext('tricks_probabilities_WE')->nullable();
+
             $table->timestamps();
         });
     }

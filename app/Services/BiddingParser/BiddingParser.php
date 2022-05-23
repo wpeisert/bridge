@@ -99,25 +99,7 @@ class BiddingParser implements BiddingParserInterface
 
     public function getContractAsString(): string
     {
-        $lastColorBid = $this->getLastColorBid();
-        if (!$lastColorBid) {
-            return 'pass';
-        }
-
-        $lastColorBidIndex = array_search($lastColorBid, $this->bids);
-        $firstColorBid = $this->getFirstColorBidInPairForBid($lastColorBid);
-        $firstColorBidIndex = array_search($firstColorBid, $this->bids);
-
-        $player = $this->playerService->increasePlayer($this->bidding->deal->dealer, $firstColorBidIndex);
-        $contract = $player . ' ' . Tools::decorateBid($lastColorBid);
-        $bids = array_slice($this->bids, $lastColorBidIndex);
-        if (array_search('rdbl', $bids)) {
-            $contract .= 'xx';
-        } elseif (array_search('dbl', $bids)) {
-            $contract .= 'x';
-        }
-
-        return $contract;
+        return $this->getContractWithoutVulnerability()->getAsString();
     }
 
     public function getFirstColorBidInPairForBid(string $bid): string

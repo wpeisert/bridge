@@ -9,6 +9,8 @@ class ContractValueService
     /**
      * https://www.pzbs.pl/sedziowie/mpb/2007/pol/przep77.htm
      *
+     * calculator: https://www.funbridge.com/counting-bridge
+     *
      * @param Contract $contract
      * @param int $tricks
      * @return int

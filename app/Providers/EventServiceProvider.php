@@ -24,8 +24,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         BidExpectedEvent::class => [
-            BidExpectedNotifyAdminListener::class,
-            BidExpectedNotifyPlayerListener::class,
+            //BidExpectedNotifyAdminListener::class,
+            //BidExpectedNotifyPlayerListener::class,
             MakeComputerBidListener::class,
         ],
         DealCreatedEvent::class => [

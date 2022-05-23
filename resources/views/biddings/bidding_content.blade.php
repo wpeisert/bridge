@@ -35,7 +35,7 @@
                         @endphp
 
                         <x-slot :name="$slotName">
-                            @if (!$youPlayer || $you || ($isHuman && $bidding->is_finished))
+                            @if (!$youPlayer || $you || ($bidding->is_finished))
                                 {!! $bidding->deal->getOneLineCards($playerName) !!}
                             @endif
                         </x-slot>
@@ -102,7 +102,7 @@
             @endif
 
             @if ($bidding->is_finished)
-                <br /><br /><b>Analysis:</b> <br />
+                <br /><br />
                 {!! nl2br($bidding->analysis) !!}
             @endif
 

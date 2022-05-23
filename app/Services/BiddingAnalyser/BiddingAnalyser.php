@@ -35,13 +35,13 @@ class BiddingAnalyser
         }
 
         return ''
-            . '<b>Actual contract:</b> ' . $actualContract->getAsString() . '<hr />'
+            . '<b>Final contract:</b> ' . $actualContract->getAsString() . '<hr />'
             . 'Minimax NS: ' . $minimaxContracts['NS']->getAsString() . ' value: ' . $expectedValues['NS'] . "\n"
-            . 'Result NS: ' . $bidding->result_NS . '<b>(' . ($bidding->result_NS - $expectedValues['NS'])
+            . 'Result NS: ' . $bidding->result_NS . ' <b>(' . ($bidding->result_NS - $expectedValues['NS'])
             . ', IMP:' . $this->impService->getImp($bidding->result_NS - $expectedValues['NS']) . ')</b>' . "\n"
             . '<hr />'
             . 'Minimax WE: ' . $minimaxContracts['WE']->getAsString() . ' value: ' . $expectedValues['WE'] . "\n"
-            . 'Result WE: ' . $bidding->result_WE . '<b>(' . ($bidding->result_WE - $expectedValues['WE'])
+            . 'Result WE: ' . $bidding->result_WE . ' <b>(' . ($bidding->result_WE - $expectedValues['WE'])
             . ', IMP:' . $this->impService->getImp($bidding->result_WE - $expectedValues['WE']) . ')</b>' . "\n"
             . '<hr>'
             . $trickProbsStr['NS']

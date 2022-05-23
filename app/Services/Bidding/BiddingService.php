@@ -2,9 +2,11 @@
 
 namespace App\Services\Bidding;
 
+use App\BridgeCore\Constants;
 use App\Events\BidExpectedEvent;
 use App\Models\Bid;
 use App\Models\Bidding;
+use App\Services\DealAnalyser\ProbabilityCalculator\TricksProbabilities;
 use Illuminate\Support\Facades\Log;
 
 class BiddingService implements BiddingServiceInterface
@@ -63,9 +65,30 @@ class BiddingService implements BiddingServiceInterface
         $bidding->bids()->save(new Bid($createData));
         $bidding->update(['current_player' => $this->playerService->increasePlayer($bidding->current_player)]);
         if (0 === count($this->ruleChecker->getPossibleBids($bidding))) {
-            $bidding->update(['status' => 'finished', 'current_player' => '']);
+            $bidding->update(
+                array_merge(
+                    [
+                        'status' => 'finished',
+                        'current_player' => '',
+                    ],
+                    $this->calculateResults($bidding),
+                )
+            );
         }
 
         BidExpectedEvent::dispatch($bidding);
+    }
+
+    public function calculateResults(Bidding $bidding): array
+    {
+        return []; // tmp
+        $res = [];
+        foreach (Constants::SIDES as $side) {
+            $fieldname = 'tricks_probabilities_' . $side;
+            $serializedProbabilities = $bidding->deal->$fieldname;
+            $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
+
+        }
+
     }
 }

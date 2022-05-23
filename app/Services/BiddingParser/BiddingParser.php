@@ -6,6 +6,7 @@ use App\BridgeCore\Constants;
 use App\BridgeCore\Tools;
 use App\Models\Bidding;
 use App\Services\Bidding\PlayerServiceInterface;
+use App\Services\Contract\Contract;
 
 class BiddingParser implements BiddingParserInterface
 {
@@ -64,7 +65,12 @@ class BiddingParser implements BiddingParserInterface
         return '';
     }
 
-    public function getContract(): string
+    public function getContract(): Contract
+    {
+
+    }
+
+    public function getContractAsString(): string
     {
         $lastColorBid = $this->getLastColorBid();
         if (!$lastColorBid) {

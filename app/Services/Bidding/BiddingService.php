@@ -102,7 +102,7 @@ class BiddingService implements BiddingServiceInterface
                 $tricksProbabilities->getProbabilities($actualContract->declarer, $actualContract->bidColor)
             );
 
-            $res['result_' . $declarerPair] = $ev;
+            $res['result_' . $side] = $ev;
         }
 
         return $res;

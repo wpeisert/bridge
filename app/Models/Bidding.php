@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\BiddingAnalyser\BiddingAnalyser;
+use App\Services\Imp\ImpService;
 use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
@@ -47,5 +48,15 @@ class Bidding extends Model
     public function getAnalysisAttribute(): string
     {
         return app()->make(BiddingAnalyser::class)->getBiddingAnalysisHtml($this);
+    }
+
+    public function getResultNsImpAttribute(): float
+    {
+        return (new ImpService())->getImp($this->result_NS);
+    }
+
+    public function getResultWeImpAttribute(): float
+    {
+        return (new ImpService())->getImp($this->result_WE);
     }
 }

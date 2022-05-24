@@ -36,13 +36,15 @@ class BiddingAnalyser
 
         return ''
             . '<b>Final contract:</b> ' . $actualContract->getAsString() . '<hr />'
-            . 'Minimax NS: ' . $minimaxContracts['NS']->getAsString() . ' value: ' . $expectedValues['NS'] . "\n"
-            . 'Result NS: ' . $bidding->result_NS . ' <b>(' . ($bidding->result_NS - $expectedValues['NS'])
-            . ', IMP:' . $this->impService->getImp($bidding->result_NS - $expectedValues['NS']) . ')</b>' . "\n"
+            . 'Minimax NS: ' . $minimaxContracts['NS']->getAsString() . ' expected value: ' . $expectedValues['NS'] . "\n"
+            . 'Contract: ' . $actualContract->getAsString() . ' expected value: ' . ($bidding->result_NS + $expectedValues['NS']) . "\n"
+            . 'Result NS: ' . '<b>' . $bidding->result_NS . '</b>'
+            . ', IMP: ' . '<b>' . $this->impService->getImp($bidding->result_NS) . '</b>' . "\n"
             . '<hr />'
-            . 'Minimax WE: ' . $minimaxContracts['WE']->getAsString() . ' value: ' . $expectedValues['WE'] . "\n"
-            . 'Result WE: ' . $bidding->result_WE . ' <b>(' . ($bidding->result_WE - $expectedValues['WE'])
-            . ', IMP:' . $this->impService->getImp($bidding->result_WE - $expectedValues['WE']) . ')</b>' . "\n"
+            . 'Minimax WE: ' . $minimaxContracts['WE']->getAsString() . ' expected value: ' . $expectedValues['WE'] . "\n"
+            . 'Contract: ' . $actualContract->getAsString() . ' expected value: ' . ($bidding->result_WE + $expectedValues['WE']) . "\n"
+            . 'Result WE: ' . '<b>' . $bidding->result_WE . '</b>'
+            . ', IMP: ' . '<b>' . $this->impService->getImp($bidding->result_WE) . '</b>' . "\n"
             . '<hr>'
             . $trickProbsStr['NS']
             . '<hr>'

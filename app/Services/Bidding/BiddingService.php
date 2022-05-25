@@ -96,13 +96,15 @@ class BiddingService implements BiddingServiceInterface
             $fieldname = 'tricks_probabilities_' . $side;
             $serializedProbabilities = $bidding->deal->$fieldname;
             $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
+            $fieldname = 'minimax_ev_' . $side;
+            $minimaxEv = $bidding->deal->$fieldname;
 
             $ev = $this->contractValueService->calculateContractExpectedValue(
                 $actualContract,
                 $tricksProbabilities->getProbabilities($actualContract->declarer, $actualContract->bidColor)
             );
 
-            $res['result_' . $side] = $ev;
+            $res['result_' . $side] = $ev - $minimaxEv;
         }
 
         return $res;

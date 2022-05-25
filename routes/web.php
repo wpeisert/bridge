@@ -19,17 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('dashboard', [MyBiddingController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('create', [MyBiddingController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
+Route::put('start', [MyBiddingController::class, 'start'])->middleware(['auth', 'verified'])->name('mybidding.start');
+Route::get('next/{id}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.next');
+Route::get('nextbid/{id?}', [MyBiddingController::class, 'nextbid'])->middleware(['auth', 'verified'])->name('mybidding.nextbid');
+Route::put('bbb/{id}/place-bid', [MyBiddingController::class, 'placeBid'])->middleware(['auth', 'verified'])->name('mybidding.place-bid');
+Route::get('bbb/{id}', [MyBiddingController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
+
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('dashboard', [MyBiddingController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('mybidding/create', [MyBiddingController::class, 'create'])->middleware(['auth', 'verified'])->name('mybidding.create');
-Route::put('mybidding/start', [MyBiddingController::class, 'start'])->middleware(['auth', 'verified'])->name('mybidding.start');
-Route::get('mybidding/next/{bidding}', [MyBiddingController::class, 'next'])->middleware(['auth', 'verified'])->name('mybidding.next');
-Route::get('mybidding/nextbid/{bidding?}', [MyBiddingController::class, 'nextbid'])->middleware(['auth', 'verified'])->name('mybidding.nextbid');
-Route::get('mybidding/{bidding}', [MyBiddingController::class, 'bidding'])->middleware(['auth', 'verified'])->name('mybidding');
-Route::put('mybidding/{bidding}/place-bid', [MyBiddingController::class, 'placeBid'])->middleware(['auth', 'verified'])->name('mybidding.place-bid');
 
 Route::resource('biddings', BiddingController::class)->middleware(['auth', 'verified']);
 

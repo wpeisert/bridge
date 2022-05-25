@@ -71,7 +71,7 @@
                             $you = Auth::user()->id === $bidding->training->$fieldName;
                         @endphp
 
-                        <th style="width: 80px; height: 30px; vertical-align: top;">{{ $playerName }} @if ($you)(You)@endif</th>
+                        <th style="width: 80px; height: 30px; vertical-align: top;">{{ $playerName }} @if ($you)({{ __('You') }})@endif</th>
                     @endforeach
                 </tr>
                 <tr>

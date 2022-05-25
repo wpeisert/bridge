@@ -29,7 +29,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Dealer:</strong>
+                    <strong>{{ __('Dealer') }}:</strong>
                     <select class="form-control" name="dealer">
                         @foreach ($PLAYERS_NAMES as $player)
                             <option value="{{ $player }}">

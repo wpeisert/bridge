@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('mybidding.nextbid', $bidding->id) }}"> Next </a>
+                <a class="btn btn-success" href="{{ route('mybidding.nextbid', $bidding->id) }}"> {{ __('Next') }} </a>
             </div>
         </div>
     </div>

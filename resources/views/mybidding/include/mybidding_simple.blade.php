@@ -9,7 +9,7 @@
             $you = Auth::user()->id === $training->$fieldName;
         @endphp
         @if (isset($player))
-            {{ $playerName }}: {{ $player->name }} @if ($you)(You)@endif&nbsp;
+            {{ $playerName }}: {{ $player->name }} @if ($you)({{ __('You') }})@endif&nbsp;
         @endif
     @endforeach
     <br />

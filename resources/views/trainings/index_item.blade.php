@@ -12,7 +12,7 @@
         @endforeach
     </td>
     <td>
-        Dealer: {{ $training->quiz->deal_constraint->dealer }}<br />
+        {{ __('Dealer') }}: {{ $training->quiz->deal_constraint->dealer }}<br />
         Vulnerable NS: {{ $training->quiz->deal_constraint->vulnerable_ns_human }}<br />
         Vulnerable WE: {{ $training->quiz->deal_constraint->vulnerable_we_human }}<br />
         Constraints:

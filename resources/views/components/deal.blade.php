@@ -2,8 +2,8 @@
     <tr>
         <td valign="top">
             <div style="margin-left: 5px;">
-                Dealer: {{ $dealer }}<br />
-                Vuln: {{ $vulnerable }}
+                {{ __('Dealer') }}: {{ $dealer }}<br />
+                {{ __('Vuln') }}: {{ $vulnerable }}
             </div>
         </td>
         <td align="center" valign="bottom">

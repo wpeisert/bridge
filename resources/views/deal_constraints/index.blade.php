@@ -21,7 +21,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Vulnerable</th>
-            <th>Dealer</th>
+            <th>{{ __('Dealer') }}</th>
             <th>Constraints</th>
             <th>Action</th>
         </tr>

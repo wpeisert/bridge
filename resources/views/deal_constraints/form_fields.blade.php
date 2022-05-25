@@ -41,7 +41,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Dealer:</strong>
+                <strong>{{ __('Dealer') }}:</strong>
                 <select class="form-control" name="dealer">
                     @foreach ($DEAL_CONSTRAINTS_DEALER as $text)
                         <option value="{{ $text }}" @selected($text === ($dealConstraint->dealer ?? ''))>

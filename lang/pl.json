@@ -3,5 +3,23 @@
     "The :attribute must contain at least one number.": "Pole :attribute musi zawierać co najmniej jedną cyfrę.",
     "The :attribute must contain at least one symbol.": "Pole :attribute musi zawierać co najmniej jeden znak specjalny.",
     "The :attribute must contain at least one uppercase and one lowercase letter.": "Pole :attribute musi zawierać co najmniej jedną dużą literę i jedną małą literę.",
-    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute."
+    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
+
+    "Dashboard": "Home",
+    "Log in": "Zaloguj",
+    "Log Out": "Wyloguj",
+    "Register": "Rejestracja",
+    "Password": "Hasło",
+    "Remember me": "Zapamiętaj mnie",
+    "Forgot your password?": "Zapomniałeś hasło?",
+
+    "Start a new training": "Nowy trening",
+    "Active trainings": "Bieżące treningi",
+    "Finished trainings": "Zakończone treningi",
+
+    "you": "Ty",
+    "other": "inny gracz",
+    "finished": "zakończone",
+
+    "": ""
 }

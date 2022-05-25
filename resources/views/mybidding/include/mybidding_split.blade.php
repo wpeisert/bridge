@@ -18,7 +18,7 @@
     <br />
     @foreach (['you', 'other', 'finished'] as $stage)
         @if (count($train['biddings'][$stage]))
-            <b>{{ $stage }}: </b>
+            <b>{{ __($stage) }}: </b>
             @foreach ($train['biddings'][$stage] as $bidding)
                 <a href="{{ route('mybidding', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContractAsString() !!} ]</a> &nbsp;
             @endforeach

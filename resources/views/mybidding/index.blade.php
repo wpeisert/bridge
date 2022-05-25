@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('mybidding.create') }}"> Start a new training</a>
+                <a class="btn btn-success" href="{{ route('mybidding.create') }}"> {{ __('Start a new training') }} </a>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
             @include(
                 'mybidding.include.mybidding_split',
                 [
-                    'title' => 'Active trainings',
+                    'title' => __('Active trainings'),
                     'trainings' => $activeTrainings,
                     'biddingParser' => $biddingParser,
                 ]
@@ -26,7 +26,7 @@
             @include(
                 'mybidding.include.mybidding_simple',
                 [
-                    'title' => 'Finished trainings',
+                    'title' => __('Finished trainings'),
                     'trainings' => $finishedTrainings,
                     'biddingParser' => $biddingParser,
                 ]

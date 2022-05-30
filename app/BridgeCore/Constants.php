@@ -113,6 +113,7 @@ class Constants
             'DEAL_CONSTRAINTS_DEALER' => self::DEAL_CONSTRAINTS_DEALER,
             'COLORS_COUNT' => self::COLORS_COUNT,
             'COLORS_NAMES' => self::COLORS_NAMES,
+            'COLORS_COLORS' => self::COLORS_COLORS,
             'COLORS_FULL_NAMES' => self::COLORS_FULL_NAMES,
             'CARDS_IN_COLOR_COUNT' => self::CARDS_IN_COLOR_COUNT,
             'MAX_PC' => self::MAX_PC,

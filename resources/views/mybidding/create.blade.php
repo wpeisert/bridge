@@ -1,6 +1,6 @@
 <x-my-bidding-layout>
 
-    <x-slot name="subtitle"></x-slot>
+    <x-slot name="title">New training</x-slot>
 
     <form action="{{ route('mybidding.start') }}" method="POST">
         @csrf
@@ -34,7 +34,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Deals count:</strong>
-                    <input class="form-control" name="deals_count" />
+                    <input class="form-control" name="deals_count" value="10" />
                 </div>
             </div>
 

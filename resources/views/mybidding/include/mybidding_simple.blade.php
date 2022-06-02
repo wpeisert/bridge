@@ -1,5 +1,30 @@
+<style>
+    .table_results {
+        border: 1px solid silver;
+    }
+    .table_results tr {
+        border: 1px solid silver;
+        vertical-align: top;
+    }
+    .table_results tr * {
+        border: 1px solid silver;
+        padding: 3px;
+        text-align: center;
+    }
+</style>
+
 <h3>{{ __( $title ) }} </h3>
+
 <hr />
+
+@php
+    $count = 0;
+    $result_NS = 0;
+    $result_ns_imp = 0;
+    $result_WE = 0;
+    $result_we_imp = 0;
+@endphp
+
 @foreach($trainings as $training)
 
     @foreach($PLAYERS_NAMES as $playerName)
@@ -12,39 +37,50 @@
             {{ $playerName }}: {{ $player->name }} @if ($you)({{ __('You') }})@endif&nbsp;
         @endif
     @endforeach
-    <br />
 
-    @php
-        $count = 0;
-        $result_NS = 0;
-        $result_ns_imp = 0;
-        $result_WE = 0;
-        $result_we_imp = 0;
-    @endphp
+    <table class="table_results">
+        <tr>
+            <th>Deal</th>
+            <th>NS</th>
+            <th>NS IMP</th>
+            <th>WE</th>
+            <th>WE IMP</th>
+        </tr>
+        @foreach ($training->biddings as $bidding)
+            <tr>
+                <td>
+                    <a href="{{ route('mybidding', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContractAsString() !!} ]</a>  &nbsp;
+                </td>
+            @if ($bidding->is_finished)
+                @php
+                    $count++;
+                    $result_NS += $bidding->result_NS;
+                    $result_ns_imp += $bidding->result_ns_imp;
+                    $result_WE += $bidding->result_WE;
+                    $result_we_imp += $bidding->result_we_imp;
+                @endphp
+                <td>{{ $bidding->result_NS }}</td>
+                <td>{{ $bidding->result_ns_imp }}</td>
+                <td>{{ $bidding->result_WE }}</td>
+                <td>{{ $bidding->result_we_imp }}</td>
+            @endif
+            </tr>
+        @endforeach
+        <tr>
+            <td>Total</td>
+            <td>{{ $result_NS }}</td>
+            <td>{{ $result_ns_imp }}</td>
+            <td>{{ $result_WE }}</td>
+            <td>{{ $result_we_imp }}</td>
+        </tr>
+        <tr>
+            <td>Avg.</td>
+            <td>{{ $result_NS / $count }}</td>
+            <td>{{ $result_ns_imp / $count }}</td>
+            <td>{{ $result_WE / $count }}</td>
+            <td>{{ $result_we_imp / $count }}</td>
+        </tr>
 
-    @foreach ($training->biddings as $bidding)
-        <a href="{{ route('mybidding', $bidding->id) }}">[ {!! $biddingParser->parse($bidding)->getContractAsString() !!} ]</a>  &nbsp;
-        @if ($bidding->is_finished)
-            @php
-                $count++;
-                $result_NS += $bidding->result_NS;
-                $result_ns_imp += $bidding->result_ns_imp;
-                $result_WE += $bidding->result_WE;
-                $result_we_imp += $bidding->result_we_imp;
-            @endphp
-            <b>NS:</b> {{ $bidding->result_NS }} <b>IMP:</b> {{ $bidding->result_ns_imp }} &nbsp;
-            <b>WE:</b> {{ $bidding->result_WE }} <b>IMP:</b> {{ $bidding->result_we_imp }}
-            <br />
-        @endif
-    @endforeach
-    <b>Total: </b>
-    <b>NS:</b> {{ $result_NS }} <b>IMP:</b> {{ $result_ns_imp }} &nbsp;
-    <b>WE:</b> {{ $result_WE }} <b>IMP:</b> {{ $result_we_imp }}
-    <br />
-    <b>Avg: </b>
-    <b>NS:</b> {{ $result_NS / $count }} <b>IMP:</b> {{ $result_ns_imp / $count }} &nbsp;
-    <b>WE:</b> {{ $result_WE / $count }} <b>IMP:</b> {{ $result_we_imp / $count }}
-    <br />
-
+    </table>
     <hr />
 @endforeach

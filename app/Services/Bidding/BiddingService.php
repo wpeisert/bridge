@@ -87,22 +87,27 @@ class BiddingService implements BiddingServiceInterface
     public function calculateResults(Bidding $bidding): array
     {
         $actualContract = $this->biddingParserFactory->parse($bidding)->getContractWithoutVulnerability();
-        $declarerPair = Tools::getPlayerSide($actualContract->declarer);
-        $vulnerableFieldName = 'vulnerable_' . $declarerPair;
-        $actualContract->vulnerable = $bidding->deal->$vulnerableFieldName;
 
         $res = ['contract' => $actualContract->getHash()];
         foreach (Constants::SIDES as $side) {
-            $fieldname = 'tricks_probabilities_' . $side;
-            $serializedProbabilities = $bidding->deal->$fieldname;
-            $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
             $fieldname = 'minimax_ev_' . $side;
             $minimaxEv = $bidding->deal->$fieldname;
 
-            $ev = $this->contractValueService->calculateContractExpectedValue(
-                $actualContract,
-                $tricksProbabilities->getProbabilities($actualContract->declarer, $actualContract->bidColor)
-            );
+            if ($actualContract->isPass()) {
+                $ev = 0;
+            } else {
+                $fieldname = 'tricks_probabilities_' . $side;
+                $serializedProbabilities = $bidding->deal->$fieldname;
+                $tricksProbabilities = TricksProbabilities::createFromSerialized($serializedProbabilities);
+
+                $declarerPair = Tools::getPlayerSide($actualContract->declarer);
+                $vulnerableFieldName = 'vulnerable_' . $declarerPair;
+                $actualContract->vulnerable = $bidding->deal->$vulnerableFieldName;
+                $ev = $this->contractValueService->calculateContractExpectedValue(
+                    $actualContract,
+                    $tricksProbabilities->getProbabilities($actualContract->declarer, $actualContract->bidColor)
+                );
+            }
 
             $res['result_' . $side] = $ev - $minimaxEv;
         }

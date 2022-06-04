@@ -57,6 +57,9 @@ class Contract
 
     public function getHash(): string
     {
+        if ($this->isPass()) {
+            return 'pass';
+        }
         return self::calculateHash($this->declarer, $this->level, $this->bidColor, $this->type, $this->vulnerable);
     }
 

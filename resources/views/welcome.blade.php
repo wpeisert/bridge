@@ -38,7 +38,12 @@
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h1><x-application-logo /> SAURON Bridge Bidding</h1>
+                    <h1><x-application-logo /> {{ __('homepage.title') }}</h1>
+
+                </div>
+
+                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                    {{ __('homepage.subtitle') }}
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
@@ -48,16 +53,14 @@
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
                             <div class="flex items-center">
                                 <h2> <span style="width: 150px; color: #{{ $COLORS_COLORS[$index] }};">{!! $COLORS_SYMBOLS[$index] !!} </span> </h2>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white"><span style="color: #{{ $COLORS_COLORS[$index] }};">Heading {{ $index+1 }}</span></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">
+                                    <span style="color: #{{ $COLORS_COLORS[$index] }};">{{ __('homepage.heading_' . ($index + 1)) }}</span>
+                                </div>
                             </div>
 
                             <div class="ml-12">
                                 <div class="mt-1 text-gray-600 dark:text-gray-400 text-sm">
-                                    Tutaj będzie coś mądrego napisane. Tutaj będzie coś mądrego napisane.
-                                    Tutaj będzie coś mądrego napisane. Tutaj będzie coś mądrego napisane.
-                                    <!--
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                    -->
+                                    {{ __('homepage.paragraph_' . ($index + 1)) }}
                                 </div>
                             </div>
                         </div>

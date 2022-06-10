@@ -10,13 +10,12 @@ return [
 
     'title' => 'SAURON Licytacje',
     'subtitle' => 'Trening licytacji brydżowej z partnerem',
-    'heading_1' => 'Nagłówek 1',
-    'paragraph_1' => 'tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst 1',
-    'heading_2' => 'Nagłówek 2',
-    'paragraph_2' => 'tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst  2',
-    'heading_3' => 'Nagłówek 3',
-    'paragraph_3' => 'tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst  3',
-    'heading_4' => 'Nagłówek 4',
-    'paragraph_4' => 'tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst  4',
-
+    'heading_1' => 'Licytacje (FREE)',
+    'paragraph_1' => 'Zarejestruj się, zaproś partnera i licytuj wybrane quizy. Sprawdź jak dobre kontrakty potrafisz wylicytować. System sam wylicza optymalny kontrakt na podstawie losowego rozkładu kart.',
+    'heading_2' => 'Rankingi (FREE)',
+    'paragraph_2' => 'Porównaj swoją licytację z innymi graczami. Obserwuj postępy.',
+    'heading_3' => 'Własne quizy',
+    'paragraph_3' => 'Generuj własne quizy, by doszlifować system licytacyjny dla konkretnych przypadków.',
+    'heading_4' => 'Trening czyni mistrza',
+    'paragraph_4' => 'Przygotuj własne quizy dla uczniów lub drużyny. Obserwuj wyniki i postępy.',
 ];

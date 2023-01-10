@@ -10,7 +10,7 @@ class Contract
     public string $declarer;
     public int $level;
     public string $type; // '', 'dbl', 'rdbl'
-    public bool $vulnerable;
+    public bool $vulnerable = false;
 
     public static function create(array $data = []): Contract
     {

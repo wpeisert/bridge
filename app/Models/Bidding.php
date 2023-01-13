@@ -45,6 +45,15 @@ class Bidding extends Model
         return $player ? $player->id : 0;
     }
 
+    public function getCurrentUserNameAttribute(): string
+    {
+        if (!$this->current_player) {
+            return ' - none - ';
+        }
+        $player = $this->training->getUser($this->current_player);
+        return $player ? $player->name : 'computer';
+    }
+
     public function getAnalysisAttribute(): string
     {
         return app()->make(BiddingAnalyser::class)->getBiddingAnalysisHtml($this);

@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\BidExpectedEvent;
-use App\Mail\BidExpectedMail;
+use App\Events\BidPlacedEvent;
+use App\Mail\AdminBidPlacedMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class BidExpectedNotifyAdminListener implements ShouldQueue
+class BidPlacedNotifyAdminListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -25,12 +25,12 @@ class BidExpectedNotifyAdminListener implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param BidExpectedEvent $event
+     * @param BidPlacedEvent $event
      * @return void
      */
-    public function handle(BidExpectedEvent $event)
+    public function handle(BidPlacedEvent $event)
     {
         Mail::to('info@sauron.pl')
-            ->send(new BidExpectedMail($event->bidding, true));
+            ->send(new AdminBidPlacedMail($event->bidding));
     }
 }

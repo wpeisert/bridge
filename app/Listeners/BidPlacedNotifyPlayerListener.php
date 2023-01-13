@@ -2,14 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Events\BidExpectedEvent;
-use App\Mail\BidExpectedMail;
+use App\Events\BidPlacedEvent;
+use App\Mail\BidPlacedMail;
 use App\Services\Bidding\BiddingServiceInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class BidExpectedNotifyPlayerListener implements ShouldQueue
+class BidPlacedNotifyPlayerListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -18,10 +18,10 @@ class BidExpectedNotifyPlayerListener implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param BidExpectedEvent $event
+     * @param BidPlacedEvent $event
      * @return void
      */
-    public function handle(BidExpectedEvent $event)
+    public function handle(BidPlacedEvent $event)
     {
         $bidding = $event->bidding;
         $user = $bidding->training->getUser($bidding->current_player);
@@ -29,6 +29,6 @@ class BidExpectedNotifyPlayerListener implements ShouldQueue
             return;
         }
         Mail::to($user)
-            ->send(new BidExpectedMail($bidding));
+            ->send(new BidPlacedMail($bidding));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Services\Bidding;
 
 use App\BridgeCore\Constants;
 use App\BridgeCore\Tools;
-use App\Events\BidExpectedEvent;
+use App\Events\BidPlacedEvent;
 use App\Models\Bid;
 use App\Models\Bidding;
 use App\Services\BiddingParser\BiddingParserFactoryInterface;
@@ -81,7 +81,7 @@ class BiddingService implements BiddingServiceInterface
             );
         }
 
-        BidExpectedEvent::dispatch($bidding);
+        BidPlacedEvent::dispatch($bidding);
     }
 
     public function calculateResults(Bidding $bidding): array

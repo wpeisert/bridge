@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\BidExpectedEvent;
+use App\Events\BidPlacedEvent;
 use App\Services\Bidding\BiddingServiceInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,10 +19,10 @@ class MakeComputerBidListener implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param BidExpectedEvent $event
+     * @param BidPlacedEvent $event
      * @return void
      */
-    public function handle(BidExpectedEvent $event)
+    public function handle(BidPlacedEvent $event)
     {
         $bidding = $event->bidding;
         if ($bidding->is_finished) {

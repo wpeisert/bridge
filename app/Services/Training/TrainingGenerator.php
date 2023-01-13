@@ -2,7 +2,7 @@
 
 namespace App\Services\Training;
 
-use App\Events\BidExpectedEvent;
+use App\Events\BidPlacedEvent;
 use App\Models\Training;
 use App\Services\Bidding\BiddingBuilderInterface;
 
@@ -17,7 +17,7 @@ class TrainingGenerator implements TrainingGeneratorInterface
             $bidding = $this->biddingBuilder->build($deal);
             $bidding->training_id = $training->id;
             $bidding->save();
-            BidExpectedEvent::dispatch($bidding);
+            BidPlacedEvent::dispatch($bidding);
             $cnt++;
         }
 

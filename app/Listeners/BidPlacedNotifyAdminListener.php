@@ -20,7 +20,7 @@ class BidPlacedNotifyAdminListener implements ShouldQueue
      */
     public function handle(BidPlacedEvent $event)
     {
-        Mail::to('info@sauron.pl')
+        Mail::to(config('bridge.admin_email'))
             ->send(new AdminBidPlacedMail($event->bidding));
     }
 }

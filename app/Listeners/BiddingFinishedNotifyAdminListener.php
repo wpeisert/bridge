@@ -20,7 +20,7 @@ class BiddingFinishedNotifyAdminListener implements ShouldQueue
      */
     public function handle(BiddingFinishedEvent $event)
     {
-        Mail::to('info@sauron.pl')
+        Mail::to(config('bridge.admin_email'))
             ->send(new AdminBiddingFinishedMail($event->bidding));
     }
 }

@@ -1,7 +1,7 @@
-Hi, {{ $user->name }}
+Hi, {{ ucfirst($user->name) }}
 <br /><br />
 
-Bidding finished: <a href="{{ url(route('mybidding',$bidding->id)) }}">here</a>
+Bidding finished, see analysis: <a href="{{ url(route('mybidding',$bidding->id)) }}">here</a>
 
 <br /><br />
 Cheers!

@@ -1,4 +1,4 @@
-Hi, {{ $bidding->current_user_name }}
+Hi, {{ ucfirst($bidding->current_user_name) }}
 <br /><br />
 
 Bid required in your bidding

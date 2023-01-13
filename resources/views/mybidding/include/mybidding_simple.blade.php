@@ -75,10 +75,10 @@
         </tr>
         <tr>
             <td>Avg.</td>
-            <td>{{ $result_NS / $count }}</td>
-            <td>{{ $result_ns_imp / $count }}</td>
-            <td>{{ $result_WE / $count }}</td>
-            <td>{{ $result_we_imp / $count }}</td>
+            <td>{{ round($result_NS / $count, 1) }}</td>
+            <td>{{ round($result_ns_imp / $count, 1) }}</td>
+            <td>{{ round($result_WE / $count, 1) }}</td>
+            <td>{{ round($result_we_imp / $count, 1) }}</td>
         </tr>
 
     </table>

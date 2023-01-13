@@ -13,8 +13,6 @@ class BidPlacedNotifyPlayerListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    public function __construct(private BiddingServiceInterface $biddingService) {}
-
     /**
      * Handle the event.
      *

@@ -13,16 +13,6 @@ class BidPlacedNotifyAdminListener implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param BidPlacedEvent $event

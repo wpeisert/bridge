@@ -1,1 +1,1 @@
-[ADM] {{ config('app.name') }} - new bid expected
+[ADM] {{ config('app.name') }} - bid placed, maybe new bid expected

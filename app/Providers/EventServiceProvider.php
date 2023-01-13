@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\BiddingFinishedEvent;
 use App\Events\BidPlacedEvent;
 use App\Events\DealCreatedEvent;
+use App\Listeners\BiddingFinishedNotifyAdminListener;
+use App\Listeners\BiddingFinishedNotifyPlayerListener;
 use App\Listeners\BidPlacedNotifyAdminListener;
 use App\Listeners\BidPlacedNotifyPlayerListener;
 use App\Listeners\DealAnalyseListener;
@@ -27,6 +30,10 @@ class EventServiceProvider extends ServiceProvider
             BidPlacedNotifyAdminListener::class,
             BidPlacedNotifyPlayerListener::class,
             MakeComputerBidListener::class,
+        ],
+        BiddingFinishedEvent::class => [
+            BiddingFinishedNotifyAdminListener::class,
+            BiddingFinishedNotifyPlayerListener::class,
         ],
         DealCreatedEvent::class => [
             DealAnalyseListener::class

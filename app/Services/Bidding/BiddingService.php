@@ -4,6 +4,7 @@ namespace App\Services\Bidding;
 
 use App\BridgeCore\Constants;
 use App\BridgeCore\Tools;
+use App\Events\BiddingFinishedEvent;
 use App\Events\BidPlacedEvent;
 use App\Models\Bid;
 use App\Models\Bidding;
@@ -79,6 +80,7 @@ class BiddingService implements BiddingServiceInterface
                     $this->calculateResults($bidding),
                 )
             );
+            BiddingFinishedEvent::dispatch($bidding);
         }
 
         BidPlacedEvent::dispatch($bidding);

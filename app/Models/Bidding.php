@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bidding extends Model
 {
-    private const STATUS_FINISHED = 'finished';
+    public const STATUS_FINISHED = 'finished';
 
     protected $fillable = [
         'training_id', 'deal_id', 'current_player', 'status', 'contract', 'result_NS', 'result_WE'

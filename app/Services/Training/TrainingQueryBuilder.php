@@ -2,6 +2,7 @@
 
 namespace App\Services\Training;
 
+use App\Models\Bidding;
 use App\Models\Training;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -13,12 +14,12 @@ class TrainingQueryBuilder implements TrainingQueryBuilderInterface
 
         $trainings = $active ?
             $trainingsBase->whereHas('biddings', function (Builder $query) {
-                $query->where('status', '<>', 'finished');
+                $query->where('status', '<>', Bidding::STATUS_FINISHED);
             }
             )
             :
             $trainingsBase->whereDoesntHave('biddings', function (Builder $query) {
-                $query->where('status', '<>', 'finished');
+                $query->where('status', '<>', Bidding::STATUS_FINISHED);
             }
             );
 

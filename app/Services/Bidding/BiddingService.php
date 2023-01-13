@@ -73,7 +73,7 @@ class BiddingService implements BiddingServiceInterface
             $bidding->update(
                 array_merge(
                     [
-                        'status' => 'finished',
+                        'status' => Bidding::STATUS_FINISHED,
                         'current_player' => '',
                     ],
                     $this->calculateResults($bidding),
